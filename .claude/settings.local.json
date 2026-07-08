@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p \"/Users/sarahkadlecek/Desktop/AG Design System/registry/src/components/blocks\" && mkdir -p \"/Users/sarahkadlecek/Desktop/AG Design System/registry/src/app/blocks/[slug]\" && mkdir -p \"/Users/sarahkadlecek/Desktop/AG Design System/registry/src/app/docs/tokens\" && echo \"done\")",
+      "Bash(node -e ' *)",
+      "Bash(npx tsx *)",
+      "Bash(npx tsc *)",
+      "Bash(pkill -f \"next dev\")",
+      "Bash(npm run *)",
+      "Read(//tmp/**)",
+      "Bash(open http://localhost:3000)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(node -e \"const f=require\\('/Users/sarahkadlecek/Desktop/AG Design System/registry/public/r/button.json'\\); console.log\\('button name:', f.name, '| files:', f.files?.length, '| deps:', f.dependencies\\)\")",
+      "Bash(node -e \"const f=require\\('/Users/sarahkadlecek/Desktop/AG Design System/registry/public/r/table.json'\\); console.log\\('table:', JSON.stringify\\(f, null, 2\\)\\)\")",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\('name:', d['name']\\); print\\('type:', d['type']\\); print\\('deps:', d.get\\('dependencies',[]\\)\\); print\\('files:', [f['path'] for f in d.get\\('files',[]\\)]\\); print\\('content_len:', len\\(d.get\\('files',[{}]\\)[0].get\\('content',''\\)\\)\\)\")",
+      "mcp__figma-remote-mcp__use_figma",
+      "mcp__figma-remote-mcp__get_screenshot",
+      "Bash(curl -s -o /tmp/dr-rebuilt.png \"https://www.figma.com/api/mcp/asset/ea716212-7b1d-41b3-bd2b-2978c89ae4c2\")",
+      "Bash(curl -s -o /tmp/ag-rebuilt.png \"https://www.figma.com/api/mcp/asset/c99967b7-0f6d-4c0e-82e8-fd40e0b7dc61\")"
+    ]
+  }
+}

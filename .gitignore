@@ -1,0 +1,41 @@
+# dependencies
+node_modules/
+.pnp
+.pnp.*
+
+# next.js
+.next/
+out/
+
+# production / build output
+build/
+dist/
+
+# packaged kit output (regenerate with: npm run kit:package)
+/dist/
+
+# testing / coverage
+coverage/
+
+# macOS
+.DS_Store
+
+# env files
+.env*
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+
+# editor
+*.swp
+
+# --- Excluded assets (licensing / not needed in repo) ---
+# Commercial font (F37 Jan) — do not commit
+f37-jan/
+
+# Source presentation / doc files
+*.pptx
+*.docx

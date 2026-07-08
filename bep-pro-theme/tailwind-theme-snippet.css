@@ -1,0 +1,66 @@
+/* =============================================================================
+   BEP PRO, TAILWIND v4 @theme SNIPPET
+   Add this inside your @theme inline { … } block in globals.css.
+   These declarations map BEP Pro CSS variables to Tailwind utility classes,
+   so tokens like bg-primary, text-sidebar-foreground, bg-bep-badge-1, etc.
+   are available as utility classes throughout your project.
+   ============================================================================= */
+
+@theme inline {
+  /* Core semantic tokens */
+  --color-background:            var(--background);
+  --color-foreground:            var(--foreground);
+  --color-card:                  var(--card);
+  --color-card-foreground:       var(--card-foreground);
+  --color-popover:               var(--popover);
+  --color-popover-foreground:    var(--popover-foreground);
+  --color-primary:               var(--primary);
+  --color-primary-foreground:    var(--primary-foreground);
+  --color-secondary:             var(--secondary);
+  --color-secondary-foreground:  var(--secondary-foreground);
+  --color-muted:                 var(--muted);
+  --color-muted-foreground:      var(--muted-foreground);
+  --color-accent:                var(--accent);
+  --color-accent-foreground:     var(--accent-foreground);
+  --color-destructive:           var(--destructive);
+  --color-border:                var(--border);
+  --color-input:                 var(--input);
+  --color-ring:                  var(--ring);
+  --color-brand:                 var(--brand);
+
+  /* Sidebar tokens */
+  --color-sidebar:                       var(--sidebar);
+  --color-sidebar-foreground:            var(--sidebar-foreground);
+  --color-sidebar-primary:               var(--sidebar-primary);
+  --color-sidebar-primary-foreground:    var(--sidebar-primary-foreground);
+  --color-sidebar-accent:                var(--sidebar-accent);
+  --color-sidebar-accent-foreground:     var(--sidebar-accent-foreground);
+  --color-sidebar-border:                var(--sidebar-border);
+  --color-sidebar-ring:                  var(--sidebar-ring);
+
+  /* Chart series, 7 slots. BEP Pro fills all 7 with accent colours. */
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-chart-6: var(--chart-6);
+  --color-chart-7: var(--chart-7);
+
+  /* BEP Pro badge series, RESTRICTED: badges and tags only.
+     Only defined when [data-theme="bep-pro"] is active; undefined in other themes. */
+  --color-bep-badge-1: var(--bep-badge-1);
+  --color-bep-badge-2: var(--bep-badge-2);
+  --color-bep-badge-3: var(--bep-badge-3);
+  --color-bep-badge-4: var(--bep-badge-4);
+  --color-bep-badge-5: var(--bep-badge-5);
+  --color-bep-badge-6: var(--bep-badge-6);
+  --color-bep-badge-7: var(--bep-badge-7);
+
+  /* Radius scale */
+  --radius-sm:  calc(var(--radius) * 0.6);
+  --radius-md:  calc(var(--radius) * 0.8);
+  --radius-lg:  var(--radius);
+  --radius-xl:  calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+}

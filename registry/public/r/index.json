@@ -1,0 +1,199 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "ag",
+  "homepage": "https://ag.design",
+  "items": [
+    {
+      "name": "button",
+      "type": "registry:ui",
+      "title": "Button",
+      "description": "Triggers actions, submits forms, or navigates. The most fundamental interactive element in the system."
+    },
+    {
+      "name": "badge",
+      "type": "registry:ui",
+      "title": "Badge",
+      "description": "Compact label for status, count, or category. Used inline alongside other content."
+    },
+    {
+      "name": "table",
+      "type": "registry:ui",
+      "title": "Table",
+      "description": "Structured data display with sortable columns, optional footer, and title. Use for records that benefit from columnar scanning."
+    },
+    {
+      "name": "data-table",
+      "type": "registry:ui",
+      "title": "Data Table",
+      "description": "Full-featured interactive table powered by TanStack Table v8. Supports sorting, pagination, global or column search, row selection, and column visibility, all themed via AG tokens."
+    },
+    {
+      "name": "card",
+      "type": "registry:ui",
+      "title": "Card",
+      "description": "Grouped container for related content. Cards establish visual hierarchy and organize information into scannable units."
+    },
+    {
+      "name": "input",
+      "type": "registry:ui",
+      "title": "Input",
+      "description": "Single-line text field for user data entry. Pairs with Label and supports disabled, readonly, and error states."
+    },
+    {
+      "name": "tabs",
+      "type": "registry:ui",
+      "title": "Tabs",
+      "description": "Switches between related content sections without page navigation."
+    },
+    {
+      "name": "select",
+      "type": "registry:ui",
+      "title": "Select",
+      "description": "Dropdown for choosing one value from a list. Use when options exceed 5 items."
+    },
+    {
+      "name": "skeleton",
+      "type": "registry:ui",
+      "title": "Skeleton",
+      "description": "Placeholder loading state that previews content shape while data loads."
+    },
+    {
+      "name": "chart-area-interactive",
+      "type": "registry:ui",
+      "title": "Area Chart",
+      "description": "Interactive stacked area chart with a time-range filter. Shows trends across two data series with a tooltip and legend."
+    },
+    {
+      "name": "chart-bar-default",
+      "type": "registry:ui",
+      "title": "Bar Chart",
+      "description": "Simple bar chart displaying a single data series. Best for comparing discrete categories or time periods at a glance."
+    },
+    {
+      "name": "chart-bar-stacked",
+      "type": "registry:ui",
+      "title": "Bar Chart Stacked",
+      "description": "Stacked bar chart comparing two data series with a legend. Ideal for showing part-to-whole relationships across time."
+    },
+    {
+      "name": "checkbox",
+      "type": "registry:ui",
+      "title": "Checkbox",
+      "description": "Binary selection control. Available as a simple checkbox, with description text, or inside a bordered card row."
+    },
+    {
+      "name": "alert",
+      "type": "registry:ui",
+      "title": "Alert",
+      "description": "Contextual message for informational, success, warning, or error states. Supports an optional dismiss control."
+    },
+    {
+      "name": "pagination",
+      "type": "registry:ui",
+      "title": "Pagination",
+      "description": "Navigation control for moving through paged content. Includes previous/next arrows and numbered page buttons."
+    },
+    {
+      "name": "button-group",
+      "type": "registry:ui",
+      "title": "Button Group",
+      "description": "A set of related buttons joined into a single connected control. Ideal for toggleable or segmented options."
+    },
+    {
+      "name": "radio-group",
+      "type": "registry:ui",
+      "title": "Radio Group",
+      "description": "Single-select control for mutually exclusive options. Shows all choices simultaneously for easy comparison."
+    },
+    {
+      "name": "sidebar",
+      "type": "registry:ui",
+      "title": "Sidebar",
+      "description": "Composable, themeable sidebar with icon-collapse, Sheet mobile drawer, and SidebarGroup / SidebarMenu primitives matching shadcn."
+    },
+    {
+      "name": "chart-pie-donut",
+      "type": "registry:ui",
+      "title": "Donut Chart",
+      "description": "Donut pie chart with five segments and a centred total-visitors label. Uses chart-* color tokens so it adapts to any active theme."
+    },
+    {
+      "name": "chart-line-dots",
+      "type": "registry:ui",
+      "title": "Line Chart",
+      "description": "Smooth line chart with dot markers for two series. Best for showing trends and changes over time."
+    },
+    {
+      "name": "accordion",
+      "type": "registry:ui",
+      "title": "Accordion",
+      "description": "Collapsible panels for showing and hiding content sections. Smooth height animation on open/close."
+    },
+    {
+      "name": "avatar",
+      "type": "registry:ui",
+      "title": "Avatar",
+      "description": "Circular user profile image with an initials fallback when the image is unavailable."
+    },
+    {
+      "name": "breadcrumb",
+      "type": "registry:ui",
+      "title": "Breadcrumb",
+      "description": "Accessible navigation trail showing the current page location within a hierarchy."
+    },
+    {
+      "name": "carousel",
+      "type": "registry:ui",
+      "title": "Carousel",
+      "description": "Horizontally sliding content container with prev/next navigation and optional auto-play."
+    },
+    {
+      "name": "stepper",
+      "type": "registry:ui",
+      "title": "Stepper",
+      "description": "Horizontal step progress indicator for multi-step flows. Completed steps show a checkmark."
+    },
+    {
+      "name": "calendar",
+      "type": "registry:ui",
+      "title": "Calendar",
+      "description": "Full month calendar grid with date selection. Supports single date and range selection modes."
+    },
+    {
+      "name": "command",
+      "type": "registry:ui",
+      "title": "Command",
+      "description": "Filterable command palette with grouped results. Use for search, navigation, and quick actions."
+    },
+    {
+      "name": "dialog",
+      "type": "registry:ui",
+      "title": "Dialog",
+      "description": "Modal dialog with overlay, scale animation, and accessible focus management via Base UI."
+    },
+    {
+      "name": "drawer",
+      "type": "registry:ui",
+      "title": "Drawer",
+      "description": "Slide-in panel from the right, left, or bottom edge. Built on Base UI Dialog for accessibility."
+    },
+    {
+      "name": "menu-bar",
+      "type": "registry:ui",
+      "title": "Menu Bar",
+      "description": "Horizontal menu bar with keyboard-navigable menus. Ideal for application-style top toolbars."
+    },
+    {
+      "name": "top-nav",
+      "type": "registry:ui",
+      "title": "Top Navigation",
+      "description": "Sticky top navigation bar with brand, breadcrumb trail, and right-aligned action area."
+    },
+    {
+      "name": "resizable",
+      "type": "registry:ui",
+      "title": "Resizable",
+      "description": "Drag-to-resize panel layout with a visual handle divider. Supports horizontal and vertical splits."
+    }
+  ]
+}

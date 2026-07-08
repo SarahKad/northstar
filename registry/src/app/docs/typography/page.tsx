@@ -1,0 +1,131 @@
+import { Separator } from "@/components/ui/separator"
+import { DocsLayout } from "@/components/registry/docs-layout"
+import type { Heading } from "@/components/registry/table-of-contents"
+
+const fonts = [
+  {
+    name: "Instrument Serif",
+    role: "Display, H1 & H2, Regular (min 36px)",
+    variable: "--font-display",
+    utility: "font-heading",
+    sample: "The quick brown fox jumps over the lazy dog",
+    className: "font-heading",
+  },
+  {
+    name: "Atkinson Hyperlegible",
+    role: "Body, UI & H3–H6, Regular",
+    variable: "--font-sans",
+    utility: "font-sans",
+    sample: "The quick brown fox jumps over the lazy dog",
+    className: "font-sans",
+  },
+  {
+    name: "Geist Mono",
+    role: "Code & Monospace",
+    variable: "--font-mono",
+    utility: "font-mono",
+    sample: "const greeting = \"Hello, world!\"",
+    className: "font-mono",
+  },
+]
+
+const headings: Heading[] = [
+  { id: "typefaces", text: "Typefaces", level: 2 },
+  { id: "display-scale", text: "Display Scale", level: 2 },
+  { id: "typography-scale", text: "Typography Scale", level: 2 },
+]
+
+export default function TypographyPage() {
+  return (
+    <DocsLayout headings={headings}>
+      <header className="mb-8">
+        <h1 className="text-4xl tracking-tight">Typography</h1>
+        <p className="mt-2 max-w-2xl text-muted-foreground">
+          Three font families cover every role in the system. All are loaded via{" "}
+          <code className="font-mono text-xs bg-muted px-1 py-0.5 rounded-md">next/font/google</code>{" "}
+          and injected as CSS variables, no layout shift, no flash.
+        </p>
+      </header>
+
+      <Separator className="mb-10" />
+
+      {/* Typefaces */}
+      <section className="mb-12">
+        <h2 id="typefaces" className="mb-1 scroll-mt-6">Typefaces</h2>
+        <p className="mb-6 text-sm text-muted-foreground">
+          Instrument Serif is loaded at weight 400 only, the browser should never synthesize bold
+          or semibold. H1 and H2 use Instrument Serif (never below 36px). H3–H6 use Atkinson Hyperlegible.
+        </p>
+        <div className="flex flex-col gap-4">
+          {fonts.map(({ name, role, variable, utility, sample, className }) => (
+            <div key={name} className="rounded-lg border bg-card p-5">
+              <div className="mb-3 flex items-start justify-between gap-4">
+                <div>
+                  <p className={`text-2xl font-medium leading-tight ${className}`}>{name}</p>
+                  <p className="mt-0.5 text-xs text-muted-foreground">{role}</p>
+                </div>
+                <div className="shrink-0 text-right">
+                  <p className="font-mono text-xs text-muted-foreground">{variable}</p>
+                  <p className="font-mono text-xs text-muted-foreground">{utility}</p>
+                </div>
+              </div>
+              <p className={`text-sm text-muted-foreground ${className}`}>{sample}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <Separator className="mb-10" />
+
+      {/* Display Scale */}
+      <section className="mb-12">
+        <h2 id="display-scale" className="mb-1 scroll-mt-6">Display Scale</h2>
+        <p className="mb-6 text-sm text-muted-foreground">
+          Reserved for hero moments, splash screens, and large editorial layouts. Always Instrument Serif.
+          Apply via the <code className="font-mono text-xs bg-muted px-1 py-0.5 rounded-md">.text-display-78</code> and{" "}
+          <code className="font-mono text-xs bg-muted px-1 py-0.5 rounded-md">.text-display-60</code> utility classes.
+        </p>
+        <div className="flex flex-col gap-8">
+          {[
+            { label: "Display 78", meta: "78px / −0.02em", el: <p className="text-display-78 leading-none">Display</p> },
+            { label: "Display 60", meta: "60px / −0.02em", el: <p className="text-display-60 leading-none">Display</p> },
+          ].map(({ label, meta, el }, i, arr) => (
+            <div key={label} className={`flex items-baseline gap-6 ${i < arr.length - 1 ? "border-b pb-6" : ""}`}>
+              <div className="w-32 shrink-0">
+                <p className="text-xs text-muted-foreground">{label}</p>
+                <p className="font-mono text-xs text-muted-foreground">{meta}</p>
+              </div>
+              {el}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <Separator className="mb-10" />
+
+      {/* Typography Scale */}
+      <section className="mb-12">
+        <h2 id="typography-scale" className="mb-6 scroll-mt-6">Typography Scale</h2>
+        <div className="flex flex-col gap-8">
+          {[
+            { label: "Heading 1", meta: "text-4xl · Instrument Serif",  el: <h1 className="text-4xl tracking-tight" aria-hidden="true">The quick brown fox</h1> },
+            { label: "Heading 2", meta: "text-3xl · Instrument Serif",  el: <h2 className="text-3xl tracking-tight" aria-hidden="true">The quick brown fox</h2> },
+            { label: "Heading 3", meta: "text-2xl · Atkinson",          el: <h3 className="text-2xl tracking-tight" aria-hidden="true">The quick brown fox</h3> },
+            { label: "Heading 4", meta: "text-xl · Atkinson",           el: <h4 className="text-xl" aria-hidden="true">The quick brown fox jumps</h4> },
+            { label: "Body",      meta: "text-base / normal",     el: <p className="text-base leading-relaxed max-w-prose">The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs.</p> },
+            { label: "Small",     meta: "text-sm / normal",       el: <p className="text-sm text-muted-foreground leading-relaxed max-w-prose">The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs.</p> },
+            { label: "Mono",      meta: "font-mono / text-sm",    el: <p className="font-mono text-sm">const greeting = &quot;Hello, world!&quot;</p> },
+          ].map(({ label, meta, el }, i, arr) => (
+            <div key={label} className={`flex items-baseline gap-6 ${i < arr.length - 1 ? "border-b pb-6" : ""}`}>
+              <div className="w-32 shrink-0">
+                <p className="text-xs text-muted-foreground">{label}</p>
+                <p className="font-mono text-xs text-muted-foreground">{meta}</p>
+              </div>
+              {el}
+            </div>
+          ))}
+        </div>
+      </section>
+    </DocsLayout>
+  )
+}

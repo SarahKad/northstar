@@ -1,0 +1,10 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "skeleton",
+  "type": "registry:ui",
+  "title": "Skeleton",
+  "description": "Placeholder loading state that previews content shape while data loads.",
+  "registryDependencies": [
+    "skeleton"
+  ]
+}

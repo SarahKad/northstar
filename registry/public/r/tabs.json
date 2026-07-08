@@ -1,0 +1,10 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "tabs",
+  "type": "registry:ui",
+  "title": "Tabs",
+  "description": "Switches between related content sections without page navigation.",
+  "registryDependencies": [
+    "tabs"
+  ]
+}

@@ -1,0 +1,105 @@
+/* =============================================================================
+   AG CORE THEME, src/themes/ag-core.css
+   Assemblies of God core brand theme.
+   Selector: [data-theme="ag"]
+   Applied by ThemeProvider via document.documentElement.dataset.theme = "ag"
+   ============================================================================= */
+
+/* --- Brand & chart primitives specific to AG -------------------------------- */
+
+[data-theme="ag"] {
+  /* Brand, red accent */
+  --primitive-brand-58: #DA2919;  /* base brand red */
+  --primitive-brand-63: #E54E3C;  /* lightened for dark mode */
+
+  /* Chart scale, light mode (dark → light) */
+  --primitive-chart-43:  #544F4D;  /* darkest */
+  --primitive-chart-50:  #676361;  /* step 2 */
+  --primitive-chart-57:  #7B7776;  /* step 3 */
+  --primitive-chart-65:  #938F8D;  /* step 4 */
+  --primitive-chart-73:  #ABA7A6;  /* lightest */
+
+  /* Chart scale, dark mode (dark → light) */
+  --primitive-chart-15:  #0D0B0A;  /* darkest */
+  --primitive-chart-22:  #1D1A19;  /* step 2 */
+  --primitive-chart-29:  #2E2B2A;  /* step 3 */
+  --primitive-chart-36:  #403D3C;  /* step 4 */
+  --primitive-chart-43d: #544F4D;  /* lightest */
+}
+
+/* --- Light mode semantic tokens --------------------------------------------- */
+
+[data-theme="ag"],
+[data-theme="ag"].light {
+  --background:             var(--primitive-neutral-98);   /* #F9F8F5 warm cream */
+  --foreground:             var(--primitive-neutral-15);
+  --card:                   var(--primitive-neutral-100);  /* #FEFDFC near-white cream */
+  --card-foreground:        var(--primitive-neutral-15);
+  --popover:                var(--primitive-neutral-100);
+  --popover-foreground:     var(--primitive-neutral-15);
+  --brand:                  var(--primitive-brand-58);     /* #DA291C */
+  --primary:                var(--primitive-neutral-21);
+  --primary-foreground:     var(--primitive-neutral-99);
+  --secondary:              var(--primitive-neutral-96);
+  --secondary-foreground:   var(--primitive-neutral-21);
+  --muted:                  var(--primitive-neutral-96);
+  --muted-foreground:       var(--primitive-neutral-43);  /* #544F4D */
+  --accent:                 var(--primitive-neutral-96);
+  --accent-foreground:      var(--primitive-neutral-21);
+  --destructive:            var(--primitive-brand-58);
+  --border:                 var(--primitive-neutral-92);
+  --input:                  var(--primitive-neutral-92);
+  --ring:                   var(--primitive-brand-58);
+  --chart-1:                var(--primitive-chart-43);
+  --chart-2:                var(--primitive-chart-50);
+  --chart-3:                var(--primitive-chart-57);
+  --chart-4:                var(--primitive-chart-65);
+  --chart-5:                var(--primitive-chart-73);
+  --radius:                 4px;
+  --sidebar:                var(--primitive-neutral-100);
+  --sidebar-foreground:     var(--primitive-neutral-15);
+  --sidebar-primary:        var(--primitive-neutral-21);
+  --sidebar-primary-foreground: var(--primitive-neutral-99);
+  --sidebar-accent:         var(--primitive-neutral-96);
+  --sidebar-accent-foreground:  var(--primitive-neutral-21);
+  --sidebar-border:         var(--primitive-neutral-92);
+  --sidebar-ring:           var(--primitive-brand-58);
+}
+
+/* --- Dark mode semantic tokens ---------------------------------------------- */
+
+[data-theme="ag"].dark {
+  --background:             var(--primitive-neutral-15);
+  --foreground:             var(--primitive-neutral-99);
+  --card:                   var(--primitive-neutral-21);
+  --card-foreground:        var(--primitive-neutral-99);
+  --popover:                var(--primitive-neutral-21);
+  --popover-foreground:     var(--primitive-neutral-99);
+  --brand:                  var(--primitive-brand-63);
+  --primary:                var(--primitive-neutral-92w);
+  --primary-foreground:     var(--primitive-neutral-21);
+  --secondary:              var(--primitive-neutral-27);
+  --secondary-foreground:   var(--primitive-neutral-99);
+  --muted:                  var(--primitive-neutral-27);
+  --muted-foreground:       var(--primitive-neutral-71);
+  --accent:                 var(--primitive-neutral-27);
+  --accent-foreground:      var(--primitive-neutral-99);
+  --destructive:            var(--primitive-brand-63);
+  --border:                 rgba(255, 255, 255, 0.10);
+  --input:                  rgba(255, 255, 255, 0.15);
+  --ring:                   var(--primitive-brand-63);
+  /* Reversed light-mode scale, lighter values contrast on the dark surface */
+  --chart-1:                var(--primitive-chart-73);   /* #ABA7A6 lightest */
+  --chart-2:                var(--primitive-chart-65);   /* #938F8D */
+  --chart-3:                var(--primitive-chart-57);   /* #7B7776 */
+  --chart-4:                var(--primitive-chart-50);   /* #676361 */
+  --chart-5:                var(--primitive-chart-43);   /* #544F4D darkest */
+  --sidebar:                var(--primitive-neutral-21);
+  --sidebar-foreground:     var(--primitive-neutral-99);
+  --sidebar-primary:        var(--primitive-neutral-92w);
+  --sidebar-primary-foreground: var(--primitive-neutral-21);
+  --sidebar-accent:         var(--primitive-neutral-27);
+  --sidebar-accent-foreground:  var(--primitive-neutral-99);
+  --sidebar-border:         rgba(255, 255, 255, 0.10);
+  --sidebar-ring:           var(--primitive-brand-63);
+}

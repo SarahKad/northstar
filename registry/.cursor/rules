@@ -1,0 +1,120 @@
+# AG Design System, Cursor Rules
+
+Read these rules before writing any code. Every rule is a hard requirement.
+
+---
+
+## Tokens, always, no exceptions
+
+- Never use hardcoded color values. No hex codes, no rgb(), no Tailwind color utilities like bg-blue-500 or text-red-400.
+- Always use semantic tokens: bg-background, text-foreground, text-muted-foreground, border-border, bg-card, text-primary, bg-primary, text-destructive, etc.
+- Never use primitive tokens (--primitive-neutral-15) directly in components. They exist only inside theme CSS files.
+- If a semantic token doesn't exist for what you need, stop and ask before inventing one.
+
+---
+
+## Typography, exact fonts, exact usage
+
+- Instrument Serif (font-heading), h1 and h2. Must never render below 30px (text-3xl). At smaller sizes it loses legibility and visual quality. If a section label needs to be smaller than 30px, use h3, never override an h2 with a size smaller than text-3xl.
+- Atkinson Hyperlegible (font-sans), all body text, UI labels, h3 through h6.
+- Geist Mono (font-mono), code blocks and monospace only.
+- Never use any other font family.
+- Never apply font-bold or font-semibold to Instrument Serif elements.
+- Never apply font-heading to any element that could render smaller than 36px.
+
+---
+
+## Heading sizes, use the defined scale
+
+- h1 → text-4xl + font-heading (Instrument Serif)
+- h2 → text-3xl + font-heading (Instrument Serif), never below 30px
+- h3 → text-2xl + font-semibold (Atkinson Hyperlegible)
+- h4 → text-xl + font-semibold (Atkinson Hyperlegible)
+- h5 → text-lg + font-medium (Atkinson Hyperlegible)
+- h6 → text-base + font-medium (Atkinson Hyperlegible)
+- Never rely on browser heading defaults, Tailwind preflight resets them.
+- Never override h2 with a size class below text-3xl, use h3 instead.
+
+---
+
+## Border radius, near zero by design
+
+- Use rounded-sm, rounded-md, or rounded-lg from the design system radius scale.
+- Never use rounded-full on non-circular elements.
+- Never add arbitrary radius values.
+
+---
+
+## Components, use what exists
+
+- Before writing any UI element, check src/components/ui/ and public/registry.json.
+- If a component exists in the registry, use it. Never re-implement it inline.
+- Components are built on Base UI primitives for accessibility. Do not replace them with plain HTML elements.
+
+---
+
+## TypeScript, strict always
+
+- All props must be strictly typed with union types. No loose string where 'primary' | 'secondary' is correct.
+- Export types for every component.
+- Add JSDoc comments to every prop, required, not optional.
+- Zero TypeScript errors before any task is complete.
+
+---
+
+## SSR safety
+
+- Never reference window, document, or navigator outside of a useEffect or a "use client" component.
+- All components must render correctly on the server.
+
+---
+
+## What never to do
+
+- No style={{ color: '#hex' }} or any inline style with a raw value
+- No bg-blue-500 or any Tailwind color outside semantic tokens
+- No font-bold on Instrument Serif
+- No rounded-full on non-circular elements
+- No hardcoded pixel values for spacing, use Tailwind spacing utilities
+- No skipping JSDoc on new components
+- No committing with TypeScript errors
+- No duplicating a component that already exists in src/components/ui/
+- No browser globals outside useEffect
+
+---
+
+## Theming
+
+- Two themes: ag (default) and navy.
+- Dark mode uses the .dark class on <html>. Semantic tokens handle both modes automatically.
+- Never hardcode light-only or dark-only values.
+
+---
+
+## Token architecture (three tiers, never skip one)
+
+Primitive → Semantic → Component
+
+- Primitives: raw oklch values in globals.css. Never used in components.
+- Semantic: meaning-based tokens in src/themes/. Used in all components.
+- Component: scoped tokens like --sidebar-* and --chart-*.
+
+---
+
+## Adding a new component
+
+1. Create src/components/ui/[name].tsx with strict TypeScript types and JSDoc on every prop
+2. Add entry to src/lib/registry.ts
+3. Add renderer case in src/components/registry/component-renderer.tsx
+4. Add code generator case in src/lib/code-generator.ts
+5. Run: npm run registry:generate
+6. Run: npx tsc --noEmit, zero errors required
+7. Update CHANGELOG.md
+
+---
+
+## Governance
+
+- All changes require Gloo approval before merging.
+- AI-generated code is for scaffolding only, always review before merging.
+- Every release updates CHANGELOG.md.

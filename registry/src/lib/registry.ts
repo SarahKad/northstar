@@ -1,0 +1,1226 @@
+export type PropType = "select" | "boolean" | "text" | "color"
+
+export type PropSchema = {
+  name: string
+  label: string
+  type: PropType
+  options?: string[]
+  defaultValue: string | boolean
+  description?: string
+}
+
+/** API reference row for the Props documentation table on component pages. */
+export type ApiPropSchema = {
+  name: string
+  type: string
+  default?: string
+  description: string
+}
+
+export type ComponentConfig = {
+  slug: string
+  name: string
+  description: string
+  category: string
+  usage: string
+  props: PropSchema[]
+  /** Documented component API, rendered in the Props table when present. */
+  apiProps?: ApiPropSchema[]
+  doList?: string[]
+  dontList?: string[]
+  installCommand?: string
+}
+
+export const categories = [
+  { id: "inputs", label: "Inputs & Actions" },
+  { id: "display", label: "Display" },
+  { id: "layout", label: "Layout" },
+  { id: "feedback", label: "Feedback" },
+  { id: "navigation", label: "Navigation" },
+  { id: "charts", label: "Charts & Graphs" },
+]
+
+export const components: ComponentConfig[] = [
+  {
+    slug: "button",
+    name: "Button",
+    description:
+      "Triggers actions, submits forms, or navigates. The most fundamental interactive element in the system.",
+    category: "inputs",
+    usage: "Use buttons to initiate actions. Choose the variant that reflects the importance of the action.",
+    props: [
+      {
+        name: "variant",
+        label: "Variant",
+        type: "select",
+        options: ["default", "secondary", "outline", "ghost", "destructive", "link"],
+        defaultValue: "default",
+      },
+      {
+        name: "size",
+        label: "Size",
+        type: "select",
+        options: ["xs", "sm", "default", "lg", "icon"],
+        defaultValue: "default",
+      },
+      {
+        name: "label",
+        label: "Label",
+        type: "text",
+        defaultValue: "Button",
+        description: "Button text",
+      },
+      {
+        name: "icon",
+        label: "Icon",
+        type: "select",
+        options: ["none", "only", "left", "right"],
+        defaultValue: "none",
+        description: "Icon only, or paired with label on the left or right, not both sides",
+      },
+      {
+        name: "disabled",
+        label: "Disabled",
+        type: "boolean",
+        defaultValue: false,
+      },
+    ],
+    apiProps: [
+      {
+        name: "variant",
+        type: '"default" | "secondary" | "outline" | "ghost" | "destructive" | "link"',
+        default: '"default"',
+        description: "Visual treatment for the button.",
+      },
+      {
+        name: "size",
+        type: '"xs" | "sm" | "default" | "lg" | "icon" | "icon-xs" | "icon-sm" | "icon-lg"',
+        default: '"default"',
+        description:
+          "Controls height, padding, and icon sizing. Use an icon size for icon-only buttons.",
+      },
+      {
+        name: "disabled",
+        type: "boolean",
+        default: "false",
+        description: "Prevents interaction and applies disabled styling.",
+      },
+      {
+        name: "children",
+        type: "ReactNode",
+        description:
+          "Button label or icon content. Pair size=\"icon\" with an icon and aria-label.",
+      },
+      {
+        name: "className",
+        type: "string",
+        description: "Additional classes merged onto the root element.",
+      },
+    ],
+    installCommand: "npx shadcn@latest add https://YOUR_REGISTRY_URL/r/button",
+    doList: [
+      "Use default for primary actions, one per view",
+      "Use outline or ghost for secondary actions",
+      "Use destructive for irreversible actions like delete",
+    ],
+    dontList: [
+      "Don't use more than one primary button per section",
+      "Don't use link variant for navigation within forms",
+    ],
+  },
+  {
+    slug: "badge",
+    name: "Badge",
+    description:
+      "Compact label for status, count, or category. Used inline alongside other content.",
+    category: "display",
+    usage: "Badges communicate status or categorization at a glance. Keep labels short.",
+    props: [
+      {
+        name: "variant",
+        label: "Variant",
+        type: "select",
+        options: ["default", "secondary", "outline", "destructive"],
+        defaultValue: "default",
+      },
+      {
+        name: "label",
+        label: "Label",
+        type: "text",
+        defaultValue: "Badge",
+        description: "Badge text",
+      },
+    ],
+    installCommand: "npx shadcn@latest add https://YOUR_REGISTRY_URL/r/badge",
+    doList: [
+      "Keep text under 3 words",
+      "Use secondary for neutral/informational states",
+      "Use destructive sparingly for errors or warnings",
+    ],
+    dontList: [
+      "Don't use as a button replacement",
+      "Don't stack more than 3 badges in a row",
+    ],
+  },
+  {
+    slug: "table",
+    name: "Table",
+    description:
+      "Structured data display with sortable columns, optional footer, and title. Use for records that benefit from columnar scanning.",
+    category: "display",
+    usage: "Use tables to present structured data in rows and columns. Add a title above the table when context isn't obvious from surrounding copy.",
+    installCommand: "npx shadcn@latest add table",
+    props: [
+      {
+        name: "showTitle",
+        label: "Show title",
+        type: "boolean",
+        defaultValue: true,
+      },
+      {
+        name: "title",
+        label: "Title",
+        type: "text",
+        defaultValue: "Recent invoices",
+      },
+      {
+        name: "showFooter",
+        label: "Show Footer",
+        type: "boolean",
+        defaultValue: false,
+      },
+    ],
+    doList: [
+      "Label every column with a clear header",
+      "Right-align numeric columns so values line up for easy scanning",
+      "Use a footer row for totals or aggregate values",
+      "Place the table title above the table, not below it",
+    ],
+    dontList: [
+      "Don't use a table for non-tabular data, use a list or card instead",
+      "Don't omit column headers unless the context makes each column self-evident",
+    ],
+  },
+  {
+    slug: "data-table",
+    name: "Data Table",
+    description:
+      "Full-featured interactive table powered by TanStack Table v8. Supports sorting, pagination, global or column search, row selection, and column visibility, all themed via AG tokens.",
+    category: "display",
+    usage: "Use DataTable when your data needs sorting, filtering, or pagination. Define typed column defs with createColumnHelper, pass columns + data as props, and opt into features with boolean flags.",
+    installCommand: "npm install @tanstack/react-table",
+    props: [
+      {
+        name: "searchable",
+        label: "Searchable",
+        type: "boolean",
+        defaultValue: false,
+        description: "Show a search input (global filter). Pass a column accessorKey string to filter a single column.",
+      },
+      {
+        name: "pagination",
+        label: "Pagination",
+        type: "boolean",
+        defaultValue: false,
+        description: "Show pagination controls below the table",
+      },
+      {
+        name: "selectable",
+        label: "Selectable",
+        type: "boolean",
+        defaultValue: false,
+        description: "Prepend a checkbox column for row selection",
+      },
+      {
+        name: "columnVisibility",
+        label: "Column Visibility",
+        type: "boolean",
+        defaultValue: false,
+        description: "Show a column toggle dropdown in the toolbar",
+      },
+    ],
+    doList: [
+      "Use createColumnHelper<YourType>() for full TypeScript inference on accessors and cell renderers",
+      "Define column defs outside the component (or with useMemo) to avoid re-creating the table instance on every render",
+      "Use the cell renderer to slot in Badges, Avatars, or action buttons, DataTable owns the layout, you own the content",
+      "Pass selectable + onSelectionChange together to act on the selected rows",
+    ],
+    dontList: [
+      "Don't import from @tanstack/react-table directly for column defs, use the createColumnHelper re-export from @/components/ui/data-table so types stay consistent",
+      "Don't skip the title prop on DataTable, it provides an accessible label for screen readers via a visually hidden caption",
+      "Don't define columns inline in JSX without useMemo, it causes the table to recreate on every render",
+    ],
+  },
+  {
+    slug: "card",
+    name: "Card",
+    description:
+      "Grouped container for related content. Cards establish visual hierarchy and organize information into scannable units.",
+    category: "layout",
+    usage: "Use cards to group related content. Avoid nesting cards within cards.",
+    props: [
+      {
+        name: "title",
+        label: "Title",
+        type: "text",
+        defaultValue: "Card Title",
+      },
+      {
+        name: "description",
+        label: "Description",
+        type: "text",
+        defaultValue: "Card description goes here.",
+      },
+      {
+        name: "showFooter",
+        label: "Show Footer",
+        type: "boolean",
+        defaultValue: true,
+      },
+      {
+        name: "footerCta",
+        label: "Footer CTA",
+        type: "text",
+        defaultValue: "Learn more",
+      },
+      {
+        name: "imagePosition",
+        label: "Image",
+        type: "select",
+        options: ["none", "top", "bottom"],
+        defaultValue: "none",
+        description: "Optional image, top, bottom, or none",
+      },
+    ],
+    installCommand: "npx shadcn@latest add https://YOUR_REGISTRY_URL/r/card",
+    doList: [
+      "Use consistent padding and spacing within cards",
+      "Group closely related items in the same card",
+    ],
+    dontList: [
+      "Don't nest cards inside cards",
+      "Don't use cards as purely decorative containers",
+    ],
+  },
+  {
+    slug: "input",
+    name: "Input",
+    description:
+      "Single-line text field for user data entry. Pairs with Label and supports disabled, readonly, and error states.",
+    category: "inputs",
+    usage: "Always pair inputs with a visible label. Use placeholder as a hint, not a label replacement.",
+    props: [
+      {
+        name: "type",
+        label: "Type",
+        type: "select",
+        options: ["text", "email", "password", "number", "search", "url"],
+        defaultValue: "text",
+      },
+      {
+        name: "placeholder",
+        label: "Placeholder",
+        type: "text",
+        defaultValue: "",
+        description: "Leave blank to use the type default",
+      },
+      {
+        name: "showLabel",
+        label: "Show label",
+        type: "boolean",
+        defaultValue: true,
+      },
+      {
+        name: "label",
+        label: "Label text",
+        type: "text",
+        defaultValue: "Label",
+      },
+      {
+        name: "showHelperText",
+        label: "Show helper text",
+        type: "boolean",
+        defaultValue: false,
+      },
+      {
+        name: "helperText",
+        label: "Helper text",
+        type: "text",
+        defaultValue: "We'll never share your email with anyone else.",
+      },
+      {
+        name: "disabled",
+        label: "Disabled",
+        type: "boolean",
+        defaultValue: false,
+      },
+    ],
+    installCommand: "npx shadcn@latest add https://YOUR_REGISTRY_URL/r/input",
+    doList: [
+      "Always pair with a visible label",
+      "Use placeholder text to show format (e.g. 'name@example.com')",
+      "Add helper text below the field for format hints or privacy notes",
+    ],
+    dontList: [
+      "Don't use placeholder as the only label",
+      "Don't remove the label for 'space', use a visually hidden label instead",
+    ],
+  },
+  {
+    slug: "tabs",
+    name: "Tabs",
+    description:
+      "Switches between related content sections without page navigation.",
+    category: "navigation",
+    usage: "Use tabs to organize content into parallel sections. Keep tab labels short and scannable.",
+    props: [
+      {
+        name: "tab1Label",
+        label: "Tab 1 label",
+        type: "text",
+        defaultValue: "Account",
+      },
+      {
+        name: "tab2Label",
+        label: "Tab 2 label",
+        type: "text",
+        defaultValue: "Password",
+      },
+      {
+        name: "tab3Label",
+        label: "Tab 3 label",
+        type: "text",
+        defaultValue: "Settings",
+      },
+    ],
+    installCommand: "npx shadcn@latest add tabs",
+    doList: [
+      "Use 2–5 tabs, more becomes hard to scan",
+      "Keep labels to 1–2 words",
+    ],
+    dontList: [
+      "Don't use tabs for multi-step flows, use a stepper instead",
+    ],
+  },
+  {
+    slug: "select",
+    name: "Select",
+    description:
+      "Dropdown for choosing one value from a list. Use when options exceed 5 items.",
+    category: "inputs",
+    usage: "Use Select when you have more than 5 options. For fewer choices, consider radio buttons.",
+    installCommand: "npx shadcn@latest add https://YOUR_REGISTRY_URL/r/select",
+    props: [
+      {
+        name: "showLabel",
+        label: "Show label",
+        type: "boolean",
+        defaultValue: true,
+      },
+      {
+        name: "label",
+        label: "Label",
+        type: "text",
+        defaultValue: "Select an option",
+      },
+      {
+        name: "placeholder",
+        label: "Placeholder",
+        type: "text",
+        defaultValue: "Choose…",
+      },
+      {
+        name: "option1Label",
+        label: "Option 1",
+        type: "text",
+        defaultValue: "Option 1",
+      },
+      {
+        name: "option2Label",
+        label: "Option 2",
+        type: "text",
+        defaultValue: "Option 2",
+      },
+      {
+        name: "option3Label",
+        label: "Option 3",
+        type: "text",
+        defaultValue: "Option 3",
+      },
+      {
+        name: "disabled",
+        label: "Disabled",
+        type: "boolean",
+        defaultValue: false,
+      },
+    ],
+  },
+  {
+    slug: "skeleton",
+    name: "Skeleton",
+    description:
+      "Placeholder loading state that previews content shape while data loads.",
+    category: "feedback",
+    usage: "Use skeleton loaders for content that loads asynchronously. Match the shape of the content it replaces.",
+    installCommand: "npx shadcn@latest add skeleton",
+    props: [
+      {
+        name: "variant",
+        label: "Variant",
+        type: "select",
+        options: ["text", "avatar", "card"],
+        defaultValue: "text",
+      },
+    ],
+  },
+  {
+    slug: "chart-area-interactive",
+    name: "Area Chart",
+    description:
+      "Interactive stacked area chart with a time-range filter. Shows trends across two data series with a tooltip and legend.",
+    category: "charts",
+    usage: "Use area charts to visualize cumulative or stacked trends over time. The time-range selector lets users focus on 7-day, 30-day, or 90-day windows.",
+    installCommand: "npx shadcn@latest add https://YOUR_REGISTRY_URL/r/chart-area-interactive",
+    props: [
+      {
+        name: "title",
+        label: "Title",
+        type: "text",
+        defaultValue: "Area Chart - Interactive",
+      },
+      {
+        name: "dateRange",
+        label: "Date range",
+        type: "text",
+        defaultValue: "Showing total visitors for the last 3 months",
+      },
+      {
+        name: "metric1Label",
+        label: "Metric 1 label",
+        type: "text",
+        defaultValue: "Desktop",
+      },
+      {
+        name: "metric2Label",
+        label: "Metric 2 label",
+        type: "text",
+        defaultValue: "Mobile",
+      },
+      {
+        name: "timeRange",
+        label: "Default range",
+        type: "select",
+        options: ["90d", "30d", "7d"],
+        defaultValue: "7d",
+      },
+    ],
+    doList: [
+      "Use for time-series data with two or more comparable series",
+      "Pair with a legend so each series is clearly labeled",
+      "Use the chart-* color tokens so charts respond to theme changes",
+    ],
+    dontList: [
+      "Don't use stacked area when series overlap makes individual values hard to read, use a line chart instead",
+      "Don't skip axis labels, always make the time unit clear",
+    ],
+  },
+  {
+    slug: "chart-bar-default",
+    name: "Bar Chart",
+    description: "Simple bar chart displaying a single data series. Best for comparing discrete categories or time periods at a glance.",
+    category: "charts",
+    usage: "Use bar charts when comparing a single metric across categories or time. Keep to six or fewer bars for clarity.",
+    installCommand: "npx shadcn@latest add https://YOUR_REGISTRY_URL/r/chart-bar-default",
+    props: [
+      {
+        name: "title",
+        label: "Title",
+        type: "text",
+        defaultValue: "Bar Chart",
+      },
+      {
+        name: "dateRange",
+        label: "Date range",
+        type: "text",
+        defaultValue: "January - June 2024",
+      },
+      {
+        name: "metric1Label",
+        label: "Metric label",
+        type: "text",
+        defaultValue: "Desktop",
+      },
+    ],
+    doList: [
+      "Use chart-* color tokens so the bars adapt to theme changes",
+      "Label the axis so the unit of measurement is always clear",
+    ],
+    dontList: [
+      "Don't use a bar chart for continuous data, use a line chart instead",
+      "Don't show more than ~12 bars without adding a scroll or filter",
+    ],
+  },
+  {
+    slug: "chart-bar-stacked",
+    name: "Bar Chart Stacked",
+    description: "Stacked bar chart comparing two data series with a legend. Ideal for showing part-to-whole relationships across time.",
+    category: "charts",
+    usage: "Use when you need to show both the total and the breakdown of each segment. Pair with a legend so both series are clearly labeled.",
+    installCommand: "npx shadcn@latest add https://YOUR_REGISTRY_URL/r/chart-bar-stacked",
+    props: [
+      {
+        name: "title",
+        label: "Title",
+        type: "text",
+        defaultValue: "Bar Chart - Stacked + Legend",
+      },
+      {
+        name: "dateRange",
+        label: "Date range",
+        type: "text",
+        defaultValue: "January - June 2024",
+      },
+      {
+        name: "metric1Label",
+        label: "Metric 1 label",
+        type: "text",
+        defaultValue: "Desktop",
+      },
+      {
+        name: "metric2Label",
+        label: "Metric 2 label",
+        type: "text",
+        defaultValue: "Mobile",
+      },
+    ],
+    doList: [
+      "Always show a legend when using two or more series",
+      "Use chart-1 / chart-2 tokens to keep colors consistent across charts",
+    ],
+    dontList: [
+      "Don't stack more than 3 series, the chart becomes unreadable",
+      "Don't use stacked bars when comparing individual series values is the primary goal, use a grouped bar instead",
+    ],
+  },
+  {
+    slug: "checkbox",
+    name: "Checkbox",
+    description: "Binary selection control. Available as a simple checkbox, with description text, or inside a bordered card row.",
+    category: "inputs",
+    usage: "Use checkboxes for multi-select options or toggling a single setting on/off. Use the card variant for settings panels.",
+    installCommand: "npx shadcn@latest add https://YOUR_REGISTRY_URL/r/checkbox",
+    props: [
+      {
+        name: "variant",
+        label: "Variant",
+        type: "select",
+        options: ["default", "with-description", "card"],
+        defaultValue: "default",
+        description: "Visual style of the checkbox control",
+      },
+      {
+        name: "label",
+        label: "Label",
+        type: "text",
+        defaultValue: "Accept terms and conditions",
+      },
+      {
+        name: "description",
+        label: "Description",
+        type: "text",
+        defaultValue: "You agree to our Terms of Service and Privacy Policy.",
+      },
+      {
+        name: "checked",
+        label: "Checked",
+        type: "boolean",
+        defaultValue: false,
+      },
+      {
+        name: "disabled",
+        label: "Disabled",
+        type: "boolean",
+        defaultValue: false,
+      },
+    ],
+    doList: [
+      "Always pair with a visible label to the right of the checkbox",
+      "Use for multi-select scenarios where multiple items can be chosen",
+      "Use the card variant for settings toggles where extra context is needed",
+    ],
+    dontList: [
+      "Don't use a checkbox for mutually exclusive options, use a radio group",
+      "Don't use a checkbox as a primary call to action",
+    ],
+  },
+  {
+    slug: "alert",
+    name: "Alert",
+    description: "Contextual message for informational, success, warning, or error states. Supports an optional dismiss control.",
+    category: "feedback",
+    usage: "Use alerts to surface important messages inline. Choose the variant that matches the message severity.",
+    installCommand: "npx shadcn@latest add https://YOUR_REGISTRY_URL/r/alert",
+    props: [
+      {
+        name: "variant",
+        label: "Variant",
+        type: "select",
+        options: ["default", "info", "success", "warning", "destructive"],
+        defaultValue: "default",
+      },
+      {
+        name: "title",
+        label: "Title",
+        type: "text",
+        defaultValue: "Heads up!",
+      },
+      {
+        name: "description",
+        label: "Description",
+        type: "text",
+        defaultValue: "You can add components to your app using the CLI.",
+      },
+      {
+        name: "dismissible",
+        label: "Dismissible",
+        type: "boolean",
+        defaultValue: true,
+      },
+    ],
+    doList: [
+      "Match variant to severity: info for neutral, warning for caution, destructive for errors",
+      "Keep the message concise, one sentence title, one or two sentence description",
+      "Use AlertDismiss for dismissible alerts and remove the alert from the DOM on dismiss",
+    ],
+    dontList: [
+      "Don't use alerts for success confirmations after actions, use a toast instead",
+      "Don't stack multiple alerts, consolidate into one or use a list",
+      "Don't hide critical errors behind dismiss without another way to recover the message",
+    ],
+  },
+  {
+    slug: "pagination",
+    name: "Pagination",
+    description: "Navigation control for moving through paged content. Includes previous/next arrows and numbered page buttons.",
+    category: "navigation",
+    usage: "Use pagination when content is split across pages. Show prev/next plus nearby page numbers. Disable prev on first page and next on last.",
+    installCommand: "npx shadcn@latest add https://YOUR_REGISTRY_URL/r/pagination",
+    props: [
+      {
+        name: "totalPages",
+        label: "Total pages",
+        type: "select",
+        options: ["5", "10", "20"],
+        defaultValue: "5",
+      },
+      {
+        name: "currentPage",
+        label: "Current page",
+        type: "select",
+        options: ["1", "2", "3", "4", "5"],
+        defaultValue: "3",
+      },
+    ],
+    doList: [
+      "Disable the Prev button on page 1 and Next on the last page",
+      "Highlight the current page clearly so users know where they are",
+      "Use ellipsis for large page counts rather than showing all numbers",
+    ],
+    dontList: [
+      "Don't use pagination for small data sets, show all results instead",
+      "Don't hide pagination below the fold, place it at the bottom of the list or table",
+    ],
+  },
+  {
+    slug: "button-group",
+    name: "Button Group",
+    description: "A set of related buttons joined into a single connected control. Ideal for toggleable or segmented options.",
+    category: "inputs",
+    usage: "Use button groups for tightly related actions or view-switching (e.g. List / Grid). Avoid grouping more than 5 buttons.",
+    installCommand: "npx shadcn@latest add https://YOUR_REGISTRY_URL/r/button-group",
+    props: [
+      {
+        name: "variant",
+        label: "Variant",
+        type: "select",
+        options: ["outline", "secondary"],
+        defaultValue: "outline",
+      },
+      {
+        name: "activeIndex",
+        label: "Active button",
+        type: "select",
+        options: ["Day", "Week", "Month"],
+        defaultValue: "Day",
+      },
+    ],
+    doList: [
+      "Use for 2–5 closely related options",
+      "Visually distinguish the active/selected button",
+      "Keep button labels short, 1–2 words each",
+    ],
+    dontList: [
+      "Don't use more than 5 buttons in a group, use a Select instead",
+      "Don't mix icon-only and label buttons in the same group",
+    ],
+  },
+  {
+    slug: "radio-group",
+    name: "Radio Group",
+    description: "Single-select control for mutually exclusive options. Shows all choices simultaneously for easy comparison.",
+    category: "inputs",
+    usage: "Use radio groups when users must choose exactly one option from a short list (2–6 items). For longer lists, use a Select.",
+    installCommand: "npx shadcn@latest add https://YOUR_REGISTRY_URL/r/radio-group",
+    props: [
+      {
+        name: "option1Label",
+        label: "Option 1",
+        type: "text",
+        defaultValue: "Option one",
+      },
+      {
+        name: "option2Label",
+        label: "Option 2",
+        type: "text",
+        defaultValue: "Option two",
+      },
+      {
+        name: "option3Label",
+        label: "Option 3",
+        type: "text",
+        defaultValue: "Option three",
+      },
+      {
+        name: "disabled",
+        label: "Disabled",
+        type: "boolean",
+        defaultValue: false,
+      },
+    ],
+    doList: [
+      "Use when there are 2–6 mutually exclusive options",
+      "Always pre-select the most common or safest option",
+      "Stack options vertically for easy scanning",
+    ],
+    dontList: [
+      "Don't use for more than 6 options, use a Select instead",
+      "Don't use radio buttons for multi-select, use checkboxes",
+    ],
+  },
+  {
+    slug: "sidebar",
+    name: "Sidebar",
+    description: "Composable, themeable sidebar with icon-collapse, Sheet mobile drawer, and SidebarGroup / SidebarMenu primitives matching shadcn.",
+    category: "navigation",
+    usage: "Wrap your layout in SidebarProvider. Compose Sidebar with SidebarHeader, SidebarContent (SidebarGroup + SidebarMenu), SidebarFooter, and SidebarRail. Wrap page content in SidebarInset.",
+    installCommand: "npx shadcn@latest add sidebar",
+    props: [
+      {
+        name: "activeItem",
+        label: "Active item",
+        type: "select",
+        options: ["getting-started", "typography", "button", "card"],
+        defaultValue: "getting-started",
+      },
+    ],
+    doList: [
+      "Wrap your root layout in SidebarProvider and place main content in SidebarInset",
+      "Use SidebarGroup + SidebarGroupLabel + SidebarMenu + SidebarMenuButton for navigation",
+      "Add SidebarRail as the last child of Sidebar for the collapse toggle rail",
+      "Place SidebarTrigger in the mobile header; use tooltip on menu buttons for collapsed labels",
+    ],
+    dontList: [
+      "Don't use more than 3 nesting levels, flatten the structure instead",
+      "Don't put destructive actions (like 'Delete') in the nav, use a toolbar or context menu",
+      "Don't hardcode widths, use the --sidebar-width CSS variable so themes can override it",
+    ],
+  },
+  {
+    slug: "chart-pie-donut",
+    name: "Donut Chart",
+    description: "Donut pie chart with five segments and a centred total-visitors label. Uses chart-* color tokens so it adapts to any active theme.",
+    category: "charts",
+    usage: "Use donut charts to show part-to-whole relationships when you want to highlight a single summary value in the centre. Keep to 3–6 segments for readability.",
+    installCommand: "npx shadcn@latest add https://YOUR_REGISTRY_URL/r/chart-pie-donut",
+    props: [
+      {
+        name: "title",
+        label: "Title",
+        type: "text",
+        defaultValue: "Donut Chart",
+      },
+      {
+        name: "dateRange",
+        label: "Date range",
+        type: "text",
+        defaultValue: "January – June 2024",
+      },
+      {
+        name: "segment1Label",
+        label: "Segment 1",
+        type: "text",
+        defaultValue: "Chrome",
+      },
+      {
+        name: "segment2Label",
+        label: "Segment 2",
+        type: "text",
+        defaultValue: "Safari",
+      },
+      {
+        name: "segment3Label",
+        label: "Segment 3",
+        type: "text",
+        defaultValue: "Firefox",
+      },
+      {
+        name: "segment4Label",
+        label: "Segment 4",
+        type: "text",
+        defaultValue: "Edge",
+      },
+      {
+        name: "segment5Label",
+        label: "Segment 5",
+        type: "text",
+        defaultValue: "Other",
+      },
+      {
+        name: "centerLabel",
+        label: "Center label",
+        type: "text",
+        defaultValue: "Visitors",
+      },
+    ],
+    doList: [
+      "Limit segments to 3–6, more slices become difficult to distinguish",
+      "Use chart-* color tokens so segments adapt automatically when the theme changes",
+      "Add a centred label to surface the most important aggregate value",
+    ],
+    dontList: [
+      "Don't use a pie or donut chart for comparing precise values, use a bar chart instead",
+      "Don't label individual slices with both a legend and inline text, pick one",
+    ],
+  },
+  {
+    slug: "chart-line-dots",
+    name: "Line Chart",
+    description: "Smooth line chart with dot markers for two series. Best for showing trends and changes over time.",
+    category: "charts",
+    usage: "Use line charts to visualize how metrics change over a continuous range, such as daily signups or monthly revenue.",
+    installCommand: "npx shadcn@latest add https://YOUR_REGISTRY_URL/r/chart-line-dots",
+    props: [
+      {
+        name: "title",
+        label: "Title",
+        type: "text",
+        defaultValue: "Line Chart - Dots",
+      },
+      {
+        name: "dateRange",
+        label: "Date range",
+        type: "text",
+        defaultValue: "January - June 2024",
+      },
+      {
+        name: "metric1Label",
+        label: "Metric 1 label",
+        type: "text",
+        defaultValue: "Desktop",
+      },
+      {
+        name: "metric2Label",
+        label: "Metric 2 label",
+        type: "text",
+        defaultValue: "Mobile",
+      },
+    ],
+    doList: [
+      "Use dot markers to make individual data points easy to tap or hover",
+      "Use a natural curve (type=\"natural\") for smoother visual flow",
+    ],
+    dontList: [
+      "Don't use a line chart for unordered categories, use a bar chart instead",
+      "Don't plot too many series on one chart without a legend",
+    ],
+  },
+  {
+    slug: "accordion",
+    name: "Accordion",
+    description: "Collapsible panels for showing and hiding content sections. Smooth height animation on open/close.",
+    category: "display",
+    usage: "Use accordions to progressively disclose content and reduce visual clutter. Prefer single mode for FAQs.",
+    installCommand: "npx shadcn@latest add https://YOUR_REGISTRY_URL/r/accordion",
+    props: [
+      {
+        name: "multiple",
+        label: "Multiple",
+        type: "boolean",
+        defaultValue: false,
+        description: "Allow multiple panels to be open simultaneously",
+      },
+    ],
+    doList: [
+      "Use single mode for FAQs so only one answer is visible at a time",
+      "Keep trigger labels short and scannable",
+    ],
+    dontList: [
+      "Don't hide critical information in accordions, use cards instead",
+      "Don't nest accordions inside accordions",
+    ],
+  },
+  {
+    slug: "avatar",
+    name: "Avatar",
+    description: "Circular user profile image with an initials fallback when the image is unavailable.",
+    category: "display",
+    usage: "Use avatars to represent users in comments, lists, and navigation. Always provide an alt text or initials fallback.",
+    installCommand: "npx shadcn@latest add https://YOUR_REGISTRY_URL/r/avatar",
+    props: [
+      {
+        name: "size",
+        label: "Size",
+        type: "select",
+        options: ["sm", "default", "lg", "xl"],
+        defaultValue: "default",
+      },
+    ],
+    doList: [
+      "Always provide a fallback with 1–2 initials",
+      "Use consistent sizing within a single list or row",
+    ],
+    dontList: [
+      "Don't use avatars without an accessible label or alt text",
+      "Don't stack more than 5 overlapping avatars without a count badge",
+    ],
+  },
+  {
+    slug: "breadcrumb",
+    name: "Breadcrumb",
+    description: "Accessible navigation trail showing the current page location within a hierarchy.",
+    category: "navigation",
+    usage: "Use breadcrumbs on pages deeper than 2 levels. The last item is always the current page and not a link.",
+    installCommand: "npx shadcn@latest add https://YOUR_REGISTRY_URL/r/breadcrumb",
+    props: [],
+    doList: [
+      "Keep each label short, 1 to 3 words",
+      "Always make the last item non-clickable to indicate the current page",
+    ],
+    dontList: [
+      "Don't show breadcrumbs on top-level pages",
+      "Don't truncate mid-path, truncate from the beginning if space is limited",
+    ],
+  },
+  {
+    slug: "carousel",
+    name: "Carousel",
+    description: "Horizontally sliding content container with prev/next navigation and optional auto-play.",
+    category: "display",
+    usage: "Use carousels for a series of related visual items like testimonials or feature highlights. Keep to 3–5 slides.",
+    installCommand: "npx shadcn@latest add https://YOUR_REGISTRY_URL/r/carousel",
+    props: [
+      {
+        name: "loop",
+        label: "Loop",
+        type: "boolean",
+        defaultValue: false,
+        description: "Wrap from last slide back to first",
+      },
+      {
+        name: "autoPlay",
+        label: "Auto Play",
+        type: "boolean",
+        defaultValue: false,
+        description: "Automatically advance every 3 seconds",
+      },
+    ],
+    doList: [
+      "Show navigation arrows so users can control the carousel",
+      "Keep slide count to 3–5 for best usability",
+    ],
+    dontList: [
+      "Don't autoplay carousels that contain important information",
+      "Don't use carousels for primary navigation",
+    ],
+  },
+  {
+    slug: "stepper",
+    name: "Stepper",
+    description: "Horizontal step progress indicator for multi-step flows. Completed steps show a checkmark.",
+    category: "navigation",
+    usage: "Use steppers for linear multi-step processes like onboarding or checkout. Keep steps to 3–5.",
+    installCommand: "npx shadcn@latest add https://YOUR_REGISTRY_URL/r/stepper",
+    props: [
+      {
+        name: "currentStep",
+        label: "Current Step",
+        type: "select",
+        options: ["0", "1", "2"],
+        defaultValue: "1",
+        description: "Zero-based index of the active step",
+      },
+    ],
+    doList: [
+      "Label each step clearly with 1–2 words",
+      "Always show the user's current position and completed steps",
+    ],
+    dontList: [
+      "Don't use more than 5 steps, break long flows into stages instead",
+      "Don't use a stepper for non-linear flows, use tabs instead",
+    ],
+  },
+  {
+    slug: "calendar",
+    name: "Calendar",
+    description: "Full month calendar grid with date selection. Supports single date and range selection modes.",
+    category: "inputs",
+    usage: "Use the calendar component for date pickers and scheduling interfaces. Prefer the popover pattern for inline forms.",
+    installCommand: "npx shadcn@latest add https://YOUR_REGISTRY_URL/r/calendar",
+    props: [
+      {
+        name: "mode",
+        label: "Mode",
+        type: "select",
+        options: ["single", "range"],
+        defaultValue: "single",
+        description: "Single date or date range selection",
+      },
+    ],
+    doList: [
+      "Pre-select today's date when a current date is a sensible default",
+      "Highlight the selected range clearly in range mode",
+    ],
+    dontList: [
+      "Don't use a full calendar for simple date-of-birth entry, use text inputs instead",
+      "Don't allow selection of disabled or unavailable dates without visual feedback",
+    ],
+  },
+  {
+    slug: "command",
+    name: "Command",
+    description: "Filterable command palette with grouped results. Use for search, navigation, and quick actions.",
+    category: "inputs",
+    usage: "Use command palettes for power-user search and navigation. Trigger with ⌘K or a dedicated search button.",
+    installCommand: "npx shadcn@latest add https://YOUR_REGISTRY_URL/r/command",
+    props: [],
+    doList: [
+      "Group items into logical sections with clear headings",
+      "Show an empty state when no results match the query",
+    ],
+    dontList: [
+      "Don't show more than 10 items per group without pagination",
+      "Don't use a command palette as the only search mechanism",
+    ],
+  },
+  {
+    slug: "dialog",
+    name: "Dialog",
+    description: "Modal dialog with overlay, scale animation, and accessible focus management via Base UI.",
+    category: "feedback",
+    usage: "Use dialogs for focused tasks that require user input before continuing. Keep content concise.",
+    installCommand: "npx shadcn@latest add https://YOUR_REGISTRY_URL/r/dialog",
+    props: [],
+    doList: [
+      "Always provide a close button (X) and a Cancel action",
+      "Use for destructive confirmations and focused form flows",
+    ],
+    dontList: [
+      "Don't stack dialogs, close the current one before opening another",
+      "Don't put scrolling content inside dialogs, use a drawer instead",
+    ],
+  },
+  {
+    slug: "drawer",
+    name: "Drawer",
+    description: "Slide-in panel from the right, left, or bottom edge. Built on Base UI Dialog for accessibility.",
+    category: "feedback",
+    usage: "Use drawers for secondary panels, detail views, and forms that need more vertical space than a dialog.",
+    installCommand: "npx shadcn@latest add https://YOUR_REGISTRY_URL/r/drawer",
+    props: [
+      {
+        name: "side",
+        label: "Side",
+        type: "select",
+        options: ["right", "left", "bottom"],
+        defaultValue: "right",
+        description: "Which edge the drawer slides in from",
+      },
+    ],
+    doList: [
+      "Use right-side drawers for detail panels and forms",
+      "Use bottom drawers on mobile for sheet-style interactions",
+    ],
+    dontList: [
+      "Don't use a drawer when a simple tooltip or popover would suffice",
+      "Don't open a drawer from within a dialog",
+    ],
+  },
+  {
+    slug: "menu-bar",
+    name: "Menu Bar",
+    description: "Horizontal menu bar with keyboard-navigable menus. Ideal for application-style top toolbars.",
+    category: "navigation",
+    usage: "Use a menu bar in desktop-style app shells where users need access to grouped commands across File, Edit, View, etc.",
+    installCommand: "npx shadcn@latest add https://YOUR_REGISTRY_URL/r/menu-bar",
+    props: [],
+    doList: [
+      "Group related commands under clear top-level menu names",
+      "Show keyboard shortcuts next to menu items using MenuBarShortcut",
+    ],
+    dontList: [
+      "Don't use a menu bar for top-level site navigation, use a top nav instead",
+      "Don't nest more than 2 levels of submenus",
+    ],
+  },
+  {
+    slug: "top-nav",
+    name: "Top Navigation",
+    description: "Sticky top navigation bar with brand, breadcrumb trail, and right-aligned action area.",
+    category: "navigation",
+    usage: "Use the top nav as the global header in application shells. Pair with a side nav for deep hierarchies.",
+    installCommand: "npx shadcn@latest add https://YOUR_REGISTRY_URL/r/top-nav",
+    props: [],
+    doList: [
+      "Keep the brand area minimal, logo or name only",
+      "Use the breadcrumb to orient users within the app hierarchy",
+    ],
+    dontList: [
+      "Don't add more than 3 action buttons to the right slot",
+      "Don't use the top nav for marketing pages, use a dedicated site header",
+    ],
+  },
+  {
+    slug: "resizable",
+    name: "Resizable",
+    description: "Drag-to-resize panel layout with a visual handle divider. Supports horizontal and vertical splits.",
+    category: "layout",
+    usage: "Use resizable panels for IDE-style layouts or side-by-side comparison views where users need to adjust proportions.",
+    installCommand: "npx shadcn@latest add https://YOUR_REGISTRY_URL/r/resizable",
+    props: [],
+    doList: [
+      "Set a minSize on each panel to prevent them from collapsing completely",
+      "Show a visible grip icon on the handle so the interaction is discoverable",
+    ],
+    dontList: [
+      "Don't use resizable panels on mobile, use stacked layouts instead",
+      "Don't nest resizable groups more than 2 levels deep",
+    ],
+  },
+]
+
+export function getComponent(slug: string): ComponentConfig | undefined {
+  return components.find((c) => c.slug === slug)
+}
+
+export function getComponentsByCategory(categoryId: string): ComponentConfig[] {
+  return components.filter((c) => c.category === categoryId)
+}
+
+export function uniqueComponents(): ComponentConfig[] {
+  const seen = new Set<string>()
+  return components.filter((c) => {
+    if (seen.has(c.slug)) return false
+    seen.add(c.slug)
+    return true
+  })
+}
