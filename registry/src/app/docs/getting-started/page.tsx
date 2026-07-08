@@ -32,10 +32,6 @@ export default function GettingStartedPage() {
 
         <section>
           <h2 id="before-you-start" className="mb-3 scroll-mt-6">Before you start</h2>
-          <p className="mb-3 text-muted-foreground">
-            Offline or before you open Cursor? Open{" "}
-            <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs">START_HERE.html</code> at the repo root (or at the top of the offline kit zip). Same Getting Started content, no dev server required.
-          </p>
           <p className="mb-3 text-muted-foreground">You will need:</p>
           <ul className="flex list-none flex-col gap-2 text-muted-foreground">
             {[
