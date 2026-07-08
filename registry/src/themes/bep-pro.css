@@ -45,6 +45,16 @@
   --primitive-bep-accent-7: #EF4444;  /* BEP Red, charts & badges only */
 }
 
+/* --- Typography: Montserrat for headings + display (BEP Pro only) ---------- */
+
+html[data-theme="bep-pro"] {
+  --font-display: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
+}
+
+html[data-theme="bep-pro"] :is(h1, h2, h3, h4, h5, h6) {
+  font-family: var(--font-display);
+}
+
 /* --- Dark mode semantic tokens (DEFAULT / PRIMARY) ------------------------- */
 
 [data-theme="bep-pro"],

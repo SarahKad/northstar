@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { Atkinson_Hyperlegible_Next, Instrument_Serif, Geist_Mono } from "next/font/google"
+import { Atkinson_Hyperlegible_Next, Instrument_Serif, Geist_Mono, Montserrat } from "next/font/google"
 import Script from "next/script"
 import "./globals.css"
 import { ThemeProvider } from "@/components/registry/theme-provider"
@@ -27,6 +27,12 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 })
 
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-montserrat",
+})
+
 export const metadata: Metadata = {
   title: "AG Design System",
   description: "Assemblies of God component registry and documentation",
@@ -42,7 +48,7 @@ export default function RootLayout({
       lang="en"
       suppressHydrationWarning
       data-theme="ag"
-      className={cn("h-full antialiased font-sans light", atkinson.variable, instrumentSerif.variable, geistMono.variable)}
+      className={cn("h-full antialiased font-sans light", atkinson.variable, instrumentSerif.variable, geistMono.variable, montserrat.variable)}
     >
       <body className="h-full">
         <Script

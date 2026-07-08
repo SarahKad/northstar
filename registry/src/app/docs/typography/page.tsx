@@ -1,33 +1,7 @@
 import { Separator } from "@/components/ui/separator"
 import { DocsLayout } from "@/components/registry/docs-layout"
+import { TypographyTypefaces } from "@/components/registry/typography-typefaces"
 import type { Heading } from "@/components/registry/table-of-contents"
-
-const fonts = [
-  {
-    name: "Instrument Serif",
-    role: "Display, H1 & H2, Regular (min 36px)",
-    variable: "--font-display",
-    utility: "font-heading",
-    sample: "The quick brown fox jumps over the lazy dog",
-    className: "font-heading",
-  },
-  {
-    name: "Atkinson Hyperlegible",
-    role: "Body, UI & H3–H6, Regular",
-    variable: "--font-sans",
-    utility: "font-sans",
-    sample: "The quick brown fox jumps over the lazy dog",
-    className: "font-sans",
-  },
-  {
-    name: "Geist Mono",
-    role: "Code & Monospace",
-    variable: "--font-mono",
-    utility: "font-mono",
-    sample: "const greeting = \"Hello, world!\"",
-    className: "font-mono",
-  },
-]
 
 const headings: Heading[] = [
   { id: "typefaces", text: "Typefaces", level: 2 },
@@ -41,7 +15,8 @@ export default function TypographyPage() {
       <header className="mb-8">
         <h1 className="text-4xl tracking-tight">Typography</h1>
         <p className="mt-2 max-w-2xl text-muted-foreground">
-          Three font families cover every role in the system. All are loaded via{" "}
+          Three font families cover every role in the system (Montserrat loads for BEP Pro headings).
+          All are loaded via{" "}
           <code className="font-mono text-xs bg-muted px-1 py-0.5 rounded-md">next/font/google</code>{" "}
           and injected as CSS variables, no layout shift, no flash.
         </p>
@@ -52,27 +27,20 @@ export default function TypographyPage() {
       {/* Typefaces */}
       <section className="mb-12">
         <h2 id="typefaces" className="mb-1 scroll-mt-6">Typefaces</h2>
-        <p className="mb-6 text-sm text-muted-foreground">
+        <p className="mb-4 text-sm text-muted-foreground">
           Instrument Serif is loaded at weight 400 only, the browser should never synthesize bold
           or semibold. H1 and H2 use Instrument Serif (never below 36px). H3–H6 use Atkinson Hyperlegible.
         </p>
-        <div className="flex flex-col gap-4">
-          {fonts.map(({ name, role, variable, utility, sample, className }) => (
-            <div key={name} className="rounded-lg border bg-card p-5">
-              <div className="mb-3 flex items-start justify-between gap-4">
-                <div>
-                  <p className={`text-2xl font-medium leading-tight ${className}`}>{name}</p>
-                  <p className="mt-0.5 text-xs text-muted-foreground">{role}</p>
-                </div>
-                <div className="shrink-0 text-right">
-                  <p className="font-mono text-xs text-muted-foreground">{variable}</p>
-                  <p className="font-mono text-xs text-muted-foreground">{utility}</p>
-                </div>
-              </div>
-              <p className={`text-sm text-muted-foreground ${className}`}>{sample}</p>
-            </div>
-          ))}
+        <div className="mb-6 rounded-lg border border-border bg-muted/30 px-4 py-3 text-sm text-muted-foreground">
+          <p>
+            <strong className="font-normal text-foreground">BEP Pro theme:</strong> When{" "}
+            <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs">data-theme=&quot;bep-pro&quot;</code>{" "}
+            is active, headings (H1–H6) and display utilities use{" "}
+            <strong className="font-normal text-foreground">Montserrat</strong> instead of Instrument Serif.
+            Body and UI text stay on Atkinson Hyperlegible. AG Core and Navy are unchanged.
+          </p>
         </div>
+        <TypographyTypefaces />
       </section>
 
       <Separator className="mb-10" />
@@ -81,8 +49,8 @@ export default function TypographyPage() {
       <section className="mb-12">
         <h2 id="display-scale" className="mb-1 scroll-mt-6">Display Scale</h2>
         <p className="mb-6 text-sm text-muted-foreground">
-          Reserved for hero moments, splash screens, and large editorial layouts. Always Instrument Serif.
-          Apply via the <code className="font-mono text-xs bg-muted px-1 py-0.5 rounded-md">.text-display-78</code> and{" "}
+          Reserved for hero moments, splash screens, and large editorial layouts. Uses Instrument Serif
+          on AG Core and Navy; Montserrat on BEP Pro. Apply via the <code className="font-mono text-xs bg-muted px-1 py-0.5 rounded-md">.text-display-78</code> and{" "}
           <code className="font-mono text-xs bg-muted px-1 py-0.5 rounded-md">.text-display-60</code> utility classes.
         </p>
         <div className="flex flex-col gap-8">
