@@ -1,5 +1,7 @@
 /** Shared copy-paste commands for setup docs (Cursor and Claude Code tabs). */
 
+import { REGISTRY_DIR_PROMPT_HINT } from "@/lib/setup-repo"
+
 /** Registry URL while browsing docs or running manual install scripts. */
 export const REGISTRY_URL = "http://localhost:3000"
 
@@ -87,7 +89,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 export const CURSOR_FULL_SETUP_PROMPT = `I'm starting a new AG product with the full app shell (login, sidebar, dashboard).
 
 My folders:
-- REGISTRY_DIR: [paste path to your saved AG Design System kit, the registry folder on disk; do NOT open this in Cursor]
+- REGISTRY_DIR: [${REGISTRY_DIR_PROMPT_HINT}]
 - MY_APP_DIR: [paste the project folder I already opened in Cursor, e.g. Desktop/my-product]
 
 Run the full setup in this session:
@@ -104,7 +106,7 @@ When done, confirm /login and /dashboard work on my app, not the design system d
 export const CURSOR_BOOTSTRAP_ONLY_PROMPT = `Bootstrap my AG app only, do NOT add the app shell.
 
 My folders:
-- REGISTRY_DIR: [paste path to your saved AG Design System kit on disk, do NOT open this in Cursor]
+- REGISTRY_DIR: [${REGISTRY_DIR_PROMPT_HINT}]
 - MY_APP_DIR: [paste the project folder I already opened in Cursor]
 
 Bootstrap only:
@@ -125,7 +127,7 @@ export const CURSOR_GETTING_STARTED_PROMPT = CURSOR_FULL_SETUP_PROMPT
 /** Recovery prompt when Bootstrap+Shell failed or user scaffolded manually. */
 export const CURSOR_APP_SHELL_PROMPT = `Continue app shell setup for my AG app.
 
-REGISTRY_DIR: [paste registry folder path]
+REGISTRY_DIR: [${REGISTRY_DIR_PROMPT_HINT}]
 MY_APP_DIR: [paste app folder path]
 
 The app already has scaffold files from npm run scaffold:shell.
@@ -140,7 +142,7 @@ export const REGISTRY_URL_EXPORT = `export AG_REGISTRY_URL="${REGISTRY_URL}"`
 
 export const CURSOR_VIBE_START_PROMPT = `Scaffold the AG app shell for my product.
 
-REGISTRY_DIR: [paste your design system folder path]
+REGISTRY_DIR: [${REGISTRY_DIR_PROMPT_HINT}]
 MY_APP_DIR: [paste your app folder path]
 
 My app is already bootstrapped with AG colors and fonts. Please:
@@ -155,7 +157,7 @@ Ask before running commands. Explain in plain language.`
 
 export const CURSOR_TROUBLESHOOTING_PROMPT = `Something didn't work during AG Design System setup.
 
-REGISTRY_DIR: [paste your design system folder path]
+REGISTRY_DIR: [${REGISTRY_DIR_PROMPT_HINT}]
 MY_APP_DIR: [paste your app folder path]
 
 Walk me through troubleshooting using src/components/ag-shell/INSTALL.md in my app.
@@ -163,7 +165,7 @@ Explain fixes in plain language and ask before running commands.`
 
 export const CLAUDE_GETTING_STARTED_PROMPT = `I'm starting a new AG product from the AG Design System registry.
 
-REGISTRY_DIR: [paste path to registry folder]
+REGISTRY_DIR: [${REGISTRY_DIR_PROMPT_HINT}]
 MY_APP_DIR: [paste path to new app folder]
 
 Follow CLAUDE.md. Run ag-get-started first (bootstrap), then ag-vibe-start for app shell.

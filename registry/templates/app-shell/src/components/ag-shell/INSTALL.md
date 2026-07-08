@@ -10,20 +10,20 @@ Work through the sections in order. If you get stuck, share this file with someo
 
 | What | How to recognize it |
 |------|---------------------|
-| **Design system folder** | The `registry` folder you downloaded, the one that contains this documentation site |
+| **Design system folder** | The `registry` folder inside your git clone of [AG-Design-System](https://github.com/skadlecek/AG-Design-System) (your `REGISTRY_DIR`) |
 | **Your app folder** | The new project `create-next-app` created for your product |
 
 **Mac tip:** In Terminal, type `cd ` (with a space), drag the folder from Finder into Terminal, press Enter.
 
 In the commands below, replace:
 
-- `REGISTRY_DIR` → full path to the design system `registry` folder  
+- `REGISTRY_DIR` → full path to the `registry` folder in your clone  
 - `MY_APP_DIR` → full path to your app folder  
 
 Example:
 
 ```bash
-cd "/Users/you/Desktop/AG Design System/registry"
+cd "/Users/you/Projects/AG-Design-System/registry"
 npm run scaffold:shell -- "/Users/you/Projects/my-app"
 ```
 

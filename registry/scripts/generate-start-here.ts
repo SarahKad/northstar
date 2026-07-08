@@ -15,6 +15,11 @@ import {
   CURSOR_TROUBLESHOOTING_PROMPT,
   SCAFFOLD_SHELL,
 } from "../src/lib/docs-setup-commands"
+import {
+  DESIGN_SYSTEM_GITHUB_URL,
+  GIT_CLONE_COMMAND,
+  REGISTRY_DIR_NAME,
+} from "../src/lib/setup-repo"
 
 const ROOT = resolve(__dirname, "..")
 const OUT = resolve(ROOT, "START_HERE.html")
@@ -367,15 +372,18 @@ ${calloutWarning(
   `<p><strong>PLEASE NOTE:</strong> Cursor may open a browser preview of the AG Design System during setup. You will see the docs (Getting Started, components, etc.), please note that is the registry downloading files in the background, <strong>not your app.</strong> You can close that preview or keep it open as a reference guide. Your app will open later (which can take up to 10 minutes) on a different localhost: with ${code("/login")} and ${code("/dashboard")}.</p>`
 )}
 
-${h3("cursor-step-0", "Step 0, Save the kit & open your project")}
+${h3("cursor-step-0", "Step 0, Get the kit & open your project")}
 <p>Do this once before Bootstrap + Shell. You work in your <strong>project folder</strong> in Cursor. The design system stays on disk as a reference kit, you do not open it as your workspace.</p>
+<p><strong>Get the design system on your computer.</strong> Ask engineering for access to the private GitHub repo, then clone (recommended):</p>
+${pre(GIT_CLONE_COMMAND)}
+<p>Your ${code("REGISTRY_DIR")} is the ${code(REGISTRY_DIR_NAME)} folder inside the clone (e.g. ${code("~/Projects/AG-Design-System/registry")}). It must contain ${code(".cursor/skills/")}, ${code("templates/app-shell/")}, and ${code("public/r/")}.</p>
+<p class="small"><strong>No GitHub access?</strong> Ask engineering for the offline kit zip (includes ${code("START_HERE.html")} at the top).</p>
 ${stepList([
-  `<strong>Save the AG Design System</strong> on your computer. Your team or engineering provides this (zip, shared drive, or USB). Unzip if needed and note the full path to the inner ${code("registry")} folder, you will paste this as ${code("REGISTRY_DIR")} in Step 1. The folder should contain ${code(".cursor/skills/")}, ${code("templates/app-shell/")}, and ${code("public/r/")}.`,
   `Open <strong>Cursor</strong> on your computer.`,
   `<strong>File → Open Folder</strong> → create or choose your <strong>project folder</strong> (e.g. ${code("Desktop/my-product")}). It can be empty, Step 1 builds your app here. Do <strong>not</strong> open the design system folder.`,
   `Open Chat: <strong>View → Chat</strong> (or press ${code("Cmd + L")} on Mac, ${code("Ctrl + L")} on Windows).`,
 ])}
-<p class="small"><strong>Looking ahead:</strong> Today setup is offline, Cursor reads skills and files from your saved ${code("REGISTRY_DIR")}. Later, a hosted registry URL or a one-command bootstrap kit may reduce what you need locally; the project-folder workflow stays the same.</p>
+<p class="small"><strong>Updates:</strong> Run ${code("git pull")} inside your clone when engineering publishes changes. Repo: <a href="${DESIGN_SYSTEM_GITHUB_URL}">${DESIGN_SYSTEM_GITHUB_URL.replace("https://", "")}</a>.</p>
 
 ${h3("cursor-step-1", "Step 1, Bootstrap + Shell")}
 <p>With your <strong>project folder</strong> open in Cursor, one prompt creates your app, adds AG colors and fonts, then adds login, sidebar, dashboard, and sample charts. Paste both folder paths from Step 0.</p>
@@ -425,11 +433,11 @@ function buildClaudeGuide(): string {
   return `
 ${calloutNeutral(
   "Set up with Claude Code",
-  `<p>Start Claude Code inside your ${code("registry")} folder. It reads ${code("CLAUDE.md")} and the setup skills automatically. Approve terminal commands when asked.</p>`
+  `<p>Start Claude Code inside your clone's ${code(REGISTRY_DIR_NAME)} folder (${code("REGISTRY_DIR")}). It reads ${code("CLAUDE.md")} and the setup skills automatically. Approve terminal commands when asked.</p>`
 )}
 
 ${h3("claude-step-0", "Step 0, Start Claude in the design system folder")}
-<p>In Terminal, go to where you saved the design system, then start Claude Code:</p>
+<p>In Terminal, go to your clone's ${code(REGISTRY_DIR_NAME)} folder (${code("REGISTRY_DIR")}), then start Claude Code:</p>
 ${pre('cd "REGISTRY_DIR"\nclaude')}
 <p>Your new app is a <strong>separate folder</strong>. Tell Claude both paths up front.</p>
 
@@ -476,7 +484,7 @@ const html = `<!DOCTYPE html>
       `<p>You will need:</p>
       ${ul([
         "Node.js on your computer (ask engineering if unsure)",
-        "This folder saved on your machine, the inner registry folder is your REGISTRY_DIR",
+        `GitHub access to ${DESIGN_SYSTEM_GITHUB_URL.replace("https://", "")} (private repo), or an offline kit zip from engineering`,
         "A project folder for your new app, create it in Cursor before setup (Cursor Step 0)",
       ])}`
     )}

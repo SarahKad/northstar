@@ -1,6 +1,7 @@
 import { DocsLayout } from "@/components/registry/docs-layout"
 import { GettingStartedGuide } from "@/components/registry/getting-started-guide"
 import type { Heading } from "@/components/registry/table-of-contents"
+import { DESIGN_SYSTEM_GITHUB_URL } from "@/lib/setup-repo"
 
 const headings: Heading[] = [
   { id: "overview", text: "Overview", level: 2 },
@@ -33,13 +34,13 @@ export default function GettingStartedPage() {
           <h2 id="before-you-start" className="mb-3 scroll-mt-6">Before you start</h2>
           <p className="mb-3 text-muted-foreground">
             Offline or before you open Cursor? Open{" "}
-            <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs">START_HERE.html</code> in this folder in any browser, same Getting Started content, no dev server required.
+            <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs">START_HERE.html</code> at the repo root (or at the top of the offline kit zip). Same Getting Started content, no dev server required.
           </p>
           <p className="mb-3 text-muted-foreground">You will need:</p>
           <ul className="flex list-none flex-col gap-2 text-muted-foreground">
             {[
               "Node.js on your computer (ask engineering if unsure)",
-              "A local copy of the AG Design System saved on your machine (see Cursor Step 0, your team or engineering provides this as a zip or folder)",
+              `GitHub access to ${DESIGN_SYSTEM_GITHUB_URL.replace("https://", "")} (private repo), or an offline kit zip from engineering — see Cursor Step 0`,
               "A project folder for your new app, create it in Cursor before setup (Cursor Step 0)",
             ].map((item, i) => (
               <li key={i} className="flex items-start gap-2">

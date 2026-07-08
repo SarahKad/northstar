@@ -46,7 +46,7 @@ When running in **Cursor IDE**:
 
 ## Before you run anything
 
-1. Get **REGISTRY_DIR**, full path to the saved design system kit on disk (the inner `registry` folder). The user does **not** need this folder open in Cursor.
+1. Get **REGISTRY_DIR**, full path to the **`registry`** folder inside a git clone of [AG-Design-System](https://github.com/skadlecek/AG-Design-System) (private repo, ask engineering for access). Offline kit zip is an alternative. The user does **not** need this folder open in Cursor.
 2. Get **MY_APP_DIR**, full path to the user's **project folder** (usually already open in Cursor). The app is created or updated here.
 3. **Read skills from disk**, if `@ag-get-started` is not in the workspace, read and follow `REGISTRY_DIR/.cursor/skills/ag-get-started/SKILL.md` (and `ag-vibe-start` when continuing to shell).
 4. Confirm `REGISTRY_DIR` exists and contains `.cursor/skills/`, `templates/app-shell/`, and `public/r/`.

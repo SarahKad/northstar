@@ -39,6 +39,22 @@ npm run kit:package
 
 ---
 
+## Getting the design system (for setup)
+
+Setup needs a local copy on disk. **Recommended:** clone the private GitHub repo (ask engineering for access):
+
+```bash
+git clone https://github.com/skadlecek/AG-Design-System.git
+```
+
+Use the **`registry/`** folder inside the clone as `REGISTRY_DIR` in Cursor setup prompts.
+
+**Alternative:** offline kit zip from engineering (includes `START_HERE.html` at the top).
+
+Run `git pull` in your clone when engineering publishes updates.
+
+---
+
 ## Quick start (developers)
 
 ```bash
@@ -63,7 +79,7 @@ Full registry docs, token architecture, and troubleshooting: [`registry/README.m
 | **Components** | 32 registry entries (UI + chart blocks) |
 | **Themes** | AG Core, Navy, BEP Pro |
 | **Stack** | Next.js 15, React 19, TypeScript, Tailwind v4, Base UI, Phosphor Icons |
-| **Install path** | Local registry JSON via `shadcn add` (Stage 2: hosted registry URL) |
+| **Install path** | Local registry JSON via `shadcn add` while `npm run dev:install` runs in your clone |
 
 Regenerate manifests after editing `registry/src/lib/registry.ts`:
 

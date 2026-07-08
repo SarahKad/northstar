@@ -22,6 +22,13 @@ import {
   ROOT_LAYOUT,
   SCAFFOLD_SHELL,
 } from "@/lib/docs-setup-commands"
+import {
+  DESIGN_SYSTEM_GITHUB_URL,
+  GIT_CLONE_COMMAND,
+  REGISTRY_DIR_MARKERS,
+  REGISTRY_DIR_NAME,
+  REGISTRY_DIR_PROMPT_HINT,
+} from "@/lib/setup-repo"
 
 function StepHeading({ id, n, title }: { id: string; n: number; title: string }) {
   return (
@@ -113,14 +120,30 @@ function CursorGuide() {
           <li className="flex gap-3">
             <span className="flex size-5 shrink-0 items-center justify-center border text-xs font-medium">1</span>
             <span>
-              <strong className="font-normal text-foreground">Save the AG Design System</strong> on your computer. Your team or engineering provides this (zip, shared drive, or USB). Unzip if needed and note the full path to the inner{" "}
-              <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs">registry</code> folder, you will paste this as{" "}
-              <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs">REGISTRY_DIR</code> in Step 1. The folder should contain{" "}
-              <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs">.cursor/skills/</code>,{" "}
-              <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs">templates/app-shell/</code>, and{" "}
-              <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs">public/r/</code>.
+              <strong className="font-normal text-foreground">Get the AG Design System on your computer.</strong>{" "}
+              Ask engineering for access to the private GitHub repo, then clone it (recommended):
             </span>
           </li>
+        </ol>
+        <CodeBlock code={GIT_CLONE_COMMAND} iconOnly compact className="mb-4" />
+        <p className="mb-4 text-sm text-muted-foreground">
+          After cloning, your <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs">REGISTRY_DIR</code> is the{" "}
+          <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs">{REGISTRY_DIR_NAME}</code> folder inside the clone (e.g.{" "}
+          <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs">~/Projects/AG-Design-System/registry</code>). It must contain{" "}
+          {REGISTRY_DIR_MARKERS.map((m, i) => (
+            <span key={m}>
+              {i > 0 && (i === REGISTRY_DIR_MARKERS.length - 1 ? ", and " : ", ")}
+              <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs">{m}</code>
+            </span>
+          ))}
+          .
+        </p>
+        <p className="mb-4 text-sm text-muted-foreground">
+          <strong className="font-normal text-foreground">No GitHub access?</strong> Ask engineering for the offline kit zip (includes{" "}
+          <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs">START_HERE.html</code> at the top). Use the inner folder that contains the same paths as{" "}
+          <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs">{REGISTRY_DIR_NAME}/</code> above.
+        </p>
+        <ol className="flex list-none flex-col gap-3 text-muted-foreground" start={2}>
           <li className="flex gap-3">
             <span className="flex size-5 shrink-0 items-center justify-center border text-xs font-medium">2</span>
             <span>
@@ -144,8 +167,12 @@ function CursorGuide() {
           </li>
         </ol>
         <p className="mt-4 text-sm text-muted-foreground">
-          <strong className="font-normal text-foreground">Looking ahead:</strong> Today setup is offline, Cursor reads skills and files from your saved{" "}
-          <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs">REGISTRY_DIR</code>. Later, a hosted registry URL or a one-command bootstrap kit may reduce what you need locally; the project-folder workflow stays the same.
+          <strong className="font-normal text-foreground">Updates:</strong> Setup uses files on your machine. Run{" "}
+          <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs">git pull</code> inside your clone when engineering publishes changes. Repo:{" "}
+          <a href={DESIGN_SYSTEM_GITHUB_URL} className="text-primary underline underline-offset-4" target="_blank" rel="noreferrer">
+            {DESIGN_SYSTEM_GITHUB_URL.replace("https://", "")}
+          </a>
+          .
         </p>
       </section>
 
@@ -165,7 +192,7 @@ function CursorGuide() {
 
 I want to start a new AG product with the full app shell.
 
-REGISTRY_DIR: [paste path to saved design system kit, not opened in Cursor]
+REGISTRY_DIR: [${REGISTRY_DIR_PROMPT_HINT}]
 MY_APP_DIR: [paste your project folder, the folder open in Cursor]
 
 Read skills from REGISTRY_DIR/.cursor/skills/ and run bootstrap, then the app shell.`}
@@ -197,7 +224,7 @@ Read skills from REGISTRY_DIR/.cursor/skills/ and run bootstrap, then the app sh
 
 Bootstrap my AG app only, do NOT add the app shell.
 
-REGISTRY_DIR: [paste path to saved design system kit, not opened in Cursor]
+REGISTRY_DIR: [${REGISTRY_DIR_PROMPT_HINT}]
 MY_APP_DIR: [paste your project folder, the folder open in Cursor]
 
 Read ag-get-started from REGISTRY_DIR/.cursor/skills/. Stop after bootstrap, no scaffold:shell, no /login, no /dashboard.`}
@@ -285,7 +312,9 @@ function ClaudeGuide() {
       <div className="border border-border bg-muted/30 px-4 py-4 text-muted-foreground">
         <p className="font-medium text-foreground">Set up with Claude Code</p>
         <p className="mt-2 text-sm">
-          Start Claude Code inside your <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs">registry</code> folder. It reads{" "}
+          Start Claude Code inside your clone&apos;s{" "}
+          <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs">{REGISTRY_DIR_NAME}</code> folder (
+          <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs">REGISTRY_DIR</code>). It reads{" "}
           <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs">CLAUDE.md</code> and the setup skills automatically. Approve terminal commands when asked.
         </p>
       </div>
@@ -293,7 +322,8 @@ function ClaudeGuide() {
       <section>
         <StepHeading id="claude-step-0" n={0} title="Start Claude in the design system folder" />
         <p className="mb-3 text-muted-foreground">
-          In Terminal, go to where you saved the design system, then start Claude Code:
+          In Terminal, go to your clone&apos;s <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs">{REGISTRY_DIR_NAME}</code> folder (
+          <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs">REGISTRY_DIR</code>), then start Claude Code:
         </p>
         <CodeBlock code={`cd "REGISTRY_DIR"\nclaude`} iconOnly compact />
         <p className="mt-3 text-muted-foreground">
