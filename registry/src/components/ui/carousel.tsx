@@ -9,6 +9,8 @@ type CarouselContextValue = {
   count: number
   loop: boolean
   goTo: (index: number) => void
+  snapTo: (index: number) => void
+  setCount: (n: number) => void
   prev: () => void
   next: () => void
 }
@@ -18,6 +20,8 @@ const CarouselContext = React.createContext<CarouselContextValue>({
   count: 0,
   loop: false,
   goTo: () => {},
+  snapTo: () => {},
+  setCount: () => {},
   prev: () => {},
   next: () => {},
 })
@@ -51,21 +55,43 @@ function Carousel({
 }) {
   const [current, setCurrent] = React.useState(0)
   const [count, setCount] = React.useState(0)
+  const indexModeRef = React.useRef<"logical" | "extended">("logical")
 
-  const goTo = React.useCallback((index: number) => {
+  const snapTo = React.useCallback((index: number) => {
     setCurrent(index)
   }, [])
 
+  const goTo = React.useCallback(
+    (index: number) => {
+      setCurrent(loop ? index + 1 : index)
+    },
+    [loop]
+  )
+
+  React.useEffect(() => {
+    if (!count) return
+
+    if (loop && count > 1 && indexModeRef.current === "logical") {
+      setCurrent((c) => c + 1)
+      indexModeRef.current = "extended"
+    } else if (!loop && indexModeRef.current === "extended") {
+      setCurrent((c) => c - 1)
+      indexModeRef.current = "logical"
+    }
+  }, [loop, count])
+
   const prev = React.useCallback(() => {
     setCurrent((c) => {
-      if (c === 0) return loop ? count - 1 : 0
+      if (loop && count > 1) return c - 1
+      if (c === 0) return 0
       return c - 1
     })
   }, [count, loop])
 
   const next = React.useCallback(() => {
     setCurrent((c) => {
-      if (c === count - 1) return loop ? 0 : count - 1
+      if (loop && count > 1) return c + 1
+      if (c === count - 1) return count - 1
       return c + 1
     })
   }, [count, loop])
@@ -77,7 +103,9 @@ function Carousel({
   }, [autoPlay, next])
 
   return (
-    <CarouselContext.Provider value={{ current, count, loop, goTo, prev, next }}>
+    <CarouselContext.Provider
+      value={{ current, count, loop, goTo, snapTo, setCount, prev, next }}
+    >
       <div
         data-slot="carousel"
         role="region"
@@ -85,42 +113,74 @@ function Carousel({
         className={cn("relative", className)}
         {...props}
       >
-        <CountSetter setCount={setCount} />
         {children}
       </div>
     </CarouselContext.Provider>
   )
 }
 
-/** Internal helper that counts CarouselItem children via DOM after render. */
-function CountSetter({ setCount }: { setCount: (n: number) => void }) {
-  const ref = React.useRef<HTMLDivElement>(null)
-  React.useEffect(() => {
-    const parent = ref.current?.closest("[data-slot='carousel']")
-    if (!parent) return
-    const track = parent.querySelector("[data-slot='carousel-content']")
-    if (!track) return
-    const items = track.querySelectorAll("[data-slot='carousel-item']")
-    setCount(items.length)
-  })
-  return <div ref={ref} className="hidden" />
+function cloneSlide(slide: React.ReactNode, key: string) {
+  if (!React.isValidElement(slide)) return slide
+
+  return React.cloneElement(slide, {
+    key,
+    "data-carousel-clone": "",
+    "aria-hidden": true,
+  } as React.HTMLAttributes<HTMLElement>)
 }
 
 /**
  * @description The sliding track that holds all `CarouselItem` children.
- * Uses CSS translate-x for smooth slide transitions.
+ * Uses CSS translate-x for smooth slide transitions. When `loop` is enabled,
+ * clones the first and last slides so the track always advances in the same
+ * direction, then snaps without animation to the real slide.
  */
 function CarouselContent({ className, children, ...props }: React.HTMLAttributes<HTMLDivElement>) {
-  const { current } = React.useContext(CarouselContext)
+  const { current, count, loop, snapTo, setCount } = React.useContext(CarouselContext)
+  const [disableTransition, setDisableTransition] = React.useState(false)
+  const items = React.useMemo(() => React.Children.toArray(children), [children])
+
+  React.useEffect(() => {
+    setCount(items.length)
+  }, [items.length, setCount])
+
+  const slides =
+    loop && items.length > 1
+      ? [cloneSlide(items[items.length - 1], "carousel-clone-start"), ...items, cloneSlide(items[0], "carousel-clone-end")]
+      : items
+
+  const handleTransitionEnd = () => {
+    if (!loop || items.length <= 1) return
+
+    if (current === 0) {
+      setDisableTransition(true)
+      snapTo(items.length)
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => setDisableTransition(false))
+      })
+    } else if (current === items.length + 1) {
+      setDisableTransition(true)
+      snapTo(1)
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => setDisableTransition(false))
+      })
+    }
+  }
+
   return (
     <div className="overflow-hidden rounded-lg">
       <div
         data-slot="carousel-content"
-        className={cn("flex transition-transform duration-300 ease-in-out", className)}
+        className={cn(
+          "flex ease-in-out",
+          disableTransition ? "transition-none" : "transition-transform duration-300",
+          className
+        )}
         style={{ transform: `translateX(-${current * 100}%)` }}
+        onTransitionEnd={handleTransitionEnd}
         {...props}
       >
-        {children}
+        {slides}
       </div>
     </div>
   )
@@ -142,13 +202,22 @@ function CarouselItem({ className, ...props }: React.HTMLAttributes<HTMLDivEleme
   )
 }
 
+function getLogicalIndex(current: number, count: number, loop: boolean) {
+  if (!loop || count <= 1) return current
+  if (current === 0) return count - 1
+  if (current === count + 1) return 0
+  return current - 1
+}
+
 /**
  * @description Previous slide navigation button. Disabled at the first slide
  * unless `loop` is enabled on the parent `Carousel`.
  */
 function CarouselPrev({ className, ...props }: React.ButtonHTMLAttributes<HTMLButtonElement>) {
-  const { prev, current, loop } = React.useContext(CarouselContext)
-  const disabled = !loop && current === 0
+  const { prev, current, count, loop } = React.useContext(CarouselContext)
+  const logicalIndex = getLogicalIndex(current, count, loop)
+  const disabled = !loop && logicalIndex === 0
+
   return (
     <button
       data-slot="carousel-prev"
@@ -176,7 +245,9 @@ function CarouselPrev({ className, ...props }: React.ButtonHTMLAttributes<HTMLBu
  */
 function CarouselNext({ className, ...props }: React.ButtonHTMLAttributes<HTMLButtonElement>) {
   const { next, current, count, loop } = React.useContext(CarouselContext)
-  const disabled = !loop && current === count - 1
+  const logicalIndex = getLogicalIndex(current, count, loop)
+  const disabled = !loop && logicalIndex === count - 1
+
   return (
     <button
       data-slot="carousel-next"

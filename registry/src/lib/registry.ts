@@ -202,56 +202,6 @@ export const components: ComponentConfig[] = [
     ],
   },
   {
-    slug: "data-table",
-    name: "Data Table",
-    description:
-      "Full-featured interactive table powered by TanStack Table v8. Supports sorting, pagination, global or column search, row selection, and column visibility, all themed via AG tokens.",
-    category: "display",
-    usage: "Use DataTable when your data needs sorting, filtering, or pagination. Define typed column defs with createColumnHelper, pass columns + data as props, and opt into features with boolean flags.",
-    installCommand: "npm install @tanstack/react-table",
-    props: [
-      {
-        name: "searchable",
-        label: "Searchable",
-        type: "boolean",
-        defaultValue: false,
-        description: "Show a search input (global filter). Pass a column accessorKey string to filter a single column.",
-      },
-      {
-        name: "pagination",
-        label: "Pagination",
-        type: "boolean",
-        defaultValue: false,
-        description: "Show pagination controls below the table",
-      },
-      {
-        name: "selectable",
-        label: "Selectable",
-        type: "boolean",
-        defaultValue: false,
-        description: "Prepend a checkbox column for row selection",
-      },
-      {
-        name: "columnVisibility",
-        label: "Column Visibility",
-        type: "boolean",
-        defaultValue: false,
-        description: "Show a column toggle dropdown in the toolbar",
-      },
-    ],
-    doList: [
-      "Use createColumnHelper<YourType>() for full TypeScript inference on accessors and cell renderers",
-      "Define column defs outside the component (or with useMemo) to avoid re-creating the table instance on every render",
-      "Use the cell renderer to slot in Badges, Avatars, or action buttons, DataTable owns the layout, you own the content",
-      "Pass selectable + onSelectionChange together to act on the selected rows",
-    ],
-    dontList: [
-      "Don't import from @tanstack/react-table directly for column defs, use the createColumnHelper re-export from @/components/ui/data-table so types stay consistent",
-      "Don't skip the title prop on DataTable, it provides an accessible label for screen readers via a visually hidden caption",
-      "Don't define columns inline in JSX without useMemo, it causes the table to recreate on every render",
-    ],
-  },
-  {
     slug: "card",
     name: "Card",
     description:
@@ -746,13 +696,6 @@ export const components: ComponentConfig[] = [
         type: "select",
         options: ["outline", "secondary"],
         defaultValue: "outline",
-      },
-      {
-        name: "activeIndex",
-        label: "Active button",
-        type: "select",
-        options: ["Day", "Week", "Month"],
-        defaultValue: "Day",
       },
     ],
     doList: [

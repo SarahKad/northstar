@@ -62,7 +62,6 @@ import { TopNav, TopNavBrand, TopNavBreadcrumb, TopNavActions } from "@/componen
 import { getMenuBarMenus } from "@/lib/menu-bar-data"
 import { buildTopNavBreadcrumbItems } from "@/lib/top-nav-data"
 import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from "@/components/ui/resizable"
-import { DataTablePlaygroundPreview } from "@/components/blocks/data-table-demo"
 import {
   Alert,
   AlertIcon,
@@ -447,14 +446,8 @@ function InputPreview({ props }: { props: Record<string, string | boolean> }) {
 
 function ButtonGroupPreview({ props }: { props: Record<string, string | boolean> }) {
   const labels = ["Day", "Week", "Month"] as const
-  const configuredActive = labels.indexOf(String(props.activeIndex ?? "Day") as (typeof labels)[number])
-  const activeIndex = configuredActive >= 0 ? configuredActive : parseInt(String(props.activeIndex || "0"), 10)
-  const [active, setActive] = useState(activeIndex)
+  const [active, setActive] = useState(0)
   const variant = (props.variant as "outline" | "secondary") || "outline"
-
-  useEffect(() => {
-    setActive(activeIndex)
-  }, [activeIndex])
 
   return (
     <ButtonGroup variant={variant}>
@@ -723,18 +716,6 @@ export function ComponentRenderer({ slug, props }: Props) {
 
     case "table":
       return <TablePreview props={props} />
-
-    case "data-table":
-      return (
-        <div className="w-full">
-          <DataTablePlaygroundPreview
-            searchable={Boolean(props.searchable)}
-            pagination={Boolean(props.pagination)}
-            selectable={Boolean(props.selectable)}
-            columnVisibility={Boolean(props.columnVisibility)}
-          />
-        </div>
-      )
 
     case "badge":
       return (
@@ -1030,13 +1011,14 @@ export function ComponentRenderer({ slug, props }: Props) {
 
     case "accordion": {
       const multiple = Boolean(props.multiple)
-      const items = [
+      const allItems = [
         { value: "item-1", trigger: "Is it accessible?", content: "Yes. It adheres to the WAI-ARIA design pattern." },
         { value: "item-2", trigger: "Is it styled?", content: "Yes. It comes with default styles that match the design system's aesthetics." },
         { value: "item-3", trigger: "Is it animated?", content: "Yes. It uses a CSS grid-rows transition for smooth height animation." },
       ]
+      const items = multiple ? allItems : allItems.slice(0, 1)
       return (
-        <Accordion multiple={multiple} className="w-full max-w-md">
+        <Accordion key={multiple ? "multiple" : "single"} multiple={multiple} className="w-full max-w-md">
           {items.map((item) => (
             <AccordionItem key={item.value} value={item.value}>
               <AccordionTrigger>{item.trigger}</AccordionTrigger>

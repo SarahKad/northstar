@@ -74,23 +74,22 @@ function AccordionTrigger({ className, children, ...props }: AccordionPrimitive.
 
 /**
  * @description The collapsible panel containing accordion body content.
- * Animates open and closed using a CSS grid-rows transition.
+ * Uses Base UI's `--accordion-panel-height` variable with height transitions
+ * so both open and close animate smoothly.
  */
 function AccordionContent({ className, children, ...props }: AccordionPrimitive.Panel.Props) {
   return (
     <AccordionPrimitive.Panel
       data-slot="accordion-content"
       className={cn(
-        "grid overflow-hidden text-sm text-muted-foreground",
-        "transition-all duration-200 ease-out",
-        "data-[open]:grid-rows-[1fr] data-[closed]:grid-rows-[0fr]",
+        "overflow-hidden text-sm text-muted-foreground",
+        "h-(--accordion-panel-height) transition-[height] duration-200 ease-out",
+        "data-ending-style:h-0 data-starting-style:h-0",
         className
       )}
       {...props}
     >
-      <div className="min-h-0">
-        <div className="pb-4">{children}</div>
-      </div>
+      <div className="pb-4">{children}</div>
     </AccordionPrimitive.Panel>
   )
 }

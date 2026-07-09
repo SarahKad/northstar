@@ -22,12 +22,6 @@
       "description": "Structured data display with sortable columns, optional footer, and title. Use for records that benefit from columnar scanning."
     },
     {
-      "name": "data-table",
-      "type": "registry:ui",
-      "title": "Data Table",
-      "description": "Full-featured interactive table powered by TanStack Table v8. Supports sorting, pagination, global or column search, row selection, and column visibility, all themed via AG tokens."
-    },
-    {
       "name": "card",
       "type": "registry:ui",
       "title": "Card",

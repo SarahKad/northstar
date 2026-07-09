@@ -32,7 +32,6 @@ export function ComponentPlayground({ component }: Props) {
 
   const isSidebarPreview = component.slug === "sidebar"
   const isChartPreview = component.slug.startsWith("chart-")
-  const isDataTablePreview = component.slug === "data-table"
 
   const configuratorSchema = useMemo(() => {
     if (component.slug === "top-nav") {
@@ -83,7 +82,7 @@ export function ComponentPlayground({ component }: Props) {
           areaClassName={cn(
             isSidebarPreview
               ? "min-h-[520px] p-4"
-              : isChartPreview || isDataTablePreview
+              : isChartPreview
                 ? "min-h-[420px] p-6"
                 : "min-h-[280px] p-10"
           )}

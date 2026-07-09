@@ -71,7 +71,15 @@ function ButtonGroupItem({ className, variant = "outline", size = "default", act
       className={cn(
         buttonVariants({ variant, size }),
         "relative focus-visible:z-10",
-        "aria-pressed:z-10 aria-pressed:border-primary aria-pressed:bg-primary aria-pressed:text-primary-foreground aria-pressed:hover:bg-primary/90 aria-pressed:hover:text-primary-foreground dark:aria-pressed:hover:bg-primary/90",
+        "data-active:z-10 aria-pressed:z-10",
+        "data-active:border-primary data-active:bg-primary data-active:text-primary-foreground",
+        "data-active:hover:bg-primary/90 data-active:hover:text-primary-foreground",
+        "aria-pressed:border-primary aria-pressed:bg-primary aria-pressed:text-primary-foreground",
+        "aria-pressed:hover:bg-primary/90 aria-pressed:hover:text-primary-foreground",
+        "dark:data-active:border-primary dark:data-active:bg-primary dark:data-active:text-primary-foreground",
+        "dark:data-active:hover:bg-primary/90 dark:data-active:hover:text-primary-foreground",
+        "dark:aria-pressed:border-primary dark:aria-pressed:bg-primary dark:aria-pressed:text-primary-foreground",
+        "dark:aria-pressed:hover:bg-primary/90 dark:aria-pressed:hover:text-primary-foreground",
         className
       )}
       {...props}

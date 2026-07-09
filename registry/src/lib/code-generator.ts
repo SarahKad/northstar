@@ -569,69 +569,6 @@ export function generateTableCode(props: PropsMap): string {
 ${tableClose}`
 }
 
-export function generateDataTableCode(props: PropsMap): string {
-  const searchable = Boolean(props.searchable)
-  const pagination = Boolean(props.pagination)
-  const selectable = Boolean(props.selectable)
-  const columnVisibility = Boolean(props.columnVisibility)
-
-  const dataTableProps = [
-    "  columns={columns}",
-    "  data={employees}",
-    searchable && '  searchable="name"',
-    searchable && '  searchPlaceholder="Search by name…"',
-    pagination && "  pagination",
-    pagination && "  pageSize={8}",
-    selectable && "  selectable",
-    columnVisibility && "  columnVisibility",
-    '  title="Employee directory"',
-  ]
-    .filter(Boolean)
-    .join("\n")
-
-  return `import { DataTable, createColumnHelper, type ColumnDef } from "@/components/ui/data-table"
-import { Badge } from "@/components/ui/badge"
-
-type Employee = {
-  id: string
-  name: string
-  role: string
-  department: string
-  status: "Active" | "On Leave" | "Inactive"
-  joined: string
-}
-
-const col = createColumnHelper<Employee>()
-
-const columns: ColumnDef<Employee>[] = [
-  col.accessor("name", {
-    header: "Name",
-    cell: (info) => <span className="font-medium">{info.getValue()}</span>,
-  }),
-  col.accessor("role", { header: "Role" }),
-  col.accessor("department", { header: "Department" }),
-  col.accessor("status", {
-    header: "Status",
-    cell: (info) => (
-      <Badge variant={info.getValue() === "Active" ? "default" : "secondary"}>
-        {info.getValue()}
-      </Badge>
-    ),
-  }),
-]
-
-const employees: Employee[] = [
-  { id: "E001", name: "Jordan Alvarez", role: "Senior Engineer", department: "Product", status: "Active", joined: "2021-03-15" },
-  { id: "E002", name: "Morgan Lee", role: "Product Manager", department: "Product", status: "Active", joined: "2020-07-01" },
-  { id: "E003", name: "Taylor Kim", role: "Designer", department: "Design", status: "On Leave", joined: "2022-01-10" },
-]
-
-<DataTable
-${dataTableProps}
-/>`
-}
-
-
 export function generateCheckboxCode(props: PropsMap): string {
   const label = props.label || "Accept terms and conditions"
   const description = props.description || "You agree to our Terms of Service and Privacy Policy."
@@ -658,27 +595,32 @@ export function generateCheckboxCode(props: PropsMap): string {
 }
 
 export function generateAccordionCode(props: PropsMap): string {
-  const type = props.type || "single"
-  const collapsible = props.collapsible !== false ? " collapsible" : ""
-  return `<Accordion type="${type}"${collapsible}>
-  <AccordionItem value="item-1">
-    <AccordionTrigger>Is it accessible?</AccordionTrigger>
+  const multiple = Boolean(props.multiple)
+  const multipleAttr = multiple ? " multiple" : ""
+
+  const items = multiple
+    ? [
+        { value: "item-1", trigger: "Is it accessible?", content: "Yes. It adheres to the WAI-ARIA design pattern." },
+        { value: "item-2", trigger: "Is it styled?", content: "Yes. It comes with default styles that match the design system." },
+        { value: "item-3", trigger: "Is it animated?", content: "Yes. It uses a CSS grid-rows transition for smooth height animation." },
+      ]
+    : [
+        { value: "item-1", trigger: "Is it accessible?", content: "Yes. It adheres to the WAI-ARIA design pattern." },
+      ]
+
+  const itemMarkup = items
+    .map(
+      (item) => `  <AccordionItem value="${item.value}">
+    <AccordionTrigger>${item.trigger}</AccordionTrigger>
     <AccordionContent>
-      Yes. It adheres to the WAI-ARIA design pattern.
+      ${item.content}
     </AccordionContent>
-  </AccordionItem>
-  <AccordionItem value="item-2">
-    <AccordionTrigger>Is it styled?</AccordionTrigger>
-    <AccordionContent>
-      Yes. It comes with default styles that match the design system.
-    </AccordionContent>
-  </AccordionItem>
-  <AccordionItem value="item-3">
-    <AccordionTrigger>Is it animated?</AccordionTrigger>
-    <AccordionContent>
-      Yes. It uses a CSS grid-rows transition for smooth height animation.
-    </AccordionContent>
-  </AccordionItem>
+  </AccordionItem>`
+    )
+    .join("\n")
+
+  return `<Accordion${multipleAttr}>
+${itemMarkup}
 </Accordion>`
 }
 
@@ -998,10 +940,6 @@ const pages = getPaginationPages(currentPage, totalPages)
 
 export function generateButtonGroupCode(props: PropsMap): string {
   const variant = props.variant || "outline"
-  const labels = ["Day", "Week", "Month"] as const
-  const activeLabel = String(props.activeIndex || "Day")
-  const active = labels.indexOf(activeLabel as (typeof labels)[number])
-  const activeIdx = active >= 0 ? active : parseInt(String(props.activeIndex || "0"), 10)
 
   return `"use client"
 
@@ -1009,7 +947,7 @@ import { useState } from "react"
 import { ButtonGroup, ButtonGroupItem } from "@/components/ui/button-group"
 
 export function ViewSwitcher() {
-  const [active, setActive] = useState(${activeIdx})
+  const [active, setActive] = useState(0)
 
   return (
     <ButtonGroup variant="${variant}">
@@ -1113,7 +1051,6 @@ export const codeGenerators: CodeGeneratorMap = {
   skeleton: generateSkeletonCode,
   "chart-area-interactive": generateChartAreaInteractiveCode,
   "table": generateTableCode,
-  "data-table": generateDataTableCode,
   "chart-bar-default": generateChartBarDefaultCode,
   "chart-bar-stacked": generateChartBarStackedCode,
   "chart-pie-donut": generateChartPieDonutCode,
