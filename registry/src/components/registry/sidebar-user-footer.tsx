@@ -49,11 +49,11 @@ export function SidebarUserFooter() {
           "bg-background px-2.5 py-2 text-left outline-none",
           "hover:bg-muted transition-colors",
           "focus-visible:ring-2 focus-visible:ring-ring/50",
-          "group-data-[collapsible=icon]:size-8 group-data-[collapsible=icon]:w-8 group-data-[collapsible=icon]:min-w-8 group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:p-0"
+          "group-data-[collapsible=icon]:size-8 group-data-[collapsible=icon]:w-8 group-data-[collapsible=icon]:min-w-8 group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:rounded-full group-data-[collapsible=icon]:border-0 group-data-[collapsible=icon]:bg-transparent group-data-[collapsible=icon]:p-0 group-data-[collapsible=icon]:hover:bg-transparent group-data-[collapsible=icon]:focus-visible:ring-0"
         )}
         aria-label={`${USER.name}, ${USER.email}`}
       >
-        <Avatar size="sm" className="size-8 shrink-0">
+        <Avatar size="sm" className="size-8 shrink-0 shadow-none hover:shadow-none">
           <AvatarImage src={USER.avatar} alt={USER.name} />
           <AvatarFallback>{USER.initials}</AvatarFallback>
         </Avatar>

@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/breadcrumb"
 import { Carousel, CarouselContent, CarouselItem, CarouselPrev, CarouselNext } from "@/components/ui/carousel"
 import { Stepper } from "@/components/ui/stepper"
+import { resolveStepperCurrentStep, STEPPER_PREVIEW_STEPS } from "@/lib/stepper-data"
 import { Calendar } from "@/components/ui/calendar"
 import {
   Command,
@@ -58,6 +59,8 @@ import {
   MenuBarShortcut,
 } from "@/components/ui/menu-bar"
 import { TopNav, TopNavBrand, TopNavBreadcrumb, TopNavActions } from "@/components/ui/top-nav"
+import { getMenuBarMenus } from "@/lib/menu-bar-data"
+import { buildTopNavBreadcrumbItems } from "@/lib/top-nav-data"
 import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from "@/components/ui/resizable"
 import { DataTablePlaygroundPreview } from "@/components/blocks/data-table-demo"
 import {
@@ -73,7 +76,7 @@ import {
   BookOpen, Palette, Package,
 } from "@phosphor-icons/react"
 import { type ElementType } from "react"
-import { Pagination, PaginationItem, PaginationPrev, PaginationNext, PaginationEllipsis } from "@/components/ui/pagination"
+import { Pagination, PaginationItem, PaginationPrev, PaginationNext, PaginationEllipsis, getPaginationPages } from "@/components/ui/pagination"
 import { ButtonGroup, ButtonGroupItem } from "@/components/ui/button-group"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { SideNav } from "@/components/ui/side-nav"
@@ -103,6 +106,7 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import {
   Card,
+  CardBody,
   CardContent,
   CardDescription,
   CardFooter,
@@ -117,6 +121,7 @@ import { cn } from "@/lib/utils"
 import { SidebarUserFooter } from "@/components/registry/sidebar-user-footer"
 import { SearchDialog } from "@/components/registry/search-dialog"
 import { SidebarNavLayout } from "@/components/registry/sidebar-nav-layout"
+import { usePreviewViewport } from "@/components/registry/preview-viewport-context"
 
 const PLAYGROUND_SECTION_ICONS: Record<string, ElementType> = {
   guides: BookOpen,
@@ -242,6 +247,150 @@ function AlertPreview({ props }: { props: Record<string, string | boolean> }) {
       </AlertContent>
       {dismissible && <AlertDismiss onClick={() => setOpen(false)} />}
     </Alert>
+  )
+}
+
+function PaginationPreview({ props }: { props: Record<string, string | boolean> }) {
+  const total = parseInt(String(props.totalPages || "5"), 10)
+  const [current, setCurrent] = useState(1)
+
+  useEffect(() => {
+    setCurrent((page) => Math.min(page, total))
+  }, [total])
+
+  const pages = getPaginationPages(current, total)
+
+  return (
+    <Pagination>
+      <PaginationPrev onClick={() => setCurrent((page) => Math.max(1, page - 1))} disabled={current === 1} />
+      {pages.map((page, index) =>
+        page === "ellipsis" ? (
+          <PaginationEllipsis key={`ellipsis-${index}`} />
+        ) : (
+          <PaginationItem
+            key={page}
+            aria-current={current === page ? "page" : undefined}
+            onClick={() => setCurrent(page)}
+          >
+            {page}
+          </PaginationItem>
+        )
+      )}
+      <PaginationNext onClick={() => setCurrent((page) => Math.min(total, page + 1))} disabled={current === total} />
+    </Pagination>
+  )
+}
+
+function CardPreview({ props }: { props: Record<string, string | boolean> }) {
+  const layout = String(props.layout || "vertical")
+  const isHorizontal = layout === "horizontal"
+  const imagePos = String(props.imagePosition || "none")
+  const resolvedImagePos =
+    imagePos === "none"
+      ? "none"
+      : isHorizontal
+        ? ["left", "right"].includes(imagePos)
+          ? imagePos
+          : "left"
+        : ["top", "bottom"].includes(imagePos)
+          ? imagePos
+          : "top"
+
+  const cardImage =
+    resolvedImagePos !== "none" ? (
+      <img
+        src="/card-placeholder.jpg"
+        alt="Card image"
+        className={cn(
+          "object-cover",
+          isHorizontal
+            ? "w-2/5 max-w-[180px] shrink-0 self-stretch min-h-[180px]"
+            : "h-44 w-full"
+        )}
+      />
+    ) : null
+
+  const cardContent = (
+    <>
+      <CardHeader>
+        <CardTitle>{String(props.title || "Card Title")}</CardTitle>
+        <CardDescription>{String(props.description || "Card description")}</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <p className="text-sm text-muted-foreground">Card content area</p>
+      </CardContent>
+      {props.showFooter && (
+        <CardFooter>
+          <Button variant="outline" size="sm">
+            {String(props.footerCta || "Learn more")}
+          </Button>
+        </CardFooter>
+      )}
+    </>
+  )
+
+  return (
+    <Card
+      orientation={isHorizontal ? "horizontal" : "vertical"}
+      className={isHorizontal ? "w-[480px]" : "w-[340px]"}
+    >
+      {isHorizontal ? (
+        <>
+          {resolvedImagePos === "left" && cardImage}
+          <CardBody>{cardContent}</CardBody>
+          {resolvedImagePos === "right" && cardImage}
+        </>
+      ) : (
+        <>
+          {resolvedImagePos === "top" && cardImage}
+          {cardContent}
+          {resolvedImagePos === "bottom" && cardImage}
+        </>
+      )}
+    </Card>
+  )
+}
+
+function DialogPreview() {
+  const isMobilePreview = usePreviewViewport() === "mobile"
+
+  return (
+    <Dialog>
+      <DialogTrigger
+        render={<Button variant="outline">Edit Profile</Button>}
+      />
+      <DialogPortal>
+        <DialogOverlay />
+        <DialogContent
+          className={cn(
+            isMobilePreview &&
+              "w-[calc(340px-2rem)] max-w-[calc(100vw-2rem)] p-4"
+          )}
+        >
+          <DialogClose />
+          <DialogHeader>
+            <DialogTitle>Edit Profile</DialogTitle>
+            <DialogDescription>
+              Make changes to your profile here. Click save when you are done.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="grid gap-3 py-4">
+            <div className="grid gap-1.5">
+              <Label htmlFor="dialog-name">Name</Label>
+              <Input id="dialog-name" defaultValue="Jane Doe" />
+            </div>
+            <div className="grid gap-1.5">
+              <Label htmlFor="dialog-email">Email</Label>
+              <Input id="dialog-email" defaultValue="jane@example.com" />
+            </div>
+          </div>
+          <DialogFooter>
+            <DialogClose render={<Button variant="outline">Cancel</Button>} />
+            <Button>Save changes</Button>
+          </DialogFooter>
+        </DialogContent>
+      </DialogPortal>
+    </Dialog>
   )
 }
 
@@ -594,36 +743,8 @@ export function ComponentRenderer({ slug, props }: Props) {
         </Badge>
       )
 
-    case "card": {
-      const imagePos = String(props.imagePosition || "none")
-      const cardImage = imagePos !== "none" ? (
-        <img
-          src="/card-placeholder.jpg"
-          alt="Card image"
-          className="w-full h-44 object-cover"
-        />
-      ) : null
-      return (
-        <Card className="w-[340px]">
-          {imagePos === "top" && cardImage}
-          <CardHeader>
-            <CardTitle>{String(props.title || "Card Title")}</CardTitle>
-            <CardDescription>{String(props.description || "Card description")}</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <p className="text-sm text-muted-foreground">Card content area</p>
-          </CardContent>
-          {props.showFooter && (
-            <CardFooter>
-              <Button variant="outline" size="sm">
-                {String(props.footerCta || "Learn more")}
-              </Button>
-            </CardFooter>
-          )}
-          {imagePos === "bottom" && cardImage}
-        </Card>
-      )
-    }
+    case "card":
+      return <CardPreview props={props} />
 
     case "input":
       return <InputPreview props={props} />
@@ -690,26 +811,8 @@ export function ComponentRenderer({ slug, props }: Props) {
     case "alert":
       return <AlertPreview props={props} />
 
-    case "pagination": {
-      const total = parseInt(String(props.totalPages || "5"), 10)
-      const [current, setCurrent] = useState(parseInt(String(props.currentPage || "3"), 10))
-      const pages = Array.from({ length: total }, (_, i) => i + 1)
-      return (
-        <Pagination>
-          <PaginationPrev onClick={() => setCurrent(p => Math.max(1, p - 1))} disabled={current === 1} />
-          {pages.map((page) => (
-            <PaginationItem
-              key={page}
-              aria-current={current === page ? "page" : undefined}
-              onClick={() => setCurrent(page)}
-            >
-              {page}
-            </PaginationItem>
-          ))}
-          <PaginationNext onClick={() => setCurrent(p => Math.min(total, p + 1))} disabled={current === total} />
-        </Pagination>
-      )
-    }
+    case "pagination":
+      return <PaginationPreview props={props} />
 
     case "button-group":
       return <ButtonGroupPreview props={props} />
@@ -773,6 +876,8 @@ export function ComponentRenderer({ slug, props }: Props) {
 
     case "sidebar": {
       const activeItem = String(props.activeItem || "getting-started")
+      const showLogo = props.showLogo !== false
+      const showSearch = props.showSearch !== false
       const navGroups = [
         {
           id: "guides",
@@ -808,21 +913,25 @@ export function ComponentRenderer({ slug, props }: Props) {
         >
           <SidebarProvider className="flex h-full min-h-0 w-full overflow-hidden">
             <Sidebar>
-              <SidebarHeader className="gap-2 border-b border-sidebar-border p-2">
-                <div className="flex items-center gap-2 group-data-[collapsible=icon]:justify-center">
-                  <Image
-                    src="/logo.png"
-                    alt="My App"
-                    width={28}
-                    height={28}
-                    className="shrink-0 object-contain dark:invert"
-                  />
-                  <span className="truncate font-medium text-sm group-data-[collapsible=icon]:hidden">
-                    My App
-                  </span>
-                </div>
-                <SearchDialog />
-              </SidebarHeader>
+              {(showLogo || showSearch) && (
+                <SidebarHeader className="gap-2 border-b border-sidebar-border p-2">
+                  {showLogo && (
+                    <div className="flex items-center gap-2 group-data-[collapsible=icon]:justify-center">
+                      <Image
+                        src="/logo.png"
+                        alt="My App"
+                        width={28}
+                        height={28}
+                        className="shrink-0 object-contain dark:invert"
+                      />
+                      <span className="truncate font-medium text-sm group-data-[collapsible=icon]:hidden">
+                        My App
+                      </span>
+                    </div>
+                  )}
+                  {showSearch && <SearchDialog />}
+                </SidebarHeader>
+              )}
               <SidebarNavLayout
                 pinned={navGroups
                   .filter((group) => group.id === "guides")
@@ -997,12 +1106,8 @@ export function ComponentRenderer({ slug, props }: Props) {
     }
 
     case "stepper": {
-      const currentStep = parseInt(String(props.currentStep || "1"), 10)
-      const steps = [
-        { label: "Account", description: "Your details" },
-        { label: "Profile", description: "Set up your profile" },
-        { label: "Review", description: "Confirm & submit" },
-      ]
+      const currentStep = resolveStepperCurrentStep(props.currentStep ?? "Step 2")
+      const steps = [...STEPPER_PREVIEW_STEPS]
       return (
         <Stepper currentStep={currentStep} steps={steps} className="w-full" />
       )
@@ -1043,39 +1148,7 @@ export function ComponentRenderer({ slug, props }: Props) {
       )
 
     case "dialog":
-      return (
-        <Dialog>
-          <DialogTrigger
-            render={<Button variant="outline">Edit Profile</Button>}
-          />
-          <DialogPortal>
-            <DialogOverlay />
-            <DialogContent>
-              <DialogClose />
-              <DialogHeader>
-                <DialogTitle>Edit Profile</DialogTitle>
-                <DialogDescription>
-                  Make changes to your profile here. Click save when you are done.
-                </DialogDescription>
-              </DialogHeader>
-              <div className="grid gap-3 py-4">
-                <div className="grid gap-1.5">
-                  <Label htmlFor="dialog-name">Name</Label>
-                  <Input id="dialog-name" defaultValue="Jane Doe" />
-                </div>
-                <div className="grid gap-1.5">
-                  <Label htmlFor="dialog-email">Email</Label>
-                  <Input id="dialog-email" defaultValue="jane@example.com" />
-                </div>
-              </div>
-              <DialogFooter>
-                <DialogClose render={<Button variant="outline">Cancel</Button>} />
-                <Button>Save changes</Button>
-              </DialogFooter>
-            </DialogContent>
-          </DialogPortal>
-        </Dialog>
-      )
+      return <DialogPreview />
 
     case "drawer": {
       const side = (props.side as "right" | "left" | "bottom") || "right"
@@ -1097,7 +1170,7 @@ export function ComponentRenderer({ slug, props }: Props) {
                 </p>
               </div>
               <DrawerFooter>
-                <DrawerClose render={<Button variant="outline" size="sm">Close</Button>} />
+                <DrawerClose render={<Button variant="ghost" size="sm">Close</Button>} />
                 <Button size="sm">Save</Button>
               </DrawerFooter>
             </DrawerContent>
@@ -1106,64 +1179,64 @@ export function ComponentRenderer({ slug, props }: Props) {
       )
     }
 
-    case "menu-bar":
+    case "menu-bar": {
+      const menus = getMenuBarMenus(props.menuCount ?? "3")
+
       return (
         <MenuBar>
-          <MenuBarMenu>
-            <MenuBarTrigger>File</MenuBarTrigger>
-            <MenuBarContent>
-              <MenuBarItem>New File <MenuBarShortcut>⌘N</MenuBarShortcut></MenuBarItem>
-              <MenuBarItem>Open… <MenuBarShortcut>⌘O</MenuBarShortcut></MenuBarItem>
-              <MenuBarSeparator />
-              <MenuBarItem>Save <MenuBarShortcut>⌘S</MenuBarShortcut></MenuBarItem>
-            </MenuBarContent>
-          </MenuBarMenu>
-          <MenuBarMenu>
-            <MenuBarTrigger>Edit</MenuBarTrigger>
-            <MenuBarContent>
-              <MenuBarItem>Undo <MenuBarShortcut>⌘Z</MenuBarShortcut></MenuBarItem>
-              <MenuBarItem>Redo <MenuBarShortcut>⌘⇧Z</MenuBarShortcut></MenuBarItem>
-              <MenuBarSeparator />
-              <MenuBarItem>Cut</MenuBarItem>
-              <MenuBarItem>Copy</MenuBarItem>
-            </MenuBarContent>
-          </MenuBarMenu>
-          <MenuBarMenu>
-            <MenuBarTrigger>View</MenuBarTrigger>
-            <MenuBarContent>
-              <MenuBarItem>Zoom In</MenuBarItem>
-              <MenuBarItem>Zoom Out</MenuBarItem>
-              <MenuBarSeparator />
-              <MenuBarItem>Toggle Sidebar</MenuBarItem>
-            </MenuBarContent>
-          </MenuBarMenu>
+          {menus.map((menu) => (
+            <MenuBarMenu key={menu.label}>
+              <MenuBarTrigger>{menu.label}</MenuBarTrigger>
+              <MenuBarContent>
+                {menu.items.map((item, index) => {
+                  if (item.type === "separator") {
+                    return <MenuBarSeparator key={`${menu.label}-separator-${index}`} />
+                  }
+
+                  return (
+                    <MenuBarItem key={`${menu.label}-${item.label}`}>
+                      {item.label}
+                      {item.shortcut ? <MenuBarShortcut>{item.shortcut}</MenuBarShortcut> : null}
+                    </MenuBarItem>
+                  )
+                })}
+              </MenuBarContent>
+            </MenuBarMenu>
+          ))}
         </MenuBar>
       )
+    }
 
-    case "top-nav":
+    case "top-nav": {
+      const showLogo = props.showLogo !== false
+      const showSearch = props.showSearch !== false
+      const showBreadcrumbs = props.showBreadcrumbs !== false
+      const breadcrumbItems = buildTopNavBreadcrumbItems(props)
       return (
-        <div className="w-full max-w-2xl rounded-lg overflow-hidden border border-border">
+        <div className="w-full rounded-lg overflow-hidden border border-border">
           <TopNav>
-            <TopNavBrand>
-              <span className="size-5 rounded-sm bg-primary" />
-              AG Design
-            </TopNavBrand>
-            <TopNavBreadcrumb
-              items={[
-                { label: "Components", href: "#" },
-                { label: "Button" },
-              ]}
-            />
-            <TopNavActions />
+            {showLogo && (
+              <TopNavBrand>
+                <span className="size-5 rounded-sm bg-primary" />
+                AG Design
+              </TopNavBrand>
+            )}
+            {showBreadcrumbs && <TopNavBreadcrumb items={breadcrumbItems} />}
+            <TopNavActions showSearch={showSearch} />
           </TopNav>
         </div>
       )
+    }
 
-    case "resizable":
+    case "resizable": {
+      const direction = (props.direction as "horizontal" | "vertical") || "horizontal"
       return (
         <ResizablePanelGroup
-          direction="horizontal"
-          className="w-full max-w-lg rounded-lg border border-border h-40"
+          direction={direction}
+          className={cn(
+            "w-full max-w-lg rounded-lg border border-border",
+            direction === "horizontal" ? "h-40" : "h-64"
+          )}
         >
           <ResizablePanel defaultSize={30} minSize={15} className="p-4">
             <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Sidebar</p>
@@ -1176,6 +1249,7 @@ export function ComponentRenderer({ slug, props }: Props) {
           </ResizablePanel>
         </ResizablePanelGroup>
       )
+    }
 
     default:
       return (

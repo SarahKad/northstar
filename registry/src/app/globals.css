@@ -192,27 +192,27 @@
      size, use an h3 instead. h3–h6 use Atkinson Hyperlegible. */
   h1 {
     font-family: var(--font-display);
-    @apply text-4xl tracking-tight;
+    @apply !text-4xl tracking-tight;
   }
   h2 {
     font-family: var(--font-display);
-    @apply text-3xl tracking-tight;
+    @apply !text-3xl tracking-tight;
   }
   h3 {
     font-family: var(--font-sans);
-    @apply text-2xl tracking-tight font-semibold;
+    @apply !text-2xl tracking-tight font-semibold;
   }
   h4 {
     font-family: var(--font-sans);
-    @apply text-xl font-semibold;
+    @apply !text-xl font-semibold;
   }
   h5 {
     font-family: var(--font-sans);
-    @apply text-lg font-medium;
+    @apply !text-lg font-medium;
   }
   h6 {
     font-family: var(--font-sans);
-    @apply text-base font-medium;
+    @apply !text-base font-medium;
   }
 }
 

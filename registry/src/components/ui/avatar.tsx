@@ -104,7 +104,7 @@ function AvatarFallback({ className, ...props }: React.HTMLAttributes<HTMLSpanEl
     <span
       data-slot="avatar-fallback"
       className={cn(
-        "absolute inset-0 flex items-center justify-center rounded-full bg-muted text-muted-foreground font-medium select-none",
+        "absolute inset-0 flex items-center justify-center rounded-full border-0 bg-muted text-muted-foreground font-medium select-none ring-0 outline-none",
         className
       )}
       {...props}

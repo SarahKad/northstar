@@ -1,6 +1,33 @@
 import { cn } from "@/lib/utils"
 import { ArrowLeft, ArrowRight } from "@phosphor-icons/react/dist/ssr"
 
+const MAX_PAGE_SLOTS = 5
+
+/**
+ * Builds the page indicators for pagination, never more than five slots.
+ * Shows a sliding window with ellipsis when total pages exceed five.
+ *
+ * @example
+ * getPaginationPages(2, 11)  // [1, 2, 3, 4, "ellipsis"]
+ * getPaginationPages(7, 11)  // ["ellipsis", 6, 7, 8, "ellipsis"]
+ * getPaginationPages(10, 11) // ["ellipsis", 8, 9, 10, 11]
+ */
+export function getPaginationPages(current: number, total: number): (number | "ellipsis")[] {
+  if (total <= MAX_PAGE_SLOTS) {
+    return Array.from({ length: total }, (_, index) => index + 1)
+  }
+
+  if (current <= 4) {
+    return [1, 2, 3, 4, "ellipsis"]
+  }
+
+  if (current >= total - 3) {
+    return ["ellipsis", total - 3, total - 2, total - 1, total]
+  }
+
+  return ["ellipsis", current - 1, current, current + 1, "ellipsis"]
+}
+
 /**
  * @description Accessible `<nav>` wrapper for a pagination control. Provides the
  * `role="navigation"` and `aria-label="pagination"` attributes automatically.

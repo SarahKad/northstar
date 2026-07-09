@@ -78,13 +78,19 @@ function ResizablePanel({
   /** Minimum panel size in percent. @default 10 */
   minSize?: number
 }) {
+  const { direction } = React.useContext(ResizableContext)
+  const minSizeStyle =
+    direction === "horizontal"
+      ? { minWidth: `${minSize}%` }
+      : { minHeight: `${minSize}%` }
+
   return (
     <div
       data-slot="resizable-panel"
       className={cn("overflow-auto", className)}
       style={{
         flexBasis: `${defaultSize}%`,
-        minWidth: `${minSize}%`,
+        ...minSizeStyle,
         ...style,
       }}
       {...props}

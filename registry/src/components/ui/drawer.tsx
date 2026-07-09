@@ -133,7 +133,10 @@ function DrawerFooter({ className, ...props }: React.HTMLAttributes<HTMLDivEleme
   return (
     <div
       data-slot="drawer-footer"
-      className={cn("flex items-center gap-2 border-t border-border px-4 py-3", className)}
+      className={cn(
+        "mt-auto flex w-full items-center justify-end gap-2 border-t border-border px-4 py-3",
+        className
+      )}
       {...props}
     />
   )

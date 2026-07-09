@@ -34,6 +34,47 @@ export function ComponentPlayground({ component }: Props) {
   const isChartPreview = component.slug.startsWith("chart-")
   const isDataTablePreview = component.slug === "data-table"
 
+  const configuratorSchema = useMemo(() => {
+    if (component.slug === "top-nav") {
+      const showBreadcrumbs = propValues.showBreadcrumbs !== false
+      const breadcrumbLevels = String(propValues.breadcrumbLevels ?? "3")
+
+      return component.props.filter((prop) => {
+        if (!showBreadcrumbs && prop.name.startsWith("breadcrumb") && prop.name !== "showBreadcrumbs") {
+          return false
+        }
+
+        if (breadcrumbLevels === "1") {
+          return !["breadcrumbTitle1", "breadcrumbTitle2", "breadcrumbTitle3"].includes(prop.name)
+        }
+
+        if (breadcrumbLevels === "3") {
+          return prop.name !== "breadcrumbTitle"
+        }
+
+        return true
+      })
+    }
+
+    if (component.slug === "card") {
+      const layout = String(propValues.layout ?? "vertical")
+
+      return component.props.map((prop) => {
+        if (prop.name !== "imagePosition") return prop
+
+        return {
+          ...prop,
+          options:
+            layout === "horizontal"
+              ? ["none", "left", "right"]
+              : ["none", "top", "bottom"],
+        }
+      })
+    }
+
+    return component.props
+  }, [component.slug, component.props, propValues])
+
   return (
     <div className="flex flex-col gap-8">
       {/* Preview + Configurator */}
@@ -56,7 +97,7 @@ export function ComponentPlayground({ component }: Props) {
             Configure
           </p>
           <PropsConfigurator
-            schema={component.props}
+            schema={configuratorSchema}
             values={propValues}
             onChange={handleChange}
           />

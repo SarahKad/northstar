@@ -143,7 +143,9 @@ function StepperItem({
           {label}
         </span>
         {description && (
-          <span className="mt-0.5 text-xs text-muted-foreground">{description}</span>
+          <span className="mt-0.5 max-md:max-w-[18ch] text-xs leading-snug text-muted-foreground">
+            {description}
+          </span>
         )}
       </div>
     </li>

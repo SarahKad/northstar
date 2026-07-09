@@ -51,9 +51,11 @@ function MenuBarTrigger({ className, ...props }: Menu.Trigger.Props) {
       data-slot="menu-bar-trigger"
       className={cn(
         "flex items-center rounded-md px-2.5 py-1 text-xs font-medium text-foreground",
-        "transition-colors hover:bg-muted",
+        "transition-colors hover:bg-muted hover:text-foreground",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50",
-        "data-[popup-open]:bg-muted",
+        "focus-visible:bg-muted focus-visible:text-foreground",
+        "data-[popup-open]:bg-muted data-[popup-open]:text-foreground",
+        "data-[pressed]:bg-muted data-[pressed]:text-foreground",
         className
       )}
       {...props}
@@ -65,7 +67,12 @@ function MenuBarTrigger({ className, ...props }: Menu.Trigger.Props) {
  * @description Dropdown panel for a `MenuBarMenu`. Renders in a portal and
  * positions below its trigger.
  */
-function MenuBarContent({ className, sideOffset = 6, ...props }: Menu.Positioner.Props & { className?: string }) {
+function MenuBarContent({
+  className,
+  sideOffset = 6,
+  children,
+  ...props
+}: Menu.Positioner.Props & { className?: string; children?: React.ReactNode }) {
   return (
     <Menu.Portal>
       <Menu.Positioner sideOffset={sideOffset} {...props}>
@@ -77,7 +84,9 @@ function MenuBarContent({ className, sideOffset = 6, ...props }: Menu.Positioner
             "data-[starting-style]:scale-95 data-[starting-style]:opacity-0",
             className
           )}
-        />
+        >
+          {children}
+        </Menu.Popup>
       </Menu.Positioner>
     </Menu.Portal>
   )

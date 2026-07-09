@@ -36,6 +36,7 @@ import {
   PaginationItem,
   PaginationPrev,
   PaginationNext,
+  getPaginationPages,
 } from "@/components/ui/pagination"
 import {
   DropdownMenu,
@@ -46,27 +47,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { cn } from "@/lib/utils"
-
-/** Page numbers to render, all pages when few, window + ellipsis when many. */
-function getPaginationPages(current: number, total: number): (number | "ellipsis")[] {
-  if (total <= 7) {
-    return Array.from({ length: total }, (_, i) => i + 1)
-  }
-
-  const pages: (number | "ellipsis")[] = [1]
-  if (current > 3) pages.push("ellipsis")
-
-  const start = Math.max(2, current - 1)
-  const end = Math.min(total - 1, current + 1)
-  for (let page = start; page <= end; page += 1) {
-    pages.push(page)
-  }
-
-  if (current < total - 2) pages.push("ellipsis")
-  if (total > 1) pages.push(total)
-
-  return pages
-}
 
 // Re-export so consumers can import directly from the design system
 export type { ColumnDef } from "@tanstack/react-table"

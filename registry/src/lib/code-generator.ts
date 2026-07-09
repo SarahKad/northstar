@@ -1,3 +1,14 @@
+import {
+  getMenuBarMenus,
+  type MenuBarItemDef,
+  type MenuBarMenuDef,
+} from "@/lib/menu-bar-data"
+import { resolveStepperCurrentStep, STEPPER_PREVIEW_STEPS } from "@/lib/stepper-data"
+import {
+  buildTopNavBreadcrumbItems,
+  formatTopNavBreadcrumbItemsCode,
+} from "@/lib/top-nav-data"
+
 type PropsMap = Record<string, string | boolean>
 
 function escapeJsString(value: string): string {
@@ -72,21 +83,40 @@ export function generateBadgeCode(props: PropsMap): string {
 }
 
 export function generateCardCode(props: PropsMap): string {
-  const { title, description, showFooter, footerCta, imagePosition } = props
-  const pos = String(imagePosition || "none")
-  const img = `\n  <img src="/card-placeholder.jpg" alt="Card image" className="w-full h-44 object-cover" />`
-  const footer =
-    showFooter
-      ? `\n  <CardFooter>\n    <Button variant="outline">${footerCta}</Button>\n  </CardFooter>`
-      : ""
-  return `<Card className="w-[360px]">${pos === "top" ? img : ""}
-  <CardHeader>
+  const { title, description, showFooter, footerCta, layout, imagePosition } = props
+  const isHorizontal = String(layout || "vertical") === "horizontal"
+  let pos = String(imagePosition || "none")
+
+  if (pos !== "none") {
+    if (isHorizontal && !["left", "right"].includes(pos)) pos = "left"
+    if (!isHorizontal && !["top", "bottom"].includes(pos)) pos = "top"
+  }
+
+  const imgHorizontal =
+    '\n  <img src="/card-placeholder.jpg" alt="Card image" className="w-2/5 max-w-[180px] shrink-0 self-stretch min-h-[180px] object-cover" />'
+  const imgVertical =
+    '\n  <img src="/card-placeholder.jpg" alt="Card image" className="h-44 w-full object-cover" />'
+  const img = isHorizontal ? imgHorizontal : imgVertical
+  const footer = showFooter
+    ? `\n  <CardFooter>\n    <Button variant="outline">${footerCta}</Button>\n  </CardFooter>`
+    : ""
+  const body = `  <CardHeader>
     <CardTitle>${title}</CardTitle>
     <CardDescription>${description}</CardDescription>
   </CardHeader>
   <CardContent>
     {/* card content */}
-  </CardContent>${footer}${pos === "bottom" ? img : ""}
+  </CardContent>${footer}`
+
+  if (isHorizontal) {
+    return `<Card orientation="horizontal" className="max-w-xl">${pos === "left" ? img : ""}
+  <CardBody>${body}
+  </CardBody>${pos === "right" ? img : ""}
+</Card>`
+  }
+
+  return `<Card className="w-[360px]">${pos === "top" ? img : ""}
+${body}${pos === "bottom" ? img : ""}
 </Card>`
 }
 
@@ -705,11 +735,14 @@ export function generateCarouselCode(props: PropsMap): string {
 }
 
 export function generateStepperCode(props: PropsMap): string {
-  const currentStep = parseInt(String(props.currentStep || "1"), 10)
+  const currentStep = resolveStepperCurrentStep(props.currentStep ?? "Step 2")
+  const stepsCode = STEPPER_PREVIEW_STEPS.map(
+    (step) =>
+      `  { label: "${step.label}", description: "${step.description}" }`
+  ).join(",\n")
+
   return `const steps = [
-  { label: "Account", description: "Your details" },
-  { label: "Profile", description: "Set up your profile" },
-  { label: "Review", description: "Confirm & submit" },
+${stepsCode}
 ]
 
 <Stepper currentStep={${currentStep}} steps={steps} />`
@@ -810,7 +843,7 @@ export function generateDrawerCode(props: PropsMap): string {
         <p className="text-sm text-muted-foreground">Drawer content goes here.</p>
       </div>
       <DrawerFooter>
-        <DrawerClose render={<Button variant="outline" size="sm">Close</Button>} />
+        <DrawerClose render={<Button variant="ghost" size="sm">Close</Button>} />
         <Button size="sm">Save</Button>
       </DrawerFooter>
     </DrawerContent>
@@ -818,52 +851,65 @@ export function generateDrawerCode(props: PropsMap): string {
 </Drawer>`
 }
 
-export function generateMenuBarCode(_props: PropsMap): string {
+function renderMenuBarItemCode(item: MenuBarItemDef): string {
+  if (item.type === "separator") return "      <MenuBarSeparator />"
+  const shortcut = item.shortcut ? ` <MenuBarShortcut>${item.shortcut}</MenuBarShortcut>` : ""
+  return `      <MenuBarItem>${item.label}${shortcut}</MenuBarItem>`
+}
+
+function renderMenuBarMenuCode(menu: MenuBarMenuDef): string {
+  const items = menu.items.map(renderMenuBarItemCode).join("\n")
+  return `  <MenuBarMenu>
+    <MenuBarTrigger>${menu.label}</MenuBarTrigger>
+    <MenuBarContent>
+${items}
+    </MenuBarContent>
+  </MenuBarMenu>`
+}
+
+export function generateMenuBarCode(props: PropsMap): string {
+  const menus = getMenuBarMenus(props.menuCount ?? "3")
+  const menusCode = menus.map((menu) => renderMenuBarMenuCode(menu)).join("\n")
+
   return `<MenuBar>
-  <MenuBarMenu>
-    <MenuBarTrigger>File</MenuBarTrigger>
-    <MenuBarContent>
-      <MenuBarItem>New File <MenuBarShortcut>⌘N</MenuBarShortcut></MenuBarItem>
-      <MenuBarItem>Open… <MenuBarShortcut>⌘O</MenuBarShortcut></MenuBarItem>
-      <MenuBarSeparator />
-      <MenuBarItem>Save <MenuBarShortcut>⌘S</MenuBarShortcut></MenuBarItem>
-    </MenuBarContent>
-  </MenuBarMenu>
-  <MenuBarMenu>
-    <MenuBarTrigger>Edit</MenuBarTrigger>
-    <MenuBarContent>
-      <MenuBarItem>Undo <MenuBarShortcut>⌘Z</MenuBarShortcut></MenuBarItem>
-      <MenuBarItem>Redo <MenuBarShortcut>⌘⇧Z</MenuBarShortcut></MenuBarItem>
-    </MenuBarContent>
-  </MenuBarMenu>
-  <MenuBarMenu>
-    <MenuBarTrigger>View</MenuBarTrigger>
-    <MenuBarContent>
-      <MenuBarItem>Zoom In</MenuBarItem>
-      <MenuBarItem>Zoom Out</MenuBarItem>
-    </MenuBarContent>
-  </MenuBarMenu>
+${menusCode}
 </MenuBar>`
 }
 
-export function generateTopNavCode(_props: PropsMap): string {
-  return `<TopNav>
-  <TopNavBrand>
+export function generateTopNavCode(props: PropsMap): string {
+  const showLogo = props.showLogo !== false
+  const showSearch = props.showSearch !== false
+  const showBreadcrumbs = props.showBreadcrumbs !== false
+
+  const brand = showLogo
+    ? `  <TopNavBrand>
     <span className="size-5 rounded-sm bg-primary" />
     AG Design
   </TopNavBrand>
-  <TopNavBreadcrumb
+`
+    : ""
+
+  const breadcrumbs = showBreadcrumbs
+    ? `  <TopNavBreadcrumb
     items={[
-      { label: "Components", href: "/components" },
-      { label: "Button" },
+${formatTopNavBreadcrumbItemsCode(buildTopNavBreadcrumbItems(props))}
     ]}
   />
-  <TopNavActions />
+`
+    : ""
+
+  const actionsAttrs = showSearch ? "" : " showSearch={false}"
+
+  return `<TopNav>
+${brand}${breadcrumbs}  <TopNavActions${actionsAttrs} />
 </TopNav>`
 }
 
-export function generateResizableCode(_props: PropsMap): string {
-  return `<ResizablePanelGroup direction="horizontal" className="rounded-lg border h-40">
+export function generateResizableCode(props: PropsMap): string {
+  const direction = String(props.direction || "horizontal")
+  const sizeClass = direction === "horizontal" ? "h-40" : "h-64"
+
+  return `<ResizablePanelGroup direction="${direction}" className="rounded-lg border ${sizeClass}">
   <ResizablePanel defaultSize={30} minSize={15} className="p-4">
     <p className="text-sm font-medium">Sidebar</p>
   </ResizablePanel>
@@ -921,18 +967,32 @@ ${stateWrapper}`
 
 export function generatePaginationCode(props: PropsMap): string {
   const total = parseInt(String(props.totalPages || "5"), 10)
-  const current = parseInt(String(props.currentPage || "3"), 10)
-  return `<Pagination>
-  <PaginationPrev disabled={currentPage === 1} />
-  {pages.map((page) => (
-    <PaginationItem
-      key={page}
-      aria-current={page === ${current} ? "page" : undefined}
-    >
-      {page}
-    </PaginationItem>
-  ))}
-  <PaginationNext disabled={currentPage === ${total}} />
+  return `const [currentPage, setCurrentPage] = React.useState(1)
+const totalPages = ${total}
+const pages = getPaginationPages(currentPage, totalPages)
+
+<Pagination>
+  <PaginationPrev
+    onClick={() => setCurrentPage((page) => Math.max(1, page - 1))}
+    disabled={currentPage === 1}
+  />
+  {pages.map((page, index) =>
+    page === "ellipsis" ? (
+      <PaginationEllipsis key={\`ellipsis-\${index}\`} />
+    ) : (
+      <PaginationItem
+        key={page}
+        aria-current={page === currentPage ? "page" : undefined}
+        onClick={() => setCurrentPage(page)}
+      >
+        {page}
+      </PaginationItem>
+    )
+  )}
+  <PaginationNext
+    onClick={() => setCurrentPage((page) => Math.min(totalPages, page + 1))}
+    disabled={currentPage === totalPages}
+  />
 </Pagination>`
 }
 
@@ -996,10 +1056,32 @@ export function generateSideNavCode(_props: PropsMap): string {
 <SideNav sections={sections} />`
 }
 
-export function generateSidebarCode(_props: PropsMap): string {
+export function generateSidebarCode(props: PropsMap): string {
+  const showLogo = props.showLogo !== false
+  const showSearch = props.showSearch !== false
+
+  const headerLines: string[] = []
+  if (showLogo) {
+    headerLines.push(`    <div className="flex items-center gap-2">
+      <img src="/logo.png" alt="My App" width={28} height={28} className="object-contain" />
+      <span className="font-medium text-sm">My App</span>
+    </div>`)
+  }
+  if (showSearch) {
+    headerLines.push(`    <input
+      type="search"
+      placeholder="Search…"
+      className="h-8 w-full rounded-md border border-sidebar-border bg-sidebar-accent/60 px-2.5 text-xs"
+    />`)
+  }
+
+  const header =
+    headerLines.length > 0
+      ? `\n    <SidebarHeader className="gap-2 border-b p-2">\n${headerLines.join("\n")}\n    </SidebarHeader>`
+      : ""
+
   return `<SidebarProvider>
-  <Sidebar>
-    <SidebarHeader />
+  <Sidebar>${header}
     <SidebarContent>
       <SidebarGroup>
         <SidebarGroupLabel>Guides</SidebarGroupLabel>

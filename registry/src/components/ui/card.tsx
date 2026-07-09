@@ -29,18 +29,59 @@ import { cn } from "@/lib/utils"
  *   <CardHeader><CardTitle>Quick stat</CardTitle></CardHeader>
  *   <CardContent>42</CardContent>
  * </Card>
+ *
+ * @example
+ * // Horizontal card with image on the left
+ * <Card orientation="horizontal" className="max-w-xl">
+ *   <img src="/photo.jpg" alt="" className="w-2/5 shrink-0 object-cover" />
+ *   <CardBody>
+ *     <CardHeader>
+ *       <CardTitle>Featured article</CardTitle>
+ *       <CardDescription>Published yesterday</CardDescription>
+ *     </CardHeader>
+ *     <CardContent>Summary text…</CardContent>
+ *   </CardBody>
+ * </Card>
  */
 function Card({
   className,
   size = "default",
+  orientation = "vertical",
   ...props
-}: React.ComponentProps<"div"> & { size?: "default" | "sm" }) {
+}: React.ComponentProps<"div"> & {
+  size?: "default" | "sm"
+  /** Stack content vertically or place media beside content. @default "vertical" */
+  orientation?: "vertical" | "horizontal"
+}) {
   return (
     <div
       data-slot="card"
       data-size={size}
+      data-orientation={orientation}
       className={cn(
-        "group/card flex flex-col gap-4 overflow-hidden rounded-lg bg-card py-4 text-xs/relaxed text-card-foreground ring-1 ring-foreground/10 has-data-[slot=card-footer]:pb-0 has-[>img:first-child]:pt-0 data-[size=sm]:gap-2 data-[size=sm]:py-3 data-[size=sm]:has-data-[slot=card-footer]:pb-0 *:[img:first-child]:rounded-t-lg *:[img:last-child]:rounded-b-lg",
+        "group/card flex gap-4 overflow-hidden rounded-lg bg-card text-xs/relaxed text-card-foreground ring-1 ring-foreground/10 has-data-[slot=card-footer]:pb-0 has-[>img:first-child]:pt-0 data-[size=sm]:gap-2 data-[size=sm]:has-data-[slot=card-footer]:pb-0",
+        orientation === "horizontal"
+          ? "flex-row items-stretch py-0 data-[size=sm]:py-0 *:[img:first-child]:rounded-l-lg *:[img:first-child]:rounded-tr-none *:[img:first-child]:rounded-br-none *:[img:last-child]:rounded-r-lg *:[img:last-child]:rounded-tl-none *:[img:last-child]:rounded-bl-none"
+          : "flex-col py-4 data-[size=sm]:py-3 *:[img:first-child]:rounded-t-lg *:[img:last-child]:rounded-b-lg",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+/**
+ * @description Groups card content in a vertical column. Use inside horizontal
+ * cards to keep the header, body, and footer stacked beside media.
+ */
+function CardBody({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="card-body"
+      className={cn(
+        "flex min-w-0 flex-1 flex-col gap-4 group-data-[size=sm]/card:gap-2",
+        "group-data-[orientation=vertical]/card:contents",
+        "group-data-[orientation=horizontal]/card:justify-center group-data-[orientation=horizontal]/card:py-4 group-data-[size=sm]/card:group-data-[orientation=horizontal]/card:py-3",
         className
       )}
       {...props}
@@ -178,6 +219,7 @@ function CardFooter({ className, ...props }: React.ComponentProps<"div">) {
 
 export {
   Card,
+  CardBody,
   CardHeader,
   CardFooter,
   CardTitle,
