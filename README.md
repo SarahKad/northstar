@@ -8,7 +8,7 @@ Stage 1 component registry and offline setup kit for North Star product teams. B
 
 ```
 Project North Star/               ← this repo
-├── START_HERE.html               ← offline Getting Started (double-click first)
+├── index.html                    ← offline Getting Started (double-click first)
 ├── registry/                     ← Next.js docs site + component source (main app)
 │   ├── src/components/ui/        ← base components (Button, Card, Chart…)
 │   ├── src/components/blocks/    ← composed patterns
@@ -24,7 +24,7 @@ Project North Star/               ← this repo
 
 ```
 Project North Star Kit/
-  START_HERE.html
+  index.html
   README.txt
   Project North Star/             ← paste this path as REGISTRY_DIR
 ```
@@ -41,7 +41,7 @@ npm run kit:package
 
 ## Getting the design system (for setup)
 
-Setup needs a local copy on disk. Ask engineering for the **Project North Star kit** (zip, shared drive, or USB). It includes `START_HERE.html` at the top.
+Setup needs a local copy on disk. Ask engineering for the **Project North Star kit** (zip, shared drive, or USB). It includes `index.html` at the top.
 
 Use the **`registry/`** folder inside the kit as `REGISTRY_DIR` in Cursor setup prompts.
 
@@ -59,7 +59,7 @@ npm run dev
 ```
 
 - **Getting Started (online):** `/docs/getting-started`
-- **Getting Started (offline):** open `START_HERE.html` at the repo root, or at the top of the shipped kit zip
+- **Getting Started (offline):** open `index.html` at the repo root, or at the top of the shipped kit zip
 - **New app bootstrap:** Cursor tab in Getting Started, or skills `@ns-get-started` + `@ns-vibe-start`
 
 Full registry docs, token architecture, and troubleshooting: [`registry/README.md`](registry/README.md).

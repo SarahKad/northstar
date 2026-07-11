@@ -72,7 +72,7 @@ Scaffold a production-ready layout **before** feature work:
 npm run scaffold:shell -- /path/to/my-new-app
 ```
 
-Includes demo `/login`, `/dashboard` showcase (sidebar, top nav, cards, stepper, table, charts), and `middleware.ts`. **Offline:** open `START_HERE.html` in this folder. **Online:** Getting Started at `/docs/getting-started`.
+Includes demo `/login`, `/dashboard` showcase (sidebar, top nav, cards, stepper, table, charts), and `middleware.ts`. **Offline:** open `index.html` in this folder. **Online:** Getting Started at `/docs/getting-started`.
 
 ---
 

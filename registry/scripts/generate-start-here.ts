@@ -1,5 +1,5 @@
 /**
- * Generates START_HERE.html, offline Getting Started (no sidebar, self-contained).
+ * Generates index.html, offline Getting Started (no sidebar, self-contained).
  * Run: npm run start-here:generate
  * Also runs as part of npm run registry:generate
  */
@@ -20,7 +20,7 @@ import {
 } from "../src/lib/setup-repo"
 
 const ROOT = resolve(__dirname, "..")
-const OUT = resolve(ROOT, "START_HERE.html")
+const OUT = resolve(ROOT, "index.html")
 
 const CURSOR_SKILLS_PROMPT = `@ns-get-started @ns-vibe-start
 
@@ -513,4 +513,7 @@ const html = `<!DOCTYPE html>
 `
 
 writeFileSync(OUT, html, "utf-8")
-console.log(`✓ START_HERE.html → ${OUT}`)
+const repoRootOut = resolve(ROOT, "..", "index.html")
+writeFileSync(repoRootOut, html, "utf-8")
+console.log(`✓ index.html → ${OUT}`)
+console.log(`✓ index.html → ${repoRootOut}`)

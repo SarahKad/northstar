@@ -120,7 +120,7 @@ function CursorGuide() {
             <span>
               <strong className="font-normal text-foreground">Save the Project North Star kit on your computer.</strong>{" "}
               Your team or engineering provides this (zip, shared drive, or USB). Unzip if needed. You should see{" "}
-              <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs">START_HERE.html</code> and a{" "}
+              <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs">index.html</code> and a{" "}
               <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs">Project North Star</code> folder at the top level.
             </span>
           </li>
