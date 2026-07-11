@@ -7,18 +7,18 @@ export type ThemeDefinition = {
 export const themes: ThemeDefinition[] = [
   {
     id: "ag",
-    name: "AG Core",
-    description: "Default AG brand theme.",
+    name: "NS Core",
+    description: "Default North Star brand theme.",
   },
   {
     id: "navy",
-    name: "Navy",
-    description: "Navy blue brand theme.",
+    name: "Peacock",
+    description: "Peacock green brand theme.",
   },
   {
-    id: "bep-pro",
-    name: "BEP Pro",
-    description: "Dark-first BEP Pro theme.",
+    id: "ns-pro",
+    name: "NS Pro",
+    description: "Dark-first NS Pro theme.",
   },
 ]
 

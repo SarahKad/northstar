@@ -17,10 +17,10 @@ export const themes: Theme[] = [
     darkCssVars: {},
   },
   {
-    id: "bep-pro",
-    name: "BEP Pro",
-    description: "Bold dark-first theme for BEP Pro products. Anchored to BEP Blue (#1A56DB).",
-    // All tokens are driven by [data-theme="bep-pro"] CSS selectors in bep-pro.css.
+    id: "ns-pro",
+    name: "NS Pro",
+    description: "Bold dark-first theme for NS Pro products. Anchored to Spruce/Sapphire.",
+    // All tokens are driven by [data-theme="ns-pro"] CSS selectors in ns-pro.css.
     // No inline overrides needed here.
     cssVars: {},
     darkCssVars: {},

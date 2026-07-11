@@ -1,4 +1,5 @@
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { BlockCard } from "@/components/blocks/block-card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
@@ -17,7 +18,7 @@ export function InviteTeam({ props: blockProps = {} }: Props) {
   const description = String(blockProps.description ?? "Add members to your workspace")
 
   return (
-    <Card className="w-full max-w-md">
+    <BlockCard className="w-full max-w-md">
       <CardHeader>
         <CardTitle>{title}</CardTitle>
         <CardDescription>{description}</CardDescription>
@@ -44,6 +45,6 @@ export function InviteTeam({ props: blockProps = {} }: Props) {
       <CardFooter>
         <Button className="w-full">Send Invites</Button>
       </CardFooter>
-    </Card>
+    </BlockCard>
   )
 }

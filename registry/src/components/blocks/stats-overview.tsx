@@ -1,6 +1,7 @@
 "use client"
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { BlockCard } from "@/components/blocks/block-card"
 import { usePreviewViewport } from "@/components/registry/preview-viewport-context"
 import { cn } from "@/lib/utils"
 
@@ -33,7 +34,7 @@ export function StatsOverview({ props: blockProps = {} }: Props) {
       )}
     >
       {visible.map((stat) => (
-        <Card key={stat.label}>
+        <BlockCard key={stat.label}>
           <CardHeader>
             <CardDescription>{stat.label}</CardDescription>
             <CardTitle className="text-xl tabular-nums font-light">{stat.value}</CardTitle>
@@ -43,7 +44,7 @@ export function StatsOverview({ props: blockProps = {} }: Props) {
               {stat.trend} from last month
             </p>
           </CardContent>
-        </Card>
+        </BlockCard>
       ))}
     </div>
   )

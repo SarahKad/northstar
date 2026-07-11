@@ -826,7 +826,7 @@ export function generateTopNavCode(props: PropsMap): string {
   const brand = showLogo
     ? `  <TopNavBrand>
     <span className="size-5 rounded-sm bg-primary" />
-    AG Design
+    North Star
   </TopNavBrand>
 `
     : ""
@@ -958,7 +958,6 @@ export function ViewSwitcher() {
   )
 }`
 }
-
 
 export function generateRadioGroupCode(props: PropsMap): string {
   const disabled = props.disabled ? "\n  disabled" : ""

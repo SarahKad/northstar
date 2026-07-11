@@ -13,11 +13,9 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       </h1>
     ),
     h2: ({ children, id }) => (
-      // MDX prose context, explicitly Atkinson so it can render at smaller sizes
-      // without violating the Instrument Serif ≥36px rule
       <h2
         id={id}
-        className="font-sans text-xl font-semibold mt-10 mb-3 scroll-mt-6"
+        className="font-heading text-3xl tracking-tight mt-10 mb-3 scroll-mt-6"
       >
         {children}
       </h2>
@@ -25,7 +23,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     h3: ({ children, id }) => (
       <h3
         id={id}
-        className="font-sans text-base font-medium mt-6 mb-2 scroll-mt-6"
+        className="font-heading text-2xl tracking-tight mt-6 mb-2 scroll-mt-6"
       >
         {children}
       </h3>

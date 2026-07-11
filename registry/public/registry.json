@@ -1,8 +1,8 @@
 {
-  "$schema": "https://ag.org/design-system/registry-schema.json",
+  "$schema": "https://northstar.example.com/design-system/registry-schema.json",
   "name": "@ag/components",
   "version": "0.1.0",
-  "generatedAt": "2026-07-09T19:04:04.118Z",
+  "generatedAt": "2026-07-10T15:44:41.190Z",
   "categories": [
     {
       "id": "inputs",

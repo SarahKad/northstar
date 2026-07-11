@@ -3,13 +3,13 @@
 import { TrendUp } from "@phosphor-icons/react"
 import { CartesianGrid, Line, LineChart, XAxis } from "recharts"
 import {
-  Card,
   CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import { BlockCard } from "@/components/blocks/block-card"
 import {
   ChartContainer,
   ChartLegend,
@@ -53,7 +53,7 @@ export function ChartLineDots({
   } satisfies ChartConfig
 
   return (
-    <Card>
+    <BlockCard>
       <CardHeader>
         <CardTitle>{title}</CardTitle>
         <CardDescription>{dateRange}</CardDescription>
@@ -117,6 +117,6 @@ export function ChartLineDots({
           Showing total visitors for the last 6 months
         </div>
       </CardFooter>
-    </Card>
+    </BlockCard>
   )
 }

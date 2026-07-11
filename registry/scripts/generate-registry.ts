@@ -264,7 +264,7 @@ const slugConfigs: Record<string, SlugConfig> = {
 // 1. public/registry.json  (original custom format, unchanged)
 // ---------------------------------------------------------------------------
 const manifest = {
-  $schema: "https://ag.org/design-system/registry-schema.json",
+  $schema: "https://northstar.example.com/design-system/registry-schema.json",
   name: "@ag/components",
   version: "0.1.0",
   generatedAt: new Date().toISOString(),
@@ -375,8 +375,8 @@ const globalsItem = {
   $schema: "https://ui.shadcn.com/schema/registry-item.json",
   name: "ag-globals",
   type: "registry:style",
-  title: "AG Design System Globals",
-  description: "CSS tokens, theme variables, and base typography rules for the AG Design System.",
+  title: "Project North Star Globals",
+  description: "CSS tokens, theme variables, and base typography rules for the Project North Star.",
   files: [
     {
       path: "src/app/globals.css",

@@ -2,7 +2,6 @@
 
 import { useEffect } from "react"
 import { usePathname } from "next/navigation"
-import Image from "next/image"
 import Link from "next/link"
 import {
   SidebarProvider,
@@ -12,6 +11,7 @@ import {
 } from "@/components/ui/sidebar"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { AppSidebar } from "@/components/registry/app-sidebar"
+import { SidebarBrandLogo } from "@/components/registry/sidebar-brand-logo"
 import { DarkModeToggle } from "./dark-mode-toggle"
 
 function DesktopSidebarBar() {
@@ -27,13 +27,7 @@ function MobileTopBar() {
     <header className="flex shrink-0 items-center justify-between border-b px-4 py-3 md:hidden">
       <SidebarTrigger />
       <Link href="/docs/getting-started">
-        <Image
-          src="/logo.png"
-          alt="AG Design System"
-          width={28}
-          height={28}
-          className="object-contain dark:invert"
-        />
+        <SidebarBrandLogo />
       </Link>
       <DarkModeToggle />
     </header>

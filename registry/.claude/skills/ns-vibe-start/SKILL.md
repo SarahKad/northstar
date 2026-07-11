@@ -1,21 +1,21 @@
 ---
-name: ag-vibe-start
+name: ns-vibe-start
 description: >
-  Scaffold the AG app shell and build on-brand UI with the AG Design System.
-  Use with @ag-get-started for full Bootstrap + Shell setup; or alone when the
+  Scaffold the North Star app shell and build on-brand UI with the Project North Star.
+  Use with @ns-get-started for full Bootstrap + Shell setup; or alone when the
   app is already bootstrapped. Use when building pages, components, or vibe-coding
-  with AG tokens and themes.
+  with NS tokens and themes.
 ---
 
-# AG Vibe Start
+# NS Vibe Start
 
-You are helping someone build with the AG Design System, app shell first, then
+You are helping someone build with the Project North Star, app shell first, then
 on-brand UI. The end result should match the registry and Figma handoffs.
 
-**Prerequisite:** If the user has no app yet, tell them to run **`@ag-get-started`** first.
+**Prerequisite:** If the user has no app yet, tell them to run **`@ns-get-started`** first.
 
 **Read the full token reference before writing UI code:**
-`.claude/skills/ag-vibe-start/references/token-reference.md`
+`.claude/skills/ns-vibe-start/references/token-reference.md`
 
 Docs: `/docs/getting-started`
 
@@ -29,7 +29,7 @@ When running in **Cursor IDE**:
 2. If Cursor auto-opens **Getting Started / component docs** on localhost, tell the user immediately:
    > *That is the design system site downloading components in the background, not your app. Close that preview. Your app will open when install finishes.*
 3. Use **`npm run dev:install`** in `REGISTRY_DIR` (port **3002**) for installs, keeps port **3000** for the user's app.
-4. Set **`AG_REGISTRY_URL=http://localhost:3002`** when running `install-components.sh`.
+4. Set **`NS_REGISTRY_URL=http://localhost:3002`** when running `install-components.sh`.
 5. **Stop the registry install server** before starting the app's dev server:
    ```bash
    lsof -ti :3002 | xargs kill -9 2>/dev/null || true
@@ -44,7 +44,7 @@ When running in **Cursor IDE**:
 |-----------|------------|
 | Full app with login + dashboard | Scaffold app shell (below), then customize |
 | Single page or component | Build with semantic tokens; install components from registry |
-| Already bootstrapped via `@ag-get-started` | Start at app shell or UI building |
+| Already bootstrapped via `@ns-get-started` | Start at app shell or UI building |
 
 ---
 
@@ -52,7 +52,7 @@ When running in **Cursor IDE**:
 
 Run when the user wants the starter layout (login, sidebar, dashboard, charts).
 
-Assume **REGISTRY_DIR** (saved kit on disk) and **MY_APP_DIR** (project folder, often open in Cursor) are known. Ask if missing. Read `REGISTRY_DIR/.cursor/skills/ag-vibe-start/SKILL.md` if `@ag-vibe-start` is not in the workspace.
+Assume **REGISTRY_DIR** (saved kit on disk) and **MY_APP_DIR** (project folder, often open in Cursor) are known. Ask if missing. Read `REGISTRY_DIR/.cursor/skills/ns-vibe-start/SKILL.md` if `@ns-vibe-start` is not in the workspace.
 
 1. **Scaffold** from registry (no localhost needed):
    ```bash
@@ -69,7 +69,7 @@ Assume **REGISTRY_DIR** (saved kit on disk) and **MY_APP_DIR** (project folder, 
 3. **Install shell components** from the app:
    ```bash
    cd "MY_APP_DIR"
-   export AG_REGISTRY_URL="http://localhost:3002"
+   export NS_REGISTRY_URL="http://localhost:3002"
    bash src/components/ag-shell/install-components.sh
    ```
 
@@ -116,7 +116,7 @@ Remove demo sections from `dashboard-showcase.tsx` as the user replaces them wit
 ## Hard rules, never break these
 
 1. **No raw hex or rgb() in component code**, semantic tokens only
-2. **No font-medium/semibold/bold on `<h1>` or `<h2>`**, Instrument Serif is weight 400 only
+2. **No font-medium/semibold/bold on headings**, Bitter is weight 400 only
 3. **No lucide-react**, `@phosphor-icons/react` only
 4. **No opening registry in Simple Browser** during setup
 5. **No `window`/`document` outside `useEffect`**
@@ -126,4 +126,4 @@ Remove demo sections from `dashboard-showcase.tsx` as the user replaces them wit
 
 ## Full reference
 
-`.claude/skills/ag-vibe-start/references/token-reference.md`
+`.claude/skills/ns-vibe-start/references/token-reference.md`

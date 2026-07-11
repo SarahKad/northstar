@@ -1,16 +1,16 @@
 /* =============================================================================
-   AG CORE THEME, src/themes/ag-core.css
-   Assemblies of God core brand theme.
+   NS CORE THEME, src/themes/ag-core.css
+   Project North Star core brand theme.
    Selector: [data-theme="ag"]
    Applied by ThemeProvider via document.documentElement.dataset.theme = "ag"
    ============================================================================= */
 
-/* --- Brand & chart primitives specific to AG -------------------------------- */
+/* --- Brand & chart primitives specific to NS -------------------------------- */
 
 [data-theme="ag"] {
-  /* Brand, red accent */
-  --primitive-brand-58: #DA2919;  /* base brand red */
-  --primitive-brand-63: #E54E3C;  /* lightened for dark mode */
+  /* Brand, Sapphire accent */
+  --primitive-brand-58: #72B0AB;  /* Sapphire, base brand */
+  --primitive-brand-63: #9CC9C5;  /* lightened Sapphire for dark mode */
 
   /* Chart scale, light mode (dark → light) */
   --primitive-chart-43:  #544F4D;  /* darkest */
@@ -37,7 +37,7 @@
   --card-foreground:        var(--primitive-neutral-15);
   --popover:                var(--primitive-neutral-100);
   --popover-foreground:     var(--primitive-neutral-15);
-  --brand:                  var(--primitive-brand-58);     /* #DA291C */
+  --brand:                  var(--primitive-brand-58);     /* #72B0AB Sapphire */
   --primary:                var(--primitive-neutral-21);
   --primary-foreground:     var(--primitive-neutral-99);
   --secondary:              var(--primitive-neutral-96);
@@ -46,7 +46,7 @@
   --muted-foreground:       var(--primitive-neutral-43);  /* #544F4D */
   --accent:                 var(--primitive-neutral-96);
   --accent-foreground:      var(--primitive-neutral-21);
-  --destructive:            var(--primitive-brand-58);
+  --destructive:            #DC2626;
   --border:                 var(--primitive-neutral-92);
   --input:                  var(--primitive-neutral-92);
   --ring:                   var(--primitive-brand-58);
@@ -84,7 +84,7 @@
   --muted-foreground:       var(--primitive-neutral-71);
   --accent:                 var(--primitive-neutral-27);
   --accent-foreground:      var(--primitive-neutral-99);
-  --destructive:            var(--primitive-brand-63);
+  --destructive:            #F87171;
   --border:                 rgba(255, 255, 255, 0.10);
   --input:                  rgba(255, 255, 255, 0.15);
   --ring:                   var(--primitive-brand-63);

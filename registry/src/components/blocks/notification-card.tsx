@@ -9,7 +9,8 @@ import {
   X,
   type Icon,
 } from "@phosphor-icons/react"
-import { Card, CardContent } from "@/components/ui/card"
+import { CardContent } from "@/components/ui/card"
+import { BlockCard } from "@/components/blocks/block-card"
 import { Badge } from "@/components/ui/badge"
 import { cn } from "@/lib/utils"
 
@@ -109,7 +110,7 @@ export function NotificationCard({ props: blockProps = {} }: Props) {
   const IconComponent = VARIANT_ICONS[variant]
 
   return (
-    <Card
+    <BlockCard
       className={cn(notificationCardVariants({ variant }))}
       role={variant === "alert" || variant === "warning" ? "alert" : undefined}
     >
@@ -148,7 +149,7 @@ export function NotificationCard({ props: blockProps = {} }: Props) {
           </button>
         )}
       </CardContent>
-    </Card>
+    </BlockCard>
   )
 }
 

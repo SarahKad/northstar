@@ -57,7 +57,7 @@ function cycleSort(current: SortDirection): SortDirection {
 }
 
 /**
- * Reference dashboard, demonstrates AG components in a real app layout.
+ * Reference dashboard, demonstrates North Star components in a real app layout.
  * Remove sections as you build your product.
  */
 export function DashboardShowcase() {
@@ -113,7 +113,7 @@ export function DashboardShowcase() {
           </div>
 
           <Alert>
-            <AlertTitle>AG App Shell</AlertTitle>
+            <AlertTitle>North Star App Shell</AlertTitle>
             <AlertDescription>
               This page demonstrates layout, navigation, inputs, data display, and charts.
               Charts require <code className="text-xs">chart.tsx</code>, theme tokens, and a

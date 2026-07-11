@@ -4,13 +4,13 @@ import * as React from "react"
 import { TrendUp } from "@phosphor-icons/react"
 import { Label, Pie, PieChart } from "recharts"
 import {
-  Card,
   CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import { BlockCard } from "@/components/blocks/block-card"
 import {
   ChartContainer,
   ChartTooltip,
@@ -67,7 +67,7 @@ export function ChartPieDonut({
   )
 
   return (
-    <Card className="flex flex-col">
+    <BlockCard className="flex flex-col">
       <CardHeader className="items-center pb-0">
         <CardTitle>{title}</CardTitle>
         <CardDescription>{dateRange}</CardDescription>
@@ -131,6 +131,6 @@ export function ChartPieDonut({
           Showing total visitors for the last 6 months
         </div>
       </CardFooter>
-    </Card>
+    </BlockCard>
   )
 }

@@ -69,7 +69,7 @@ for (const [fromRel, toRel] of optionalCopies) {
 }
 
 console.log(`
-AG App Shell scaffolded into: ${targetRoot}
+North Star App Shell scaffolded into: ${targetRoot}
 
 Next steps:
   1. Read src/components/ag-shell/INSTALL.md

@@ -1,10 +1,10 @@
-# AG App Shell template
+# North Star App Shell template
 
-A starter layout for new AG web apps: sign-in page, navigation, and a sample dashboard.
+A starter layout for new North Star web apps: sign-in page, navigation, and a sample dashboard.
 
 ## Who this is for
 
-Teams starting a **new website-style product** on the AG stack. Follow **Getting Started** in the docs (Cursor or Claude Code tabs).
+Teams starting a **new website-style product** on the North Star stack. Follow **Getting Started** in the docs (Cursor or Claude Code tabs).
 
 ## Install into a new project
 

@@ -10,7 +10,6 @@ Work through the sections in order. If you get stuck, share this file with someo
 
 | What | How to recognize it |
 |------|---------------------|
-| **Design system folder** | The `registry` folder inside your git clone of [AG-Design-System](https://github.com/skadlecek/AG-Design-System) (your `REGISTRY_DIR`) |
 | **Your app folder** | The new project `create-next-app` created for your product |
 
 **Mac tip:** In Terminal, type `cd ` (with a space), drag the folder from Finder into Terminal, press Enter.
@@ -23,7 +22,7 @@ In the commands below, replace:
 Example:
 
 ```bash
-cd "/Users/you/Projects/AG-Design-System/registry"
+cd "/Users/you/Projects/Project-North-Star/registry"
 npm run scaffold:shell -- "/Users/you/Projects/my-app"
 ```
 
@@ -32,14 +31,14 @@ npm run scaffold:shell -- "/Users/you/Projects/my-app"
 ## 1. Before you begin
 
 - [ ] You finished **Getting Started, Step 1** (created your app and ran shadcn init)  
-- [ ] AG colors/styles are added (Getting Started, Step 3), or engineering confirmed they are  
+- [ ] NS colors/styles are added (Getting Started, Step 3), or engineering confirmed they are  
 - [ ] You know where both folders live on your computer  
 
 ---
 
 ## 2. Theme on every page (usually engineering)
 
-Your app needs one layout file so light/dark mode and AG colors work everywhere.
+Your app needs one layout file so light/dark mode and NS colors work everywhere.
 
 **Who:** Someone comfortable editing code.  
 **File:** `MY_APP_DIR/src/app/layout.tsx`  
@@ -60,7 +59,7 @@ You do **not** need to open the design system in your browser. Cursor runs it in
 - If Cursor opens a preview showing **Getting Started** or **component docs**, that is the **design system site, not your app**. Close it.
 - Your app will open later on **`http://localhost:3000`** with `/login` and `/dashboard`.
 
-The `@ag-vibe-start` skill uses `npm run dev:install` on port **3002** so your app can use port **3000**.
+The `@ns-vibe-start` skill uses `npm run dev:install` on port **3002** so your app can use port **3000**.
 
 ### Using Terminal (two windows)
 
@@ -81,7 +80,7 @@ Open a **second** Terminal window:
 
 ```bash
 cd "MY_APP_DIR"
-export AG_REGISTRY_URL="http://localhost:3000"
+export NS_REGISTRY_URL="http://localhost:3000"
 bash src/components/ag-shell/install-components.sh
 ```
 
@@ -110,7 +109,7 @@ Open the link Terminal prints. Your **app** should be on **http://localhost:3000
 | Dashboard | Sidebar, top bar, cards, table, and charts |
 | Dark mode | Toggle if your layout includes it, colors should still look correct |
 
-**Not your app:** pages titled Getting Started, component galleries, or the AG Design System docs, that is the registry site in `REGISTRY_DIR`.
+**Not your app:** pages titled Getting Started, component galleries, or the Project North Star docs, that is the registry site in `REGISTRY_DIR`.
 
 ---
 
@@ -126,7 +125,7 @@ Open the link Terminal prints. Your **app** should be on **http://localhost:3000
 
 Usually one of these was skipped:
 
-1. AG colors/themes not added (Getting Started Step 3)  
+1. NS colors/themes not added (Getting Started Step 3)  
 2. Install script (section 3) did not finish successfully  
 3. Design system site was not running at localhost during install  
 

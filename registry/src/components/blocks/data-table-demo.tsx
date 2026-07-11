@@ -3,6 +3,7 @@
 import type { CellContext } from "@tanstack/react-table"
 import { Badge } from "@/components/ui/badge"
 import { DataTable, createColumnHelper, type ColumnDef } from "@/components/ui/data-table"
+import { BlockCard } from "@/components/blocks/block-card"
 
 // ── Types ────────────────────────────────────────────────────────────────────
 
@@ -83,17 +84,19 @@ export function DataTablePlaygroundPreview({
   columnVisibility = false,
 }: DataTablePlaygroundProps) {
   return (
-    <DataTable
-      columns={columns}
-      data={data}
-      searchable={searchable ? "name" : undefined}
-      searchPlaceholder="Search by name…"
-      pagination={pagination}
-      pageSize={8}
-      selectable={selectable}
-      columnVisibility={columnVisibility}
-      title="Employee directory"
-    />
+    <BlockCard className="w-full">
+      <DataTable
+        columns={columns}
+        data={data}
+        searchable={searchable ? "name" : undefined}
+        searchPlaceholder="Search by name…"
+        pagination={pagination}
+        pageSize={8}
+        selectable={selectable}
+        columnVisibility={columnVisibility}
+        title="Employee directory"
+      />
+    </BlockCard>
   )
 }
 

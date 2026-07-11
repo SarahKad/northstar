@@ -1,6 +1,7 @@
 "use client"
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { BlockCard } from "@/components/blocks/block-card"
 import { Button } from "@/components/ui/button"
 import { Upload } from "@phosphor-icons/react"
 
@@ -14,7 +15,7 @@ export function FileUpload({ props: blockProps = {} }: Props) {
   const hint = String(blockProps.hint ?? "PNG, JPG, PDF up to 10MB")
 
   return (
-    <Card className="w-full max-w-sm">
+    <BlockCard className="w-full max-w-sm">
       <CardHeader>
         <CardTitle>{title}</CardTitle>
         <CardDescription>{description}</CardDescription>
@@ -31,6 +32,6 @@ export function FileUpload({ props: blockProps = {} }: Props) {
           <Button variant="outline" size="sm">Browse Files</Button>
         </div>
       </CardContent>
-    </Card>
+    </BlockCard>
   )
 }

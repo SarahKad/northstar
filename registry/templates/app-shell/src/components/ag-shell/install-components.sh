@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
-# Install components required by the AG app shell showcase.
-# Usage: AG_REGISTRY_URL=https://your-registry.example.com bash install-components.sh
+# Install components required by the North Star app shell showcase.
+# Usage: NS_REGISTRY_URL=https://your-registry.example.com bash install-components.sh
 
 set -euo pipefail
 
-REGISTRY="${AG_REGISTRY_URL:-}"
+REGISTRY="${NS_REGISTRY_URL:-}"
 if [ -z "$REGISTRY" ]; then
-  echo "Set AG_REGISTRY_URL to the registry web URL (no trailing slash), not a folder path."
-  echo "Terminal:  export AG_REGISTRY_URL=http://localhost:3000  (npm run dev in REGISTRY_DIR)"
-  echo "Cursor:    export AG_REGISTRY_URL=http://localhost:3002  (npm run dev:install in REGISTRY_DIR, do not open in browser)"
-  echo "Deploy:    export AG_REGISTRY_URL=https://design.ag.org"
+  echo "Set NS_REGISTRY_URL to the registry web URL (no trailing slash), not a folder path."
+  echo "Terminal:  export NS_REGISTRY_URL=http://localhost:3000  (npm run dev in REGISTRY_DIR)"
+  echo "Cursor:    export NS_REGISTRY_URL=http://localhost:3002  (npm run dev:install in REGISTRY_DIR, do not open in browser)"
+  echo "Deploy:    export NS_REGISTRY_URL=https://design.northstar.example.com"
   exit 1
 fi
 
@@ -28,7 +28,7 @@ add_shadcn sidebar
 add_shadcn separator
 add_shadcn skeleton
 
-# AG registry components
+# NS registry components
 add_registry button
 add_registry input
 add_registry card

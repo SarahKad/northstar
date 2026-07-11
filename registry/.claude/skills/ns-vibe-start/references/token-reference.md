@@ -1,6 +1,6 @@
-# AG Design System, Vibe Coding Reference
+# Project North Star, Vibe Coding Reference
 
-Complete token, typography, and CSS reference for building new products with the AG Design System.
+Complete token, typography, and CSS reference for building new products with the Project North Star.
 
 ---
 
@@ -31,11 +31,11 @@ npm install @phosphor-icons/react
 ```
 
 ### Copy theme files
-Add these files to your project (copy from the AG registry):
+Add these files to your project (copy from the North Star registry):
 - `src/app/globals.css`, token definitions + Tailwind config
-- `src/themes/ag-core.css`, AG brand primitives + semantic tokens
-- `src/themes/navy.css`, Navy theme (optional)
-- `src/themes/bep-pro.css`, BEP Pro theme (optional)
+- `src/themes/ag-core.css`, NS brand primitives + semantic tokens
+- `src/themes/navy.css`, Peacock theme (optional)
+- `src/themes/ns-pro.css`, NS Pro theme (optional)
 
 Or install via registry:
 ```bash
@@ -47,27 +47,28 @@ npx shadcn@latest add https://YOUR_REGISTRY_URL/r/ag-globals
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "../themes/ag-core.css";
-/* @import "../themes/navy.css";, add if using navy theme */
-/* @import "../themes/bep-pro.css";, add if using BEP Pro theme */
+/* @import "../themes/navy.css";, add if using Peacock theme */
+/* @import "../themes/ns-pro.css";, add if using NS Pro theme */
 ```
 
 ### Root layout setup
 ```tsx
-import { Atkinson_Hyperlegible_Next, Instrument_Serif, Geist_Mono } from "next/font/google"
+import { Atkinson_Hyperlegible_Next, Atkinson_Hyperlegible_Mono, Bitter } from "next/font/google"
 
 const fontSans = Atkinson_Hyperlegible_Next({
   subsets: ["latin"],
   weight: ["300", "400", "700"],
   variable: "--font-sans",
 })
-const fontDisplay = Instrument_Serif({
+const fontDisplay = Bitter({
   subsets: ["latin"],
   weight: "400",         // ← only load weight 400, no 500 or 700 exists
   variable: "--font-display",
 })
-const fontMono = Geist_Mono({
+const fontMono = Atkinson_Hyperlegible_Mono({
   subsets: ["latin"],
-  variable: "--font-geist-mono",
+  weight: ["400", "700"],
+  variable: "--font-mono",
 })
 
 // Apply variables + default theme to <html>
@@ -85,14 +86,14 @@ const fontMono = Geist_Mono({
 
 | Font | CSS Variable | Tailwind Class | Weights | Use for |
 |------|-------------|----------------|---------|---------|
-| Instrument Serif | `--font-display` | `font-heading` | 400 only | h1, h2, display text |
-| Atkinson Hyperlegible Next | `--font-sans` | `font-sans` | 300, 400, 700 | Body, UI, h3–h6 |
-| Geist Mono | `--font-geist-mono` | `font-mono` | variable | Code blocks |
+| Bitter | `--font-display` | `font-heading` | 400 only | h1–h6, display text |
+| Atkinson Hyperlegible Next | `--font-sans` | `font-sans` | 300, 400, 700 | Body, UI |
+| Atkinson Hyperlegible Mono | `--font-mono` | `font-mono` | variable | Code blocks |
 
 **Critical rules:**
-- Instrument Serif only loads at weight `400`. Never apply `font-medium`, `font-semibold`, or `font-bold` to h1/h2, the browser will fall back to system sans-serif.
-- h1 and h2 get Instrument Serif automatically via the CSS base layer, no class needed.
-- h3–h6 get Atkinson automatically, no class needed.
+- Bitter only loads at weight `400`. Never apply `font-medium`, `font-semibold`, or `font-bold` to headings, the browser will fall back to system sans-serif.
+- h1–h6 get Bitter automatically via the CSS base layer, no class needed.
+- **NS Pro:** headings adopt `var(--brand)` color.
 
 ---
 
@@ -102,14 +103,12 @@ const fontMono = Geist_Mono({
 
 | Element | Size | Font | Class equivalent |
 |---------|------|------|-----------------|
-| `<h1>` | 36px | Instrument Serif | `text-4xl tracking-tight` |
-| `<h2>` | 30px | Instrument Serif | `text-3xl tracking-tight` |
-| `<h3>` | 24px | Atkinson, semibold | `text-2xl tracking-tight font-semibold` |
-| `<h4>` | 20px | Atkinson, semibold | `text-xl font-semibold` |
-| `<h5>` | 18px | Atkinson, medium | `text-lg font-medium` |
-| `<h6>` | 16px | Atkinson, medium | `text-base font-medium` |
-
-> Instrument Serif must **never** render below 30px (`text-3xl`). If you need a label smaller than that, use `<h3>` or body text, not `<h2>`.
+| `<h1>` | 36px | Bitter | `text-4xl tracking-tight` |
+| `<h2>` | 30px | Bitter | `text-3xl tracking-tight` |
+| `<h3>` | 24px | Bitter | `text-2xl tracking-tight` |
+| `<h4>` | 20px | Bitter | `text-xl` |
+| `<h5>` | 18px | Bitter | `text-lg` |
+| `<h6>` | 16px | Bitter | `text-base` |
 
 ### Type scale utilities
 
@@ -119,21 +118,21 @@ const fontMono = Geist_Mono({
 | `text-sm` | 14px | Secondary body, table cells |
 | `text-base` | 16px | Default body copy |
 | `text-lg` | 18px | Lead text, intro paragraphs |
-| `text-xl` | 20px | Section labels (Atkinson) |
+| `text-xl` | 20px | h4 equivalent |
 | `text-2xl` | 24px | h3 equivalent |
-| `text-3xl` | 30px | h2 / Instrument Serif minimum |
+| `text-3xl` | 30px | h2 equivalent |
 | `text-4xl` | 36px | h1 |
 | `text-5xl` | 48px | Hero headings |
-| `text-display-60` | 60px | Editorial / display (Instrument Serif) |
-| `text-display-78` | 78px | Largest display (Instrument Serif) |
+| `text-display-60` | 60px | Editorial / display (Bitter) |
+| `text-display-78` | 78px | Largest display (Bitter) |
 
 ### Usage examples
 ```tsx
-<h1>Page Title</h1>                          {/* auto: 36px Instrument Serif */}
-<h2>Section Heading</h2>                     {/* auto: 30px Instrument Serif */}
-<h3>Subsection</h3>                          {/* auto: 24px Atkinson semibold */}
+<h1>Page Title</h1>                          {/* auto: 36px Bitter */}
+<h2>Section Heading</h2>                     {/* auto: 30px Bitter */}
+<h3>Subsection</h3>                          {/* auto: 24px Bitter */}
 <p className="text-sm text-muted-foreground">Helper text</p>
-<p className="text-display-60">Hero copy</p> {/* 60px Instrument Serif */}
+<p className="text-display-60">Hero copy</p> {/* 60px Bitter */}
 ```
 
 ---
@@ -142,7 +141,7 @@ const fontMono = Geist_Mono({
 
 Use **only** these tokens in component code. Never use primitive token names or raw hex values directly.
 
-### AG Core, Light Mode (default)
+### NS Core, Light Mode (default)
 
 | Token | Hex | Tailwind Utility | Use |
 |-------|-----|-----------------|-----|
@@ -152,7 +151,7 @@ Use **only** these tokens in component code. Never use primitive token names or 
 | `--card-foreground` | `#0C0A09` | `text-card-foreground` | Text inside cards |
 | `--popover` | `#FFFEFD` | `bg-popover` | Dropdown / tooltip surface |
 | `--popover-foreground` | `#0C0A09` | `text-popover-foreground` | Text in popovers |
-| `--brand` | `#DA2919` | `bg-brand` / `text-brand` | AG red, highlights, active states, decorative |
+| `--brand` | `#72B0AB` | `bg-brand` / `text-brand` | Sapphire, highlights, active states, decorative |
 | `--primary` | `#1D1816` | `bg-primary` / `text-primary` | Primary CTA button surface |
 | `--primary-foreground` | `#FBFAF9` | `text-primary-foreground` | Text on primary buttons |
 | `--secondary` | `#F4F2EF` | `bg-secondary` | Secondary button / surface |
@@ -164,9 +163,9 @@ Use **only** these tokens in component code. Never use primitive token names or 
 | `--destructive` | `#DA2919` | `bg-destructive` / `text-destructive` | Errors, delete actions |
 | `--border` | `#E5E3DF` | `border-border` | Component borders and dividers |
 | `--input` | `#E5E3DF` | `border-input` | Input field border |
-| `--ring` | `#DA2919` | `ring-ring` | Focus ring (rendered at 50% opacity) |
+| `--ring` | `#72B0AB` | `ring-ring` | Focus ring (rendered at 50% opacity) |
 
-### Chart tokens (AG light mode, dark → light)
+### Chart tokens (NS light mode, dark → light)
 
 | Token | Hex | Series |
 |-------|-----|--------|
@@ -176,7 +175,7 @@ Use **only** these tokens in component code. Never use primitive token names or 
 | `--chart-4` | `#938F8D` | 4th series |
 | `--chart-5` | `#ABA7A6` | 5th series (lightest) |
 
-### AG Core, Dark Mode
+### NS Core, Dark Mode
 
 | Token | Hex |
 |-------|-----|
@@ -204,7 +203,7 @@ Use **only** these tokens in component code. Never use primitive token names or 
 | `--sidebar-accent` | `#F4F2EF` | `#2B2422` |
 | `--sidebar-accent-foreground` | `#1D1816` | `#FBFAF9` |
 | `--sidebar-border` | `#E5E3DF` | `rgba(255,255,255,0.10)` |
-| `--sidebar-ring` | `#DA2919` | `#E54E3C` |
+| `--sidebar-ring` | `#72B0AB` | `#9CC9C5` |
 
 ---
 
@@ -229,11 +228,11 @@ Primitives are the raw building blocks. **Never use these directly in components
 | `--primitive-neutral-25` | `#FBFAF9` | Near-white |
 | `--primitive-neutral-0` | `#FFFEFD` | Card / white |
 
-### AG Brand
+### NS Brand
 
 | Token | Hex |
 |-------|-----|
-| `--primitive-brand-500` | `#DA2919` |
+| `--primitive-brand-500` | `#72B0AB` |
 | `--primitive-brand-400` | `#E54E3C` |
 
 ---
@@ -310,17 +309,17 @@ Three themes are available, selected via `data-theme` on `<html>`:
 
 | Theme ID | `data-theme` value | Brand color | Default mode |
 |----------|-------------------|-------------|--------------|
-| AG Core | `ag` | `#DA2919` red | Light |
-| Navy | `navy` | `#002B65` navy | Light |
-| BEP Pro | `bep-pro` | `#1A56DB` blue | **Dark** |
+| NS Core | `ag` | `#72B0AB` Sapphire | Light |
+| Peacock | `navy` | `#053229` Peacock | Light |
+| NS Pro | `ns-pro` | `#355E58` Spruce | **Dark** |
 
 Switch theme:
 ```tsx
-document.documentElement.dataset.theme = 'bep-pro'
+document.documentElement.dataset.theme = 'ns-pro'
 ```
 
-### BEP Pro, special rules
-BEP Pro has an extended accent palette for charts and badges **only**:
+### NS Pro, special rules
+NS Pro has an extended accent palette for charts and badges **only**:
 
 | Token | Hex | Use |
 |-------|-----|-----|
@@ -329,10 +328,10 @@ BEP Pro has an extended accent palette for charts and badges **only**:
 | `--chart-3` | `#AC94FA` | Purple, charts/graphs only |
 | `--chart-4` | `#FDBA8C` | Peach, charts/graphs only |
 | `--chart-5` | `#EF4444` | Red, charts/graphs only |
-| `--bep-badge-1` through `7` | various | Badges/tags only |
-| `--bep-accent-gradient` | orange→red→blue | Badges/charts only |
+| `--ns-badge-1` through `7` | various | Badges/tags only |
+| `--ns-accent-gradient` | orange→red→blue | Badges/charts only |
 
-**Hard rule:** BEP Pro accent colors are undefined in all other themes. Using them outside BEP Pro produces invisible elements.
+**Hard rule:** NS Pro accent colors are undefined in all other themes. Using them outside NS Pro produces invisible elements.
 
 ---
 
@@ -392,10 +391,9 @@ Focus rings are automatic via the base layer (`outline-ring/50`). Never add cust
 |------|-----|
 | No hardcoded hex values in components | Breaks theming and dark mode |
 | No Tailwind color utilities (`bg-blue-500`, `text-red-600`) | Bypasses the token system |
-| No `font-medium` / `font-semibold` / `font-bold` on h1 or h2 | Instrument Serif only loads weight 400, browser falls back to system sans-serif |
-| No `font-heading` on elements smaller than `text-3xl` | Instrument Serif loses legibility below 30px |
+| No `font-medium` / `font-semibold` / `font-bold` on headings | Bitter only loads weight 400, browser falls back to system sans-serif |
 | No `rounded-full` on non-circular elements | Contradicts the near-zero radius design language |
 | No `window`, `document`, `navigator` outside `useEffect` | Breaks SSR |
 | No primitive token names in component CSS (e.g. `var(--primitive-neutral-950)`) | Tightly couples to implementation, use semantic tokens |
 | No lucide-react or other icon packages | Only `@phosphor-icons/react` is supported |
-| No BEP Pro accent tokens outside charts/badges | They are `undefined` in all other themes |
+| No NS Pro accent tokens outside charts/badges | They are `undefined` in all other themes |

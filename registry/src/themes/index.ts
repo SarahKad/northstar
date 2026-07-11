@@ -1,5 +1,5 @@
 /**
- * AG Design System, Theme Registry
+ * Project North Star, Theme Registry
  *
  * Every theme that can be applied to the design system is registered here.
  * A "theme" controls the brand-level visual identity: color palette, brand
@@ -110,18 +110,18 @@ export type ThemeDefinition = {
 export const themes: ThemeDefinition[] = [
   {
     id: "ag",
-    name: "AG Core",
-    description: "Assemblies of God core brand theme. The default theme for all AG digital products.",
+    name: "NS Core",
+    description: "Project North Star core brand theme. The default theme for all North Star digital products.",
   },
   {
     id: "navy",
-    name: "Navy",
-    description: "Cool-toned theme anchored to a deep navy blue brand color.",
+    name: "Peacock",
+    description: "Deep green theme anchored to Peacock (#053229). Spruce and Sapphire tones for charts and accents.",
   },
   {
-    id: "bep-pro",
-    name: "BEP Pro",
-    description: "Dark-first theme for BEP Pro products. Brand color: BEP Blue (#1A56DB). Accent palette is restricted to charts/graphs and badges/tags only.",
+    id: "ns-pro",
+    name: "NS Pro",
+    description: "Dark-first theme for NS Pro products. Brand: Spruce/Sapphire. North Star accent palette restricted to charts/graphs and badges/tags only.",
   },
 ]
 

@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Start Here, AG Design System</title>
+  <title>Start Here, Project North Star</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@300;400;700&amp;family=Geist+Mono:wght@100..900&amp;family=Instrument+Serif&amp;display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:wght@400;700&amp;family=Atkinson+Hyperlegible+Next:wght@300;400;700&amp;family=Bitter:wght@400&amp;display=swap" rel="stylesheet" />
 
   <style>
 :root {
@@ -26,18 +26,18 @@
   --primitive-neutral-100: #FFFEFD;  /* near-white cream */
 }
 /* =============================================================================
-   AG CORE THEME, src/themes/ag-core.css
-   Assemblies of God core brand theme.
+   NS CORE THEME, src/themes/ag-core.css
+   Project North Star core brand theme.
    Selector: [data-theme="ag"]
    Applied by ThemeProvider via document.documentElement.dataset.theme = "ag"
    ============================================================================= */
 
-/* --- Brand & chart primitives specific to AG -------------------------------- */
+/* --- Brand & chart primitives specific to NS -------------------------------- */
 
 [data-theme="ag"] {
-  /* Brand, red accent */
-  --primitive-brand-58: #DA2919;  /* base brand red */
-  --primitive-brand-63: #E54E3C;  /* lightened for dark mode */
+  /* Brand, Sapphire accent */
+  --primitive-brand-58: #72B0AB;  /* Sapphire, base brand */
+  --primitive-brand-63: #9CC9C5;  /* lightened Sapphire for dark mode */
 
   /* Chart scale, light mode (dark → light) */
   --primitive-chart-43:  #544F4D;  /* darkest */
@@ -64,7 +64,7 @@
   --card-foreground:        var(--primitive-neutral-15);
   --popover:                var(--primitive-neutral-100);
   --popover-foreground:     var(--primitive-neutral-15);
-  --brand:                  var(--primitive-brand-58);     /* #DA291C */
+  --brand:                  var(--primitive-brand-58);     /* #72B0AB Sapphire */
   --primary:                var(--primitive-neutral-21);
   --primary-foreground:     var(--primitive-neutral-99);
   --secondary:              var(--primitive-neutral-96);
@@ -73,7 +73,7 @@
   --muted-foreground:       var(--primitive-neutral-43);  /* #544F4D */
   --accent:                 var(--primitive-neutral-96);
   --accent-foreground:      var(--primitive-neutral-21);
-  --destructive:            var(--primitive-brand-58);
+  --destructive:            #DC2626;
   --border:                 var(--primitive-neutral-92);
   --input:                  var(--primitive-neutral-92);
   --ring:                   var(--primitive-brand-58);
@@ -111,7 +111,7 @@
   --muted-foreground:       var(--primitive-neutral-71);
   --accent:                 var(--primitive-neutral-27);
   --accent-foreground:      var(--primitive-neutral-99);
-  --destructive:            var(--primitive-brand-63);
+  --destructive:            #F87171;
   --border:                 rgba(255, 255, 255, 0.10);
   --input:                  rgba(255, 255, 255, 0.15);
   --ring:                   var(--primitive-brand-63);
@@ -134,8 +134,8 @@
 
 html {
   --font-sans: "Atkinson Hyperlegible Next", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Instrument Serif", ui-serif, Georgia, serif;
-  --font-geist-mono: "Geist Mono", ui-monospace, monospace;
+  --font-display: "Bitter", ui-serif, Georgia, serif;
+  --font-mono: "Atkinson Hyperlegible Mono", ui-monospace, monospace;
 }
 
 * { box-sizing: border-box; border-color: var(--border); }
@@ -211,7 +211,7 @@ p { margin: 0 0 0.75rem; }
 strong { font-weight: 500; color: var(--foreground); }
 
 code {
-  font-family: var(--font-geist-mono);
+  font-family: var(--font-mono);
   font-size: 0.75rem;
   background: color-mix(in srgb, var(--muted) 80%, transparent);
   padding: 0.125rem 0.375rem;
@@ -225,7 +225,7 @@ pre.code {
   background: color-mix(in srgb, var(--muted) 60%, transparent);
   border: 1px solid var(--border);
   border-radius: var(--radius, 4px);
-  font-family: var(--font-geist-mono);
+  font-family: var(--font-mono);
   font-size: 0.75rem;
   line-height: 1.625;
   color: color-mix(in srgb, var(--foreground) 90%, transparent);
@@ -370,13 +370,13 @@ ol.steps li { display: flex; gap: 0.75rem; align-items: flex-start; }
   <div class="wrap">
     <header>
       <h1>Start Here</h1>
-      <p class="lead">Getting Started with the AG Design System. You opened this file from the top of your kit folder, before you open Cursor. Works offline; AG fonts load when you are online.</p>
+      <p class="lead">Getting Started with the Project North Star, open this file in your browser before you open Cursor. Works offline; North Star fonts load when you are online.</p>
     </header>
 
-    <section id="overview"><h2>Overview</h2><p>The AG Design System is your team's shared library of buttons, navigation, charts, colors, and typography. You will create a new web app, apply AG styling, and add a ready-made layout (login + dashboard) in one step with Cursor or Claude. You do <strong>not</strong> move the whole design system into your app, just copy what you need from it.</p></section>
+    <section id="overview"><h2>Overview</h2><p>The Project North Star is your team's shared library of buttons, navigation, charts, colors, and typography. You will create a new web app, apply North Star styling, and add a ready-made layout (login + dashboard) in one step with Cursor or Claude. You do <strong>not</strong> move the whole design system into your app, just copy what you need from it.</p></section>
 
     <section id="before-you-start"><h2>Before you start</h2><p>You will need:</p>
-      <ul><li>Node.js on your computer (ask engineering if unsure)</li><li>This kit saved on your machine, the AG Design System subfolder is your REGISTRY_DIR</li><li>A project folder for your new app, create it in Cursor before setup (Cursor Step 0)</li></ul></section>
+      <ul><li>Node.js on your computer (ask engineering if unsure)</li><li>The Project North Star kit saved on your machine (ask engineering for the zip or shared drive link)</li><li>A project folder for your new app, create it in Cursor before setup (Cursor Step 0)</li></ul></section>
 
     <section id="setup"><h2>Setup</h2><p>Jump to the path that matches how you work. <strong>Cursor</strong> runs <strong>Bootstrap + Shell</strong> in one step (recommended).</p>
       <nav class="jump" aria-label="Setup paths">
@@ -387,20 +387,22 @@ ol.steps li { display: flex; gap: 0.75rem; align-items: flex-start; }
     <section class="platform" id="cursor"><h2>Cursor</h2>
 <div class="callout neutral"><p class="callout-title">Set up with Cursor Chat</p><p>Use skills or paste a prompt, then approve steps when Cursor asks. You do not need to run terminal commands yourself. When Cursor opens a terminal or asks to run something, click <strong>Allow</strong> or <strong>Run</strong>, that is normal.</p></div>
 
-<div class="callout warning"><p><strong>PLEASE NOTE:</strong> Cursor may open a browser preview of the AG Design System during setup. You will see the docs (Getting Started, components, etc.), please note that is the registry downloading files in the background, <strong>not your app.</strong> You can close that preview or keep it open as a reference guide. Your app will open later (which can take up to 10 minutes) on a different localhost: with <code>/login</code> and <code>/dashboard</code>.</p></div>
+<div class="callout warning"><p><strong>PLEASE NOTE:</strong> Cursor may open a browser preview of the Project North Star during setup. You will see the docs (Getting Started, components, etc.), please note that is the registry downloading files in the background, <strong>not your app.</strong> You can close that preview or keep it open as a reference guide. Your app will open later (which can take up to 10 minutes) on a different localhost: with <code>/login</code> and <code>/dashboard</code>.</p></div>
 
-<h3 id="cursor-step-0" class="step-title">Step 0, Save the kit &amp; open your project</h3>
+<h3 id="cursor-step-0" class="step-title">Step 0, Get the kit &amp; open your project</h3>
 <p>Do this once before Bootstrap + Shell. You work in your <strong>project folder</strong> in Cursor. The design system stays on disk as a reference kit, you do not open it as your workspace.</p>
-<ol class="steps"><li><span class="step-num">1</span><span><strong>Save the AG Design System Kit</strong> on your computer. Your team or engineering provides this (zip, shared drive, or USB). Unzip if needed. You should see <code>START_HERE.html</code> and an <code>AG Design System</code> folder at the top level. Open <code>START_HERE.html</code> in your browser (double-click). Note the full path to the <code>AG Design System</code> folder, you will paste this as <code>REGISTRY_DIR</code> in Step 1. That folder should contain <code>.cursor/skills/</code>, <code>templates/app-shell/</code>, and <code>public/r/</code>.</span></li><li><span class="step-num">2</span><span>Open <strong>Cursor</strong> on your computer.</span></li><li><span class="step-num">3</span><span><strong>File → Open Folder</strong> → create or choose your <strong>project folder</strong> (e.g. <code>Desktop/my-product</code>). It can be empty, Step 1 builds your app here. Do <strong>not</strong> open the design system folder.</span></li><li><span class="step-num">4</span><span>Open Chat: <strong>View → Chat</strong> (or press <code>Cmd + L</code> on Mac, <code>Ctrl + L</code> on Windows).</span></li></ol>
-<p class="small"><strong>Looking ahead:</strong> Today setup is offline, Cursor reads skills and files from your saved <code>REGISTRY_DIR</code>. Later, a hosted registry URL or a one-command bootstrap kit may reduce what you need locally; the project-folder workflow stays the same.</p>
+<p><strong>Save the Project North Star kit on your computer.</strong> Ask engineering for the zip or shared drive link.</p>
+<p>Your <code>REGISTRY_DIR</code> is the <code>registry</code> folder inside the kit (e.g. <code>~/Projects/Project North Star/registry</code>). It must contain <code>.cursor/skills/</code>, <code>templates/app-shell/</code>, and <code>public/r/</code>.</p>
+<ol class="steps"><li><span class="step-num">1</span><span>Open <strong>Cursor</strong> on your computer.</span></li><li><span class="step-num">2</span><span><strong>File → Open Folder</strong> → create or choose your <strong>project folder</strong> (e.g. <code>Desktop/my-product</code>). It can be empty, Step 1 builds your app here. Do <strong>not</strong> open the design system folder.</span></li><li><span class="step-num">3</span><span>Open Chat: <strong>View → Chat</strong> (or press <code>Cmd + L</code> on Mac, <code>Ctrl + L</code> on Windows).</span></li></ol>
+<p class="small"><strong>Updates:</strong> Ask engineering for an updated kit when new components or setup steps are published.</p>
 
 <h3 id="cursor-step-1" class="step-title">Step 1, Bootstrap + Shell</h3>
-<p>With your <strong>project folder</strong> open in Cursor, one prompt creates your app, adds AG colors and fonts, then adds login, sidebar, dashboard, and sample charts. Paste both folder paths from Step 0.</p>
+<p>With your <strong>project folder</strong> open in Cursor, one prompt creates your app, adds NS colors and fonts, then adds login, sidebar, dashboard, and sample charts. Paste both folder paths from Step 0.</p>
 <p class="option-label">Option A, Recommended, use the skills</p>
 <p>In Chat, mention both skills (or paste the paths below if @ does not find them) and send:</p>
-<pre class="code">@ag-get-started @ag-vibe-start
+<pre class="code">@ns-get-started @ns-vibe-start
 
-I want to start a new AG product with the full app shell.
+I want to start a new North Star product with the full app shell.
 
 REGISTRY_DIR: [paste path to saved design system kit, not opened in Cursor]
 MY_APP_DIR: [paste your project folder, the folder open in Cursor]
@@ -410,15 +412,15 @@ Read skills from REGISTRY_DIR/.cursor/skills/ and run bootstrap, then the app sh
 <details class="option-accordion">
   <summary>Option B, Fallback, copy and paste a prompt</summary>
   <div class="option-accordion-body"><p>Use this if the skills are not available. Replace the bracketed paths, paste into Chat once, and send.</p>
-<pre class="code">I'm starting a new AG product with the full app shell (login, sidebar, dashboard).
+<pre class="code">I'm starting a new North Star product with the full app shell (login, sidebar, dashboard).
 
 My folders:
-- REGISTRY_DIR: [paste path to the AG Design System subfolder in your kit; do NOT open this in Cursor]
+- REGISTRY_DIR: [paste path to …/Project North Star/registry from your kit; do NOT open this folder in Cursor]
 - MY_APP_DIR: [paste the project folder I already opened in Cursor, e.g. Desktop/my-product]
 
 Run the full setup in this session:
-1. Read and follow ag-get-started from REGISTRY_DIR/.cursor/skills/, bootstrap (create app, AG colors, fonts)
-2. Read and follow ag-vibe-start from REGISTRY_DIR/.cursor/skills/, app shell (scaffold:shell, install-components.sh, ThemeProvider, /login, /dashboard)
+1. Read and follow ns-get-started from REGISTRY_DIR/.cursor/skills/, bootstrap (create app, NS colors, fonts)
+2. Read and follow ns-vibe-start from REGISTRY_DIR/.cursor/skills/, app shell (scaffold:shell, install-components.sh, ThemeProvider, /login, /dashboard)
 
 Run commands against those paths even if they are not the Cursor workspace root. Do NOT stop after bootstrap.
 Use npm run dev:install in REGISTRY_DIR (port 3002) for shadcn installs, do NOT open the registry in Simple Browser.
@@ -428,72 +430,72 @@ When done, confirm /login and /dashboard work on my app, not the design system d
 </details>
 
 <h3 id="cursor-step-optional" class="step-title">Optional, Bootstrap only (no shell)</h3>
-<p>Use this only if you want AG colors and fonts on a blank app and will build your own layout, no login page, sidebar, or dashboard.</p>
+<p>Use this only if you want NS colors and fonts on a blank app and will build your own layout, no login page, sidebar, or dashboard.</p>
 <p class="option-label">Option A, Use the bootstrap skill only</p>
-<pre class="code">@ag-get-started
+<pre class="code">@ns-get-started
 
-Bootstrap my AG app only, do NOT add the app shell.
+Bootstrap my North Star app only, do NOT add the app shell.
 
 REGISTRY_DIR: [paste path to saved design system kit, not opened in Cursor]
 MY_APP_DIR: [paste your project folder, the folder open in Cursor]
 
-Read ag-get-started from REGISTRY_DIR/.cursor/skills/. Stop after bootstrap, no scaffold:shell, no /login, no /dashboard.</pre>
+Read ns-get-started from REGISTRY_DIR/.cursor/skills/. Stop after bootstrap, no scaffold:shell, no /login, no /dashboard.</pre>
 <p class="option-label">Option B, Fallback prompt</p>
-<pre class="code">Bootstrap my AG app only, do NOT add the app shell.
+<pre class="code">Bootstrap my North Star app only, do NOT add the app shell.
 
 My folders:
-- REGISTRY_DIR: [paste path to the AG Design System subfolder in your kit; do NOT open this in Cursor]
+- REGISTRY_DIR: [paste path to …/Project North Star/registry from your kit; do NOT open this folder in Cursor]
 - MY_APP_DIR: [paste the project folder I already opened in Cursor]
 
 Bootstrap only:
-1. Read and follow ONLY ag-get-started from REGISTRY_DIR/.cursor/skills/
+1. Read and follow ONLY ns-get-started from REGISTRY_DIR/.cursor/skills/
 2. Create the app (create-next-app + shadcn init) in MY_APP_DIR if it does not exist yet
-3. Add AG colors and styles using npm run dev:install in REGISTRY_DIR (port 3002)
-4. Add AG fonts in src/app/layout.tsx
-5. Stop the registry install server, start MY_APP_DIR on port 3000, confirm AG styling on the default Next.js page
+3. Add NS colors and styles using npm run dev:install in REGISTRY_DIR (port 3002)
+4. Add North Star fonts in src/app/layout.tsx
+5. Stop the registry install server, start MY_APP_DIR on port 3000, confirm North Star styling on the default Next.js page
 
-Do NOT run ag-vibe-start. Do NOT run scaffold:shell or install-components.sh. Do NOT add ThemeProvider, /login, or /dashboard.
+Do NOT run ns-vibe-start. Do NOT run scaffold:shell or install-components.sh. Do NOT add ThemeProvider, /login, or /dashboard.
 
 Do NOT open Simple Browser for the registry. If a preview opens showing Getting Started or component docs, tell me that is the design system site, not my app.
-Ask me to approve each step. STOP when bootstrap is complete and tell me how to add the shell later with @ag-vibe-start if I want it.</pre>
-<p class="small">To add the shell later, run <code>@ag-vibe-start</code> in a new Chat message.</p>
+Ask me to approve each step. STOP when bootstrap is complete and tell me how to add the shell later with @ns-vibe-start if I want it.</pre>
+<p class="small">To add the shell later, run <code>@ns-vibe-start</code> in a new Chat message.</p>
 
 <h3 id="cursor-step-2" class="step-title">Step 2, Check that it worked</h3>
 <p>After Bootstrap + Shell (Step 1):</p>
-<ul><li>Your app opens on http://localhost:3000, not the design system docs site</li><li>/login shows a sign-in page with AG styling</li><li>/dashboard shows a sidebar, top bar, and sample charts</li></ul>
+<ul><li>Your app opens on http://localhost:3000, not the design system docs site</li><li>/login shows a sign-in page with North Star styling</li><li>/dashboard shows a sidebar, top bar, and sample charts</li></ul>
 <p>If you used bootstrap only (optional path):</p>
-<ul><li>Your app opens on <code>http://localhost:3000</code> with AG styling on the default Next.js page, no <code>/login</code> or <code>/dashboard</code> yet</li></ul>
+<ul><li>Your app opens on <code>http://localhost:3000</code> with North Star styling on the default Next.js page, no <code>/login</code> or <code>/dashboard</code> yet</li></ul>
 <p>Something wrong? Paste this in Chat:</p>
-<pre class="code">Something didn't work during AG Design System setup.
+<pre class="code">Something didn't work during Project North Star setup.
 
-REGISTRY_DIR: [paste path to AG Design System subfolder in your kit]
+REGISTRY_DIR: [paste path to …/Project North Star/registry from your kit; do NOT open this folder in Cursor]
 MY_APP_DIR: [paste your app folder path]
 
 Walk me through troubleshooting using src/components/ag-shell/INSTALL.md in my app.
 Explain fixes in plain language and ask before running commands.</pre>
 
 <h3 id="cursor-step-3" class="step-title">Step 3, What's next</h3>
-<ul><li>Keep using @ag-vibe-start when building pages and adding components</li><li>Browse components on the design system site and ask Cursor to add what you need</li><li>Demo login accepts any email and password, replace with real sign-in before launch</li><li>Your app has a checklist at src/components/ag-shell/INSTALL.md after the shell is scaffolded</li></ul>
+<ul><li>Keep using @ns-vibe-start when building pages and adding components</li><li>Browse components on the design system site and ask Cursor to add what you need</li><li>Demo login accepts any email and password, replace with real sign-in before launch</li><li>Your app has a checklist at src/components/ag-shell/INSTALL.md after the shell is scaffolded</li></ul>
 </section>
     <section class="platform" id="claude"><h2>Claude Code</h2>
-<div class="callout neutral"><p class="callout-title">Set up with Claude Code</p><p>Start Claude Code inside your kit's <code>AG Design System</code> folder (<code>REGISTRY_DIR</code>). It reads <code>CLAUDE.md</code> and the setup skills automatically. Approve terminal commands when asked.</p></div>
+<div class="callout neutral"><p class="callout-title">Set up with Claude Code</p><p>Start Claude Code inside your kit's <code>registry</code> folder (<code>REGISTRY_DIR</code>). It reads <code>CLAUDE.md</code> and the setup skills automatically. Approve terminal commands when asked.</p></div>
 
 <h3 id="claude-step-0" class="step-title">Step 0, Start Claude in the design system folder</h3>
-<p>In Terminal, go to your kit's <code>AG Design System</code> folder (<code>REGISTRY_DIR</code>), then start Claude Code:</p>
+<p>In Terminal, go to your kit's <code>registry</code> folder (<code>REGISTRY_DIR</code>), then start Claude Code:</p>
 <pre class="code">cd &quot;REGISTRY_DIR&quot;
 claude</pre>
 <p>Your new app is a <strong>separate folder</strong>. Tell Claude both paths up front.</p>
 
 <h3 id="claude-step-1" class="step-title">Step 1, Bootstrap + Shell</h3>
 <p>Paste this prompt (replace the bracketed paths with yours):</p>
-<pre class="code">I'm starting a new AG product from the AG Design System registry.
+<pre class="code">I'm starting a new North Star product from the Project North Star registry.
 
-REGISTRY_DIR: [paste path to AG Design System subfolder in your kit]
+REGISTRY_DIR: [paste path to …/Project North Star/registry from your kit; do NOT open this folder in Cursor]
 MY_APP_DIR: [paste path to new app folder]
 
-Follow CLAUDE.md. Run ag-get-started first (bootstrap), then ag-vibe-start for app shell.
+Follow CLAUDE.md. Run ns-get-started first (bootstrap), then ns-vibe-start for app shell.
 Use REGISTRY_DIR for scaffold commands and http://localhost:3000 for shadcn installs while npm run dev runs in REGISTRY_DIR.</pre>
-<p>Claude will run <strong>ag-get-started</strong> first (bootstrap), then <strong>ag-vibe-start</strong> for the app shell. Review each command before approving.</p>
+<p>Claude will run <strong>ns-get-started</strong> first (bootstrap), then <strong>ns-vibe-start</strong> for the app shell. Review each command before approving.</p>
 
 <h3 id="claude-step-2" class="step-title">Step 2, Commands Claude will use (reference)</h3>
 <p class="option-label">Create app</p>
@@ -507,14 +509,14 @@ npm run scaffold:shell -- &quot;MY_APP_DIR&quot;
 
 cd &quot;MY_APP_DIR&quot;
 # Then read: src/components/ag-shell/INSTALL.md</pre>
-<p class="option-label">AG colors (registry dev server must be running)</p>
+<p class="option-label">NS colors (registry dev server must be running)</p>
 <pre class="code">npx shadcn@latest add http://localhost:3000/r/ag-globals</pre>
 </section>
 
     <section id="contributing"><h2>Contributing</h2><p>To propose a new component for this library, work with engineering, they maintain the registry files in this repo.</p></section>
 
     <footer class="footer">
-      <p>Generated from the AG Design System registry. When online, see the full docs site for component reference and Getting Started.</p>
+      <p>Generated from the Project North Star registry. When online, see the full docs site for component reference and Getting Started.</p>
     </footer>
   </div>
 </body>

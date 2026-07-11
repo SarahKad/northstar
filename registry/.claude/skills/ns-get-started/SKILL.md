@@ -1,20 +1,20 @@
 ---
-name: ag-get-started
+name: ns-get-started
 description: >
-  Bootstrap a new AG Design System product, create the Next.js app, add AG
+  Bootstrap a new Project North Star product, create the Next.js app, add NS
   colors and fonts, and verify the dev server runs. Use when the user invokes
-  @ag-get-started alone for bootstrap-only, or as step 1 before @ag-vibe-start
+  @ns-get-started alone for bootstrap-only, or as step 1 before @ns-vibe-start
   for the full Bootstrap + Shell setup. Does not scaffold the app shell unless
-  the user also invokes @ag-vibe-start in the same session.
+  the user also invokes @ns-vibe-start in the same session.
 ---
 
-# AG Get Started
+# NS Get Started
 
-You are helping someone bootstrap a new AG product using the design system.
+You are helping someone bootstrap a new North Star product using the design system.
 Assume they may not be an engineer, use plain language and ask before running commands.
 
-**Scope:** Create the app, add AG tokens/styles and fonts, confirm the dev server runs.
-**Out of scope:** App shell (login, dashboard, sidebar), unless the user also invoked `@ag-vibe-start` in the same message.
+**Scope:** Create the app, add NS tokens/styles and fonts, confirm the dev server runs.
+**Out of scope:** App shell (login, dashboard, sidebar), unless the user also invoked `@ns-vibe-start` in the same message.
 
 Docs: `/docs/getting-started` in the registry site. Manual shell steps: Cursor tab → Finish or redo shell, or Claude tab → Commands reference.
 
@@ -24,8 +24,8 @@ Docs: `/docs/getting-started` in the registry site. Manual shell steps: Cursor t
 
 | User intent | What to do |
 |-------------|------------|
-| **Bootstrap + Shell** (default), user mentions `@ag-vibe-start`, "full app shell", "login and dashboard", or Getting Started Step 1 | Run this skill through step 7, then **immediately continue** with `@ag-vibe-start` in the same session. Do not stop and hand off. |
-| **Bootstrap only**, user says "bootstrap only", "no shell", "no app shell", or uses only `@ag-get-started` with explicit bootstrap-only language | Run steps 1–7 below, then **STOP**. Do not run `scaffold:shell`, `install-components.sh`, or add routes. |
+| **Bootstrap + Shell** (default), user mentions `@ns-vibe-start`, "full app shell", "login and dashboard", or Getting Started Step 1 | Run this skill through step 7, then **immediately continue** with `@ns-vibe-start` in the same session. Do not stop and hand off. |
+| **Bootstrap only**, user says "bootstrap only", "no shell", "no app shell", or uses only `@ns-get-started` with explicit bootstrap-only language | Run steps 1–7 below, then **STOP**. Do not run `scaffold:shell`, `install-components.sh`, or add routes. |
 
 ## Cursor browser rules (critical)
 
@@ -46,9 +46,8 @@ When running in **Cursor IDE**:
 
 ## Before you run anything
 
-1. Get **REGISTRY_DIR**, full path to the **`registry`** folder inside a git clone of [AG-Design-System](https://github.com/skadlecek/AG-Design-System) (private repo, ask engineering for access). Offline kit zip is an alternative. The user does **not** need this folder open in Cursor.
 2. Get **MY_APP_DIR**, full path to the user's **project folder** (usually already open in Cursor). The app is created or updated here.
-3. **Read skills from disk**, if `@ag-get-started` is not in the workspace, read and follow `REGISTRY_DIR/.cursor/skills/ag-get-started/SKILL.md` (and `ag-vibe-start` when continuing to shell).
+3. **Read skills from disk**, if `@ns-get-started` is not in the workspace, read and follow `REGISTRY_DIR/.cursor/skills/ns-get-started/SKILL.md` (and `ns-vibe-start` when continuing to shell).
 4. Confirm `REGISTRY_DIR` exists and contains `.cursor/skills/`, `templates/app-shell/`, and `public/r/`.
 5. Explain each step in plain language before executing it.
 6. Ask the user to approve before every terminal command.
@@ -91,7 +90,7 @@ npm run dev:install
 
 Run in the **background**. shadcn installs use **`http://localhost:3002`**, a download URL, not something the user should browse.
 
-### 4. Add AG colors and styles
+### 4. Add NS colors and styles
 
 From the **app** folder:
 
@@ -110,17 +109,17 @@ Before starting the user's app:
 lsof -ti :3002 | xargs kill -9 2>/dev/null || true
 ```
 
-### 6. Add AG fonts
+### 6. Add North Star fonts
 
 Update `src/app/layout.tsx` in the app:
 
 - **Atkinson Hyperlegible Next** → `--font-sans` (body, UI)
-- **Instrument Serif** → `--font-display` (headings), weight **400 only**
-- **Geist Mono** → `--font-geist-mono` (code)
+- **Bitter** → `--font-display` (h1–h6), weight **400 only**
+- **Atkinson Hyperlegible Mono** → `--font-mono` (code)
 
 Apply font variables on `<html>`. Set `data-theme="ag"` and default light/dark classes on `<html>` if not already present.
 
-Do **not** add `ThemeProvider` yet, that ships with the app shell (`@ag-vibe-start`).
+Do **not** add `ThemeProvider` yet, that ships with the app shell (`@ns-vibe-start`).
 
 ### 7. Verify bootstrap
 
@@ -130,7 +129,7 @@ From `MY_APP_DIR`:
 npm run dev
 ```
 
-Confirm the **app** (not the registry) runs on **`http://localhost:3000`** with AG styling (warm background, AG typography). The default Next.js page is fine, shell routes come next.
+Confirm the **app** (not the registry) runs on **`http://localhost:3000`** with North Star styling (warm background, North Star typography). The default Next.js page is fine, shell routes come next.
 
 If the app lands on port 3001, stop any registry server on 3000 first, then restart the app dev server.
 
@@ -138,18 +137,18 @@ If the app lands on port 3001, stop any registry server on 3000 first, then rest
 
 ## Hand off to the user (bootstrap only)
 
-When bootstrap is complete **and the user did not also invoke `@ag-vibe-start`**, tell the user:
+When bootstrap is complete **and the user did not also invoke `@ns-vibe-start`**, tell the user:
 
 > **Your app foundation is ready.** Next steps:
 >
-> - **Want login, sidebar, and a sample dashboard?** In Chat, run **`@ag-vibe-start`** and ask it to scaffold the app shell.
-> - **Already know what you want to build?** Skip the shell and start prompting, e.g. *"Build a settings page with AG components."* Use **`@ag-vibe-start`** as you go so colors, typography, and components stay on-brand.
+> - **Want login, sidebar, and a sample dashboard?** In Chat, run **`@ns-vibe-start`** and ask it to scaffold the app shell.
+> - **Already know what you want to build?** Skip the shell and start prompting, e.g. *"Build a settings page with North Star components."* Use **`@ns-vibe-start`** as you go so colors, typography, and components stay on-brand.
 
-Do not continue into app shell unless the user also invoked `@ag-vibe-start` or asked for the full shell in the same session.
+Do not continue into app shell unless the user also invoked `@ns-vibe-start` or asked for the full shell in the same session.
 
 ## Continue to app shell (Bootstrap + Shell)
 
-When the user invoked **both** `@ag-get-started` and `@ag-vibe-start`, or asked for the full app shell, finish bootstrap (steps 1–7) then **immediately run the `@ag-vibe-start` skill**, do not stop to ask whether they want the shell.
+When the user invoked **both** `@ns-get-started` and `@ns-vibe-start`, or asked for the full app shell, finish bootstrap (steps 1–7) then **immediately run the `@ns-vibe-start` skill**, do not stop to ask whether they want the shell.
 
 ## Troubleshooting
 
@@ -167,11 +166,11 @@ When the user asked for bootstrap only:
 - Do not run `npm run scaffold:shell`
 - Do not run `install-components.sh`
 - Do not add `ThemeProvider`, `/login`, `/dashboard`, or `middleware.ts`
-- Do not load or follow `@ag-vibe-start`
+- Do not load or follow `@ns-vibe-start`
 
 ## Do not (always)
 
 - Do not open Simple Browser for the registry
 - Do not run `npm run dev` (port 3000) in REGISTRY_DIR during bootstrap, use `dev:install` on 3002
-- Do not build product pages or features beyond bootstrap (unless continuing to `@ag-vibe-start`)
+- Do not build product pages or features beyond bootstrap (unless continuing to `@ns-vibe-start`)
 - Do not add decorative accent callouts (`border-l-brand`, thick colored left borders) on cards, blocks, tables, containers, or docs panels, use `border border-border bg-muted/30` or plain text only

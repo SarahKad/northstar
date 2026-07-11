@@ -15,7 +15,7 @@ export function SubmitRequest() {
         </p>
       </div>
       <a
-        href="mailto:design@ag.org"
+        href="mailto:design@northstar.example.com"
         className="flex items-center gap-1.5 border px-3 py-1.5 text-xs font-medium hover:bg-muted shrink-0 transition-colors"
       >
         Submit a request

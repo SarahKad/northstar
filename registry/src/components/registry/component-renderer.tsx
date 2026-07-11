@@ -1,6 +1,5 @@
 "use client"
 
-import Image from "next/image"
 import { useEffect, useState } from "react"
 import { Checkbox, CheckboxWithDescription, CheckboxCard } from "@/components/ui/checkbox"
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion"
@@ -119,6 +118,7 @@ import { Envelope, Lock, MagnifyingGlass, Hash, Link, Eye, EyeSlash, TextT, Circ
 import { cn } from "@/lib/utils"
 import { SidebarUserFooter } from "@/components/registry/sidebar-user-footer"
 import { SearchDialog } from "@/components/registry/search-dialog"
+import { SidebarBrandLogo } from "@/components/registry/sidebar-brand-logo"
 import { SidebarNavLayout } from "@/components/registry/sidebar-nav-layout"
 import { usePreviewViewport } from "@/components/registry/preview-viewport-context"
 
@@ -798,7 +798,6 @@ export function ComponentRenderer({ slug, props }: Props) {
     case "button-group":
       return <ButtonGroupPreview props={props} />
 
-
     case "radio-group": {
       const [value, setValue] = useState("option1")
       const options = [
@@ -897,17 +896,8 @@ export function ComponentRenderer({ slug, props }: Props) {
               {(showLogo || showSearch) && (
                 <SidebarHeader className="gap-2 border-b border-sidebar-border p-2">
                   {showLogo && (
-                    <div className="flex items-center gap-2 group-data-[collapsible=icon]:justify-center">
-                      <Image
-                        src="/logo.png"
-                        alt="My App"
-                        width={28}
-                        height={28}
-                        className="shrink-0 object-contain dark:invert"
-                      />
-                      <span className="truncate font-medium text-sm group-data-[collapsible=icon]:hidden">
-                        My App
-                      </span>
+                    <div className="flex items-center group-data-[collapsible=icon]:justify-center">
+                      <SidebarBrandLogo />
                     </div>
                   )}
                   {showSearch && <SearchDialog />}
@@ -1007,7 +997,6 @@ export function ComponentRenderer({ slug, props }: Props) {
           />
         </div>
       )
-
 
     case "accordion": {
       const multiple = Boolean(props.multiple)
@@ -1200,7 +1189,7 @@ export function ComponentRenderer({ slug, props }: Props) {
             {showLogo && (
               <TopNavBrand>
                 <span className="size-5 rounded-sm bg-primary" />
-                AG Design
+                North Star
               </TopNavBrand>
             )}
             {showBreadcrumbs && <TopNavBreadcrumb items={breadcrumbItems} />}

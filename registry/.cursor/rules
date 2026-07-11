@@ -1,4 +1,4 @@
-# AG Design System, Cursor Rules
+# Project North Star, Cursor Rules
 
 Read these rules before writing any code. Every rule is a hard requirement.
 
@@ -15,25 +15,23 @@ Read these rules before writing any code. Every rule is a hard requirement.
 
 ## Typography, exact fonts, exact usage
 
-- Instrument Serif (font-heading), h1 and h2. Must never render below 30px (text-3xl). At smaller sizes it loses legibility and visual quality. If a section label needs to be smaller than 30px, use h3, never override an h2 with a size smaller than text-3xl.
-- Atkinson Hyperlegible (font-sans), all body text, UI labels, h3 through h6.
-- Geist Mono (font-mono), code blocks and monospace only.
+- Bitter (font-heading), all headings h1 through h6, weight 400 only.
+- Atkinson Hyperlegible (font-sans), all body text and UI labels.
+- Atkinson Hyperlegible Mono (font-mono), code blocks and monospace only.
 - Never use any other font family.
-- Never apply font-bold or font-semibold to Instrument Serif elements.
-- Never apply font-heading to any element that could render smaller than 36px.
+- Never apply font-bold, font-semibold, or font-medium to heading elements.
 
 ---
 
 ## Heading sizes, use the defined scale
 
-- h1 → text-4xl + font-heading (Instrument Serif)
-- h2 → text-3xl + font-heading (Instrument Serif), never below 30px
-- h3 → text-2xl + font-semibold (Atkinson Hyperlegible)
-- h4 → text-xl + font-semibold (Atkinson Hyperlegible)
-- h5 → text-lg + font-medium (Atkinson Hyperlegible)
-- h6 → text-base + font-medium (Atkinson Hyperlegible)
+- h1 → text-4xl + font-heading (Bitter)
+- h2 → text-3xl + font-heading (Bitter)
+- h3 → text-2xl + font-heading (Bitter)
+- h4 → text-xl + font-heading (Bitter)
+- h5 → text-lg + font-heading (Bitter)
+- h6 → text-base + font-heading (Bitter)
 - Never rely on browser heading defaults, Tailwind preflight resets them.
-- Never override h2 with a size class below text-3xl, use h3 instead.
 
 ---
 
@@ -73,7 +71,7 @@ Read these rules before writing any code. Every rule is a hard requirement.
 
 - No style={{ color: '#hex' }} or any inline style with a raw value
 - No bg-blue-500 or any Tailwind color outside semantic tokens
-- No font-bold on Instrument Serif
+- No font-bold on Bitter
 - No rounded-full on non-circular elements
 - No hardcoded pixel values for spacing, use Tailwind spacing utilities
 - No skipping JSDoc on new components
@@ -115,6 +113,6 @@ Primitive → Semantic → Component
 
 ## Governance
 
-- All changes require Gloo approval before merging.
+- All changes require team approval before merging.
 - AI-generated code is for scaffolding only, always review before merging.
 - Every release updates CHANGELOG.md.

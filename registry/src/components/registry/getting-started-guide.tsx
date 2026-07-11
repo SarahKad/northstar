@@ -9,7 +9,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion"
 import {
-  AG_GLOBALS,
+  NS_GLOBALS,
   APP_DEV,
   CLAUDE_GETTING_STARTED_PROMPT,
   CREATE_APP,
@@ -23,8 +23,6 @@ import {
   SCAFFOLD_SHELL,
 } from "@/lib/docs-setup-commands"
 import {
-  DESIGN_SYSTEM_GITHUB_URL,
-  GIT_CLONE_COMMAND,
   REGISTRY_DIR_MARKERS,
   REGISTRY_DIR_NAME,
   REGISTRY_DIR_PROMPT_HINT,
@@ -104,7 +102,7 @@ function CursorGuide() {
 
       <div className="border border-yellow-200 bg-yellow-50 px-4 py-4 text-yellow-900 dark:border-yellow-800/50 dark:bg-yellow-950/40 dark:text-yellow-100">
         <p className="text-sm opacity-90">
-          <strong className="font-normal">PLEASE NOTE:</strong> Cursor may open a browser preview of the AG Design System during setup. You will see the docs (Getting Started, components, etc.), please note that is the registry downloading files in the background,{" "}
+          <strong className="font-normal">PLEASE NOTE:</strong> Cursor may open a browser preview of Project North Star during setup. You will see the docs (Getting Started, components, etc.), please note that is the registry downloading files in the background,{" "}
           <strong className="font-normal">not your app.</strong> You can close that preview or keep it open as a reference guide. Your app will open later (which can take up to 10 minutes) on a different localhost: with{" "}
           <code className="rounded-md bg-yellow-100/80 px-1.5 py-0.5 font-mono text-xs dark:bg-yellow-900/40">/login</code> and{" "}
           <code className="rounded-md bg-yellow-100/80 px-1.5 py-0.5 font-mono text-xs dark:bg-yellow-900/40">/dashboard</code>.
@@ -120,16 +118,17 @@ function CursorGuide() {
           <li className="flex gap-3">
             <span className="flex size-5 shrink-0 items-center justify-center border text-xs font-medium">1</span>
             <span>
-              <strong className="font-normal text-foreground">Get the AG Design System on your computer.</strong>{" "}
-              Ask engineering for access to the private GitHub repo, then clone it (recommended):
+              <strong className="font-normal text-foreground">Save the Project North Star kit on your computer.</strong>{" "}
+              Your team or engineering provides this (zip, shared drive, or USB). Unzip if needed. You should see{" "}
+              <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs">START_HERE.html</code> and a{" "}
+              <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs">Project North Star</code> folder at the top level.
             </span>
           </li>
         </ol>
-        <CodeBlock code={GIT_CLONE_COMMAND} iconOnly compact className="mb-4" />
         <p className="mb-4 text-sm text-muted-foreground">
-          After cloning, your <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs">REGISTRY_DIR</code> is the{" "}
-          <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs">{REGISTRY_DIR_NAME}</code> folder inside the clone (e.g.{" "}
-          <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs">~/Projects/AG-Design-System/registry</code>). It must contain{" "}
+          Your <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs">REGISTRY_DIR</code> is the{" "}
+          <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs">{REGISTRY_DIR_NAME}</code> folder inside the kit (e.g.{" "}
+          <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs">~/Projects/Project North Star/registry</code>). It must contain{" "}
           {REGISTRY_DIR_MARKERS.map((m, i) => (
             <span key={m}>
               {i > 0 && (i === REGISTRY_DIR_MARKERS.length - 1 ? ", and " : ", ")}
@@ -137,11 +136,6 @@ function CursorGuide() {
             </span>
           ))}
           .
-        </p>
-        <p className="mb-4 text-sm text-muted-foreground">
-          <strong className="font-normal text-foreground">No GitHub access?</strong> Ask engineering for the offline kit zip (includes{" "}
-          <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs">START_HERE.html</code> at the top). Use the inner folder that contains the same paths as{" "}
-          <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs">{REGISTRY_DIR_NAME}/</code> above.
         </p>
         <ol className="flex list-none flex-col gap-3 text-muted-foreground" start={2}>
           <li className="flex gap-3">
@@ -167,19 +161,14 @@ function CursorGuide() {
           </li>
         </ol>
         <p className="mt-4 text-sm text-muted-foreground">
-          <strong className="font-normal text-foreground">Updates:</strong> Setup uses files on your machine. Run{" "}
-          <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs">git pull</code> inside your clone when engineering publishes changes. Repo:{" "}
-          <a href={DESIGN_SYSTEM_GITHUB_URL} className="text-primary underline underline-offset-4" target="_blank" rel="noreferrer">
-            {DESIGN_SYSTEM_GITHUB_URL.replace("https://", "")}
-          </a>
-          .
+          <strong className="font-normal text-foreground">Updates:</strong> Ask engineering for an updated kit when new components or setup steps are published.
         </p>
       </section>
 
       <section>
         <StepHeading id="cursor-step-1" n={1} title="Bootstrap + Shell" />
         <p className="mb-4 text-muted-foreground">
-          With your <strong className="font-normal text-foreground">project folder</strong> open in Cursor, one prompt creates your app, adds AG colors and fonts, then adds login, sidebar, dashboard, and sample charts. Paste both folder paths from Step 0.
+          With your <strong className="font-normal text-foreground">project folder</strong> open in Cursor, one prompt creates your app, adds NS colors and fonts, then adds login, sidebar, dashboard, and sample charts. Paste both folder paths from Step 0.
         </p>
         <WhatYouGet />
 
@@ -188,9 +177,9 @@ function CursorGuide() {
           In Chat, mention both skills (or paste the paths below if <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs">@</code> does not find them) and send:
         </p>
         <CodeBlock
-          code={`@ag-get-started @ag-vibe-start
+          code={`@ns-get-started @ns-vibe-start
 
-I want to start a new AG product with the full app shell.
+I want to start a new North Star product with the full app shell.
 
 REGISTRY_DIR: [${REGISTRY_DIR_PROMPT_HINT}]
 MY_APP_DIR: [paste your project folder, the folder open in Cursor]
@@ -215,19 +204,19 @@ Read skills from REGISTRY_DIR/.cursor/skills/ and run bootstrap, then the app sh
       <section>
         <OptionalHeading id="cursor-step-optional-bootstrap" title="Bootstrap only (no shell)" />
         <p className="mb-4 text-muted-foreground">
-          Use this only if you want AG colors and fonts on a blank app and will build your own layout, no login page, sidebar, or dashboard.
+          Use this only if you want NS colors and fonts on a blank app and will build your own layout, no login page, sidebar, or dashboard.
         </p>
 
         <OptionLabel letter="A" title="Use the bootstrap skill only" />
         <CodeBlock
-          code={`@ag-get-started
+          code={`@ns-get-started
 
-Bootstrap my AG app only, do NOT add the app shell.
+Bootstrap my North Star app only, do NOT add the app shell.
 
 REGISTRY_DIR: [${REGISTRY_DIR_PROMPT_HINT}]
 MY_APP_DIR: [paste your project folder, the folder open in Cursor]
 
-Read ag-get-started from REGISTRY_DIR/.cursor/skills/. Stop after bootstrap, no scaffold:shell, no /login, no /dashboard.`}
+Read ns-get-started from REGISTRY_DIR/.cursor/skills/. Stop after bootstrap, no scaffold:shell, no /login, no /dashboard.`}
           iconOnly
           compact
           className="mb-6"
@@ -236,7 +225,7 @@ Read ag-get-started from REGISTRY_DIR/.cursor/skills/. Stop after bootstrap, no 
         <OptionLabel letter="B" title="Fallback prompt" />
         <CodeBlock code={CURSOR_BOOTSTRAP_ONLY_PROMPT} iconOnly compact />
         <p className="mt-4 text-sm text-muted-foreground">
-          To add the shell later, run <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs">@ag-vibe-start</code> in a new Chat message.
+          To add the shell later, run <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs">@ns-vibe-start</code> in a new Chat message.
         </p>
       </section>
 
@@ -252,7 +241,7 @@ Read ag-get-started from REGISTRY_DIR/.cursor/skills/. Stop after bootstrap, no 
         <CodeBlock code={REGISTRY_DEV} iconOnly compact className="mb-4" />
         <CodeBlock code={INSTALL_COMPONENTS} iconOnly compact className="mb-4" />
         <p className="mb-3 text-muted-foreground">
-          Ask Cursor to update your root layout with AG ThemeProvider, or paste:
+          Ask Cursor to update your root layout with the North Star ThemeProvider, or paste:
         </p>
         <CodeBlock code={ROOT_LAYOUT} iconOnly compact />
       </section>
@@ -263,7 +252,7 @@ Read ag-get-started from REGISTRY_DIR/.cursor/skills/. Stop after bootstrap, no 
         <ul className="mb-4 flex list-none flex-col gap-2 text-muted-foreground">
           {[
             "Your app opens on http://localhost:3000, not the design system docs site",
-            "/login shows a sign-in page with AG styling",
+            "/login shows a sign-in page with North Star styling",
             "/dashboard shows a sidebar, top bar, and sample charts",
           ].map((item) => (
             <li key={item} className="flex items-start gap-2">
@@ -277,7 +266,7 @@ Read ag-get-started from REGISTRY_DIR/.cursor/skills/. Stop after bootstrap, no 
           <li className="flex items-start gap-2">
             <span className="mt-1 size-1.5 shrink-0 rounded-full bg-muted-foreground" />
             Your app opens on{" "}
-            <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs">http://localhost:3000</code> with AG styling on the default Next.js page, no{" "}
+            <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs">http://localhost:3000</code> with North Star styling on the default Next.js page, no{" "}
             <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs">/login</code> or{" "}
             <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs">/dashboard</code> yet
           </li>
@@ -290,7 +279,7 @@ Read ag-get-started from REGISTRY_DIR/.cursor/skills/. Stop after bootstrap, no 
         <StepHeading id="cursor-step-3" n={3} title="What's next" />
         <ul className="flex list-none flex-col gap-2 text-muted-foreground">
           {[
-            "Keep using @ag-vibe-start when building pages and adding components",
+            "Keep using @ns-vibe-start when building pages and adding components",
             "Browse components on the design system site and ask Cursor to add what you need",
             "Demo login accepts any email and password, replace with real sign-in before launch",
             "Your app has a checklist at src/components/ag-shell/INSTALL.md after the shell is scaffolded",
@@ -312,7 +301,7 @@ function ClaudeGuide() {
       <div className="border border-border bg-muted/30 px-4 py-4 text-muted-foreground">
         <p className="font-medium text-foreground">Set up with Claude Code</p>
         <p className="mt-2 text-sm">
-          Start Claude Code inside your clone&apos;s{" "}
+          Start Claude Code inside your kit&apos;s{" "}
           <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs">{REGISTRY_DIR_NAME}</code> folder (
           <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs">REGISTRY_DIR</code>). It reads{" "}
           <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs">CLAUDE.md</code> and the setup skills automatically. Approve terminal commands when asked.
@@ -322,7 +311,7 @@ function ClaudeGuide() {
       <section>
         <StepHeading id="claude-step-0" n={0} title="Start Claude in the design system folder" />
         <p className="mb-3 text-muted-foreground">
-          In Terminal, go to your clone&apos;s <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs">{REGISTRY_DIR_NAME}</code> folder (
+          In Terminal, go to your kit&apos;s <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs">{REGISTRY_DIR_NAME}</code> folder (
           <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs">REGISTRY_DIR</code>), then start Claude Code:
         </p>
         <CodeBlock code={`cd "REGISTRY_DIR"\nclaude`} iconOnly compact />
@@ -336,8 +325,8 @@ function ClaudeGuide() {
         <p className="mb-3 text-muted-foreground">Paste this prompt (replace the bracketed paths with yours):</p>
         <CodeBlock code={CLAUDE_GETTING_STARTED_PROMPT} iconOnly compact />
         <p className="mt-3 text-muted-foreground">
-          Claude will run <strong className="font-normal text-foreground">ag-get-started</strong> first (bootstrap), then{" "}
-          <strong className="font-normal text-foreground">ag-vibe-start</strong> for the app shell. Review each command before approving.
+          Claude will run <strong className="font-normal text-foreground">ns-get-started</strong> first (bootstrap), then{" "}
+          <strong className="font-normal text-foreground">ns-vibe-start</strong> for the app shell. Review each command before approving.
         </p>
         <div className="mt-4">
           <WhatYouGet />
@@ -350,8 +339,8 @@ function ClaudeGuide() {
         <CodeBlock code={CREATE_APP} iconOnly compact className="mb-4" />
         <p className="mb-2 text-xs font-medium text-muted-foreground">Scaffold shell (from REGISTRY_DIR)</p>
         <CodeBlock code={SCAFFOLD_SHELL} iconOnly compact className="mb-4" />
-        <p className="mb-2 text-xs font-medium text-muted-foreground">AG colors (registry dev server must be running)</p>
-        <CodeBlock code={AG_GLOBALS} iconOnly compact className="mb-4" />
+        <p className="mb-2 text-xs font-medium text-muted-foreground">NS colors (registry dev server must be running)</p>
+        <CodeBlock code={NS_GLOBALS} iconOnly compact className="mb-4" />
         <p className="mb-2 text-xs font-medium text-muted-foreground">Install UI pieces (registry dev running)</p>
         <CodeBlock code={INSTALL_COMPONENTS} iconOnly compact className="mb-4" />
         <p className="mb-2 text-xs font-medium text-muted-foreground">Theme setup</p>

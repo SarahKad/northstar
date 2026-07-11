@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { Atkinson_Hyperlegible_Next, Instrument_Serif, Geist_Mono, Montserrat } from "next/font/google"
+import { Atkinson_Hyperlegible_Next, Atkinson_Hyperlegible_Mono, Bitter } from "next/font/google"
 import Script from "next/script"
 import "./globals.css"
 import { ThemeProvider } from "@/components/registry/theme-provider"
@@ -16,26 +16,21 @@ const atkinson = Atkinson_Hyperlegible_Next({
   variable: "--font-sans",
 })
 
-const instrumentSerif = Instrument_Serif({
+const bitter = Bitter({
   subsets: ["latin"],
   weight: "400",
   variable: "--font-display",
 })
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const atkinsonMono = Atkinson_Hyperlegible_Mono({
   subsets: ["latin"],
-})
-
-const montserrat = Montserrat({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-montserrat",
+  weight: ["400", "700"],
+  variable: "--font-mono",
 })
 
 export const metadata: Metadata = {
-  title: "AG Design System",
-  description: "Assemblies of God component registry and documentation",
+  title: "Project North Star",
+  description: "Project North Star component registry and documentation",
 }
 
 export default function RootLayout({
@@ -48,7 +43,7 @@ export default function RootLayout({
       lang="en"
       suppressHydrationWarning
       data-theme="ag"
-      className={cn("h-full antialiased font-sans light", atkinson.variable, instrumentSerif.variable, geistMono.variable, montserrat.variable)}
+      className={cn("h-full antialiased font-sans light", atkinson.variable, bitter.variable, atkinsonMono.variable)}
     >
       <body className="h-full">
         <Script

@@ -171,7 +171,7 @@ export function ChartAreaInteractive({
 }: ChartAreaInteractiveProps = {}) {
   const [timeRange, setTimeRange] = React.useState(defaultTimeRange)
   const colorTheme = useDocumentThemeId()
-  const solidFill = colorTheme === "bep-pro"
+  const solidFill = colorTheme === "ns-pro"
 
   React.useEffect(() => {
     setTimeRange(defaultTimeRange)

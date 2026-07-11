@@ -3,13 +3,13 @@
 import { TrendUp } from "@phosphor-icons/react"
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts"
 import {
-  Card,
   CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import { BlockCard } from "@/components/blocks/block-card"
 import {
   ChartContainer,
   ChartLegend,
@@ -73,7 +73,7 @@ export function ChartBarStacked({
   metric2Label = "Mobile",
 }: ChartBarStackedProps = {}) {
   const colorTheme = useDocumentThemeId()
-  const solidFill = colorTheme === "bep-pro"
+  const solidFill = colorTheme === "ns-pro"
 
   const chartConfig: ChartConfig = {
     desktop: {
@@ -88,7 +88,7 @@ export function ChartBarStacked({
   }
 
   return (
-    <Card>
+    <BlockCard>
       <CardHeader>
         <CardTitle>{title}</CardTitle>
         <CardDescription>{dateRange}</CardDescription>
@@ -147,6 +147,6 @@ export function ChartBarStacked({
           Showing total visitors for the last 6 months
         </div>
       </CardFooter>
-    </Card>
+    </BlockCard>
   )
 }

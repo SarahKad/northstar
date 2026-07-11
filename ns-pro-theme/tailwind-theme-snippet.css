@@ -1,8 +1,8 @@
 /* =============================================================================
-   BEP PRO, TAILWIND v4 @theme SNIPPET
+   NS PRO, TAILWIND v4 @theme SNIPPET
    Add this inside your @theme inline { … } block in globals.css.
-   These declarations map BEP Pro CSS variables to Tailwind utility classes,
-   so tokens like bg-primary, text-sidebar-foreground, bg-bep-badge-1, etc.
+   These declarations map NS Pro CSS variables to Tailwind utility classes,
+   so tokens like bg-primary, text-sidebar-foreground, bg-ns-badge-1, etc.
    are available as utility classes throughout your project.
    ============================================================================= */
 
@@ -38,7 +38,7 @@
   --color-sidebar-border:                var(--sidebar-border);
   --color-sidebar-ring:                  var(--sidebar-ring);
 
-  /* Chart series, 7 slots. BEP Pro fills all 7 with accent colours. */
+  /* Chart series, 7 slots. NS Pro fills all 7 with accent colours. */
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
   --color-chart-3: var(--chart-3);
@@ -47,15 +47,15 @@
   --color-chart-6: var(--chart-6);
   --color-chart-7: var(--chart-7);
 
-  /* BEP Pro badge series, RESTRICTED: badges and tags only.
-     Only defined when [data-theme="bep-pro"] is active; undefined in other themes. */
-  --color-bep-badge-1: var(--bep-badge-1);
-  --color-bep-badge-2: var(--bep-badge-2);
-  --color-bep-badge-3: var(--bep-badge-3);
-  --color-bep-badge-4: var(--bep-badge-4);
-  --color-bep-badge-5: var(--bep-badge-5);
-  --color-bep-badge-6: var(--bep-badge-6);
-  --color-bep-badge-7: var(--bep-badge-7);
+  /* NS Pro badge series, RESTRICTED: badges and tags only.
+     Only defined when [data-theme="ns-pro"] is active; undefined in other themes. */
+  --color-ns-badge-1: var(--ns-badge-1);
+  --color-ns-badge-2: var(--ns-badge-2);
+  --color-ns-badge-3: var(--ns-badge-3);
+  --color-ns-badge-4: var(--ns-badge-4);
+  --color-ns-badge-5: var(--ns-badge-5);
+  --color-ns-badge-6: var(--ns-badge-6);
+  --color-ns-badge-7: var(--ns-badge-7);
 
   /* Radius scale */
   --radius-sm:  calc(var(--radius) * 0.6);

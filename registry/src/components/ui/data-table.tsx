@@ -99,7 +99,7 @@ export interface DataTableProps<TData, TValue = unknown> {
 /**
  * @description Fully-featured data table powered by TanStack Table v8.
  * Sorting, pagination, search, row selection, and column visibility, all
- * rendered with AG Design System tokens and existing UI primitives.
+ * rendered with Project North Star tokens and existing UI primitives.
  *
  * @example
  * ```tsx

@@ -1,12 +1,12 @@
-# AG Design System
+# Project North Star
 
-A Stage 1 component registry for Assemblies of God, consumed by AG development teams primarily through AI coding tools (Cursor, Claude Code).
+A Stage 1 component registry for Project North Star, consumed by North Star development teams primarily through AI coding tools (Cursor, Claude Code).
 
 ---
 
 ## What this is
 
-A living documentation site and component reference built with Next.js 15, React 19, TypeScript, and Tailwind v4. It is the single source of truth for UI components, design tokens, and usage guidelines across AG product development.
+A living documentation site and component reference built with Next.js 15, React 19, TypeScript, and Tailwind v4. It is the single source of truth for UI components, design tokens, and usage guidelines across North Star product development.
 
 This is **not** yet a published npm package, that is the Stage 2 goal. For now, teams reference components directly from this registry.
 
@@ -114,32 +114,34 @@ Three themes are registered in this design system. All are selectable from the s
 
 | Theme ID | Name | Mode default | Brand |
 |---|---|---|---|
-| `ag` | AG Core | Light | `#DA2919` AG Red |
-| `navy` | Navy | Light | `#002B65` Navy Blue |
-| `bep-pro` | BEP Pro | **Dark** | `#1A56DB` BEP Blue |
+| `ag` | NS Core | Light | `#72B0AB` Sapphire |
+| `navy` | Peacock | Light | `#053229` Peacock |
+| `ns-pro` | NS Pro | **Dark** | `#355E58` Spruce / `#72B0AB` Sapphire |
 
 ### Chart token dark mode rule
 
-In **light mode**, chart scales run dark → light. In **dark mode**, the scale is reversed (light → dark) so series remain visible against the dark background. This is implemented in `ag-core.css` and `navy.css`. Always verify chart token contrast against `--background` in both modes when creating a new theme.
+In **light mode**, chart scales run dark → light. In **dark mode**, the scale is reversed (light → dark) so series remain visible against the dark background. This is implemented in `ag-core.css` and `navy.css` (Peacock). Always verify chart token contrast against `--background` in both modes when creating a new theme.
 
-### BEP Pro, chart scale order
+### NS Pro, chart scale order
 
-BEP Pro chart-1 through chart-5 are ordered: **blue → orange → purple → peach → red**. Extended tokens chart-6 (dark red) and chart-7 (lavender) are available for future use.
+NS Pro chart-1 through chart-7 use the North Star palette: **Sapphire → Ballet Slipper → Sage → Pistachio → Bubblegum → Spruce → Arctic**.
 
-### BEP Pro, accent color restrictions
+### NS Pro, accent color restrictions
 
-BEP Pro includes a restricted accent palette. These colors exist **only for charts/graphs and badges/tags**:
+NS Pro includes a restricted accent palette. These colors exist **only for charts/graphs and badges/tags**:
 
 | Chart token | Badge token | Color | Hex |
 |---|---|---|---|
-| `--chart-1` | `--bep-badge-1` | Blue | `#60A5FA` |
-| `--chart-2` | `--bep-badge-4` | Orange | `#FB923C` |
-| `--chart-3` | `--bep-badge-2` | Purple | `#AC94FA` |
-| `--chart-4` | `--bep-badge-5` | Peach | `#FDBA8C` |
-| `--chart-5` | `--bep-badge-7` | Red | `#EF4444` |
-| `--chart-6` | `--bep-badge-6` | Dark Red | `#7F1D1D` |
-| `--chart-7` | `--bep-badge-3` | Lavender | `#DDD6FE` |
-| `--bep-accent-gradient` |, | Orange→Red→Blue | `#FB923C → #EF4444 → #788FFA` |
+| `--chart-1` | `--ns-badge-1` | Sapphire | `#72B0AB` |
+| `--chart-2` | `--ns-badge-5` | Ballet Slipper | `#FE9179` |
+| `--chart-3` | `--ns-badge-6` | Sage | `#CFB97E` |
+| `--chart-4` | `--ns-badge-7` | Pistachio | `#B89D47` |
+| `--chart-5` | `--ns-badge-4` | Bubblegum | `#FDC1B4` |
+| `--chart-6` | — | Spruce | `#355E58` |
+| `--chart-7` | `--ns-badge-2` | Arctic | `#BCDDDC` |
+| `--ns-accent-gradient` |, | Ballet Slipper→Sage→Sapphire | `#FE9179 → #CFB97E → #72B0AB` |
+
+Badge-only tokens: Lace (`--ns-badge-3`, `#FFEDD1`).
 
 **Never use these in buttons, navigation, layout, typography, forms, or any component outside charts and badges.** They are undefined (transparent) in all other themes.
 
@@ -180,7 +182,7 @@ npm run registry:generate
 
 ## Requesting a component
 
-Open an issue using the **Component Request** template in `.github/ISSUE_TEMPLATE/`. All requests require AG approval before work begins.
+Open an issue using the **Component Request** template in `engineering request templates`. All requests require team approval before work begins.
 
 ## Reporting a bug
 
@@ -190,9 +192,9 @@ Open an issue using the **Bug Report** template.
 
 ## Governance
 
-- All changes require AG approval before merging
+- All changes require team approval before merging
 - Every release updates `CHANGELOG.md`
-- Component requests and bugs tracked via GitHub Issues
+- Component requests and bugs tracked via engineering
 
 ---
 

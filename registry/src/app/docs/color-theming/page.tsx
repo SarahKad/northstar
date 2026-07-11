@@ -21,8 +21,8 @@ const colorTokens: ColorTokenDef[] = [
   {
     name: "--brand",
     label: "Brand",
-    description: "Red accent, active states, highlights, focus rings, decorative emphasis",
-    hex: "#DA2919",
+    description: "Sapphire accent, active states, highlights, focus rings, decorative emphasis",
+    hex: "#72B0AB",
     utilities: ["bg-brand", "text-brand", "border-brand"],
   },
   {
@@ -85,7 +85,7 @@ const colorTokens: ColorTokenDef[] = [
     name: "--destructive",
     label: "Destructive",
     description: "Error states, delete / irreversible actions",
-    hex: "#DA2919",
+    hex: "#DC2626",
     utilities: ["bg-destructive", "text-destructive", "border-destructive"],
   },
   {
@@ -133,8 +133,8 @@ const colorTokens: ColorTokenDef[] = [
   {
     name: "--ring",
     label: "Ring",
-    description: "Keyboard focus ring, matches brand red, rendered at 50% opacity via outline-ring/50",
-    hex: "#DA2919",
+    description: "Keyboard focus ring, matches Sapphire brand, rendered at 50% opacity via outline-ring/50",
+    hex: "#72B0AB",
     utilities: ["ring-ring", "outline-ring"],
   },
 ]

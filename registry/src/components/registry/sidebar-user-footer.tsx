@@ -8,16 +8,16 @@ import { cn } from "@/lib/utils"
 
 const USER = {
   name: "Jane Doe",
-  email: "user@ag.org",
+  email: "user@northstar.example.com",
   avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Jane",
   initials: "JD",
 }
 
 function ThemeSwatch({ themeId }: { themeId: string }) {
   const swatchColour: Record<string, string> = {
-    ag:       "#DA2919",  /* AG red */
-    navy:     "#002B65",  /* Navy blue */
-    "bep-pro": "#1A56DB",  /* BEP Blue */
+    ag:       "#72B0AB",  /* Sapphire */
+    navy:     "#053229",  /* Peacock */
+    "ns-pro": "#72B0AB",  /* Sapphire */
   }
   const colour = swatchColour[themeId] ?? "var(--muted-foreground)"
   return (

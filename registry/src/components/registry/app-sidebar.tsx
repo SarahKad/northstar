@@ -1,7 +1,6 @@
 "use client"
 
 import { type ElementType } from "react"
-import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import {
@@ -37,6 +36,7 @@ import { navSections, type NavSection } from "@/lib/nav-config"
 import { SearchDialog } from "@/components/registry/search-dialog"
 import { SidebarNavLayout } from "@/components/registry/sidebar-nav-layout"
 import { SidebarUserFooter } from "@/components/registry/sidebar-user-footer"
+import { SidebarBrandLogo } from "@/components/registry/sidebar-brand-logo"
 
 const SECTION_ICONS: Record<string, ElementType> = {
   guides: BookOpen,
@@ -120,18 +120,9 @@ export function AppSidebar() {
       <SidebarHeader className="gap-2 border-b border-sidebar-border p-2">
         <Link
           href="/docs/getting-started"
-          className="flex min-w-0 items-center gap-2.5 rounded-md px-1 py-1 outline-none focus-visible:ring-2 focus-visible:ring-sidebar-ring group-data-[collapsible=icon]:justify-center"
+          className="flex min-w-0 items-center rounded-md px-1 py-1 outline-none focus-visible:ring-2 focus-visible:ring-sidebar-ring group-data-[collapsible=icon]:justify-center"
         >
-          <Image
-            src="/logo.png"
-            alt="AG"
-            width={28}
-            height={28}
-            className="shrink-0 object-contain dark:invert"
-          />
-          <span className="truncate font-medium text-sm tracking-tight group-data-[collapsible=icon]:hidden">
-            Design System
-          </span>
+          <SidebarBrandLogo />
         </Link>
         <SearchDialog />
       </SidebarHeader>

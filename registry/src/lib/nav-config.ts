@@ -50,6 +50,12 @@ export const navSections: NavSection[] = [
         breadcrumb: ["Foundations", "Borders & Focus"],
       },
       {
+        href: "/docs/elevation",
+        label: "Elevation",
+        section: "foundations",
+        breadcrumb: ["Foundations", "Elevation"],
+      },
+      {
         href: "/docs/spacing",
         label: "Spacing",
         section: "foundations",

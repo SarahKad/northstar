@@ -1,7 +1,6 @@
 import { DocsLayout } from "@/components/registry/docs-layout"
 import { GettingStartedGuide } from "@/components/registry/getting-started-guide"
 import type { Heading } from "@/components/registry/table-of-contents"
-import { DESIGN_SYSTEM_GITHUB_URL } from "@/lib/setup-repo"
 
 const headings: Heading[] = [
   { id: "overview", text: "Overview", level: 2 },
@@ -16,7 +15,7 @@ export default function GettingStartedPage() {
       <header className="mb-8">
         <h1 className="text-4xl tracking-tight">Getting Started</h1>
         <p className="mt-2 max-w-xl text-muted-foreground">
-          Start a new AG product with the right layout, colors, and components. Pick how you work: Cursor or Claude Code.
+          Start a new North Star product with the right layout, colors, and components. Pick how you work: Cursor or Claude Code.
         </p>
       </header>
 
@@ -24,8 +23,8 @@ export default function GettingStartedPage() {
         <section>
           <h2 id="overview" className="mb-3 scroll-mt-6">Overview</h2>
           <p className="text-muted-foreground">
-            The AG Design System is your team&apos;s shared library of buttons, navigation, charts, colors, and typography.
-            You will create a new web app, apply AG styling, and add a ready-made layout (login + dashboard) in one step with Cursor or Claude.
+            Project North Star is your team&apos;s shared library of buttons, navigation, charts, colors, and typography.
+            You will create a new web app, apply North Star styling, and add a ready-made layout (login + dashboard) in one step with Cursor or Claude.
             You do <strong className="font-normal text-foreground">not</strong> move the whole design system into your app, just copy what you need from it.
           </p>
         </section>
@@ -36,7 +35,7 @@ export default function GettingStartedPage() {
           <ul className="flex list-none flex-col gap-2 text-muted-foreground">
             {[
               "Node.js on your computer (ask engineering if unsure)",
-              `GitHub access to ${DESIGN_SYSTEM_GITHUB_URL.replace("https://", "")} (private repo), or an offline kit zip from engineering — see Cursor Step 0`,
+              "The Project North Star kit saved on your machine — see Cursor Step 0",
               "A project folder for your new app, create it in Cursor before setup (Cursor Step 0)",
             ].map((item, i) => (
               <li key={i} className="flex items-start gap-2">
@@ -52,7 +51,7 @@ export default function GettingStartedPage() {
           <p className="mb-6 text-muted-foreground">
             Choose the tab that matches how you work. The <strong className="font-normal text-foreground">Cursor</strong> tab runs{" "}
             <strong className="font-normal text-foreground">Bootstrap + Shell</strong> in one step (recommended). Bootstrap-only is optional.
-            All paths end at a running app with AG styling and, for most users, login + dashboard.
+            All paths end at a running app with North Star styling and, for most users, login + dashboard.
           </p>
           <GettingStartedGuide />
         </section>

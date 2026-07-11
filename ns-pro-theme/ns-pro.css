@@ -1,0 +1,162 @@
+/* =============================================================================
+   NS PRO THEME, src/themes/ns-pro.css
+   Bold dark-first theme for NS Pro products. Accent palette from the
+   North Star color system (Sapphire through Peacock).
+   Selector: [data-theme="ns-pro"]
+   Default mode: DARK. Light mode is the secondary (override with .light class).
+   ============================================================================= */
+
+/* --- Brand & NS Pro-specific primitives --------------------------------------- */
+
+[data-theme="ns-pro"] {
+  /* Brand, Spruce (light) / Sapphire (dark) */
+  --primitive-ns-pro-blue-55:  #355E58;  /* Spruce, base brand on light surfaces */
+  --primitive-ns-pro-blue-65:  #72B0AB;  /* Sapphire, brand on dark surfaces */
+
+  /* Neutrals, true greyscale scale (base palette unchanged) */
+  --primitive-ns-pro-8:    #141414;   /* near-black (dark page bg) */
+  --primitive-ns-pro-14:   #1F1F1F;   /* dark card / elevated surface */
+  --primitive-ns-pro-20:   #2A2A2A;   /* dark secondary / muted bg */
+  --primitive-ns-pro-30:   #3D3D3D;   /* dark border */
+  --primitive-ns-pro-55:   #6B6B6B;   /* muted text on dark */
+  --primitive-ns-pro-70:   #9E9E9E;   /* medium text on dark */
+  --primitive-ns-pro-90:   #E5E5E5;   /* near-white, default text on dark */
+  --primitive-ns-pro-92:   #EBEBEB;   /* light mode border, soft grey */
+  --primitive-ns-pro-95:   #F5F5F5;   /* off-white for light mode muted bg */
+  --primitive-ns-pro-98:   #FAFAFA;   /* light mode page background */
+  --primitive-ns-pro-100:  #FFFFFF;   /* white */
+
+  /* Destructive, intentionally separate from NS Pro accent palette */
+  --primitive-ns-pro-error-dark:  #F87171;   /* error red on dark surfaces */
+  --primitive-ns-pro-error-light: #DC2626;   /* error red on light surfaces */
+
+  /* ============================================================
+     NS PRO ACCENT PRIMITIVES (North Star palette)
+     ⚠️  RESTRICTED USE, charts/graphs and badges/tags ONLY.
+     ⚠️  Do NOT use these tokens anywhere else in the codebase.
+     ⚠️  Do NOT use outside the NS Pro theme context.
+     ⚠️  Only reference via --chart-* or --ns-badge-* tokens.
+     ============================================================ */
+  --primitive-ns-pro-accent-1: #72B0AB;  /* Sapphire */
+  --primitive-ns-pro-accent-2: #BCDDDC;  /* Arctic */
+  --primitive-ns-pro-accent-3: #FFEDD1;  /* Lace */
+  --primitive-ns-pro-accent-4: #FDC1B4;  /* Bubblegum */
+  --primitive-ns-pro-accent-5: #FE9179;  /* Ballet Slipper */
+  --primitive-ns-pro-accent-6: #CFB97E;  /* Sage */
+  --primitive-ns-pro-accent-7: #B89D47;  /* Pistachio */
+  --primitive-ns-pro-accent-8: #355E58;  /* Spruce */
+  --primitive-ns-pro-accent-9: #053229;  /* Peacock */
+}
+
+/* --- Typography: Bitter headings + brand color (NS Pro only) ------------ */
+
+html[data-theme="ns-pro"] {
+  --font-display: "Bitter", ui-serif, Georgia, serif;
+}
+
+html[data-theme="ns-pro"] :is(h1, h2, h3, h4, h5, h6),
+html[data-theme="ns-pro"] .font-heading,
+html[data-theme="ns-pro"] .sidebar-brand-logo {
+  color: var(--brand);
+}
+
+/* --- Dark mode semantic tokens (DEFAULT / PRIMARY) ------------------------- */
+
+[data-theme="ns-pro"],
+[data-theme="ns-pro"].dark {
+  --background:             var(--primitive-ns-pro-8);
+  --foreground:             var(--primitive-ns-pro-90);
+  --card:                   var(--primitive-ns-pro-14);
+  --card-foreground:        var(--primitive-ns-pro-90);
+  --popover:                var(--primitive-ns-pro-14);
+  --popover-foreground:     var(--primitive-ns-pro-90);
+  --brand:                  var(--primitive-ns-pro-blue-65);   /* Sapphire on dark bg */
+  --primary:                var(--primitive-ns-pro-90);
+  --primary-foreground:     var(--primitive-ns-pro-14);
+  --secondary:              var(--primitive-ns-pro-20);
+  --secondary-foreground:   var(--primitive-ns-pro-90);
+  --muted:                  var(--primitive-ns-pro-20);
+  --muted-foreground:       var(--primitive-ns-pro-70);
+  --accent:                 var(--primitive-ns-pro-20);
+  --accent-foreground:      var(--primitive-ns-pro-90);
+  --destructive:            var(--primitive-ns-pro-error-dark);
+  --border:                 rgba(255, 255, 255, 0.10);
+  --input:                  rgba(255, 255, 255, 0.15);
+  --ring:                   var(--primitive-ns-pro-blue-65);
+  /* Chart series, North Star accent palette. Charts and graphs ONLY. */
+  --chart-1:                var(--primitive-ns-pro-accent-1);  /* Sapphire */
+  --chart-2:                var(--primitive-ns-pro-accent-5);  /* Ballet Slipper */
+  --chart-3:                var(--primitive-ns-pro-accent-6);  /* Sage */
+  --chart-4:                var(--primitive-ns-pro-accent-7);  /* Pistachio */
+  --chart-5:                var(--primitive-ns-pro-accent-4);  /* Bubblegum */
+  --chart-6:                var(--primitive-ns-pro-accent-8);  /* Spruce */
+  --chart-7:                var(--primitive-ns-pro-accent-2);  /* Arctic */
+  /* Badge series, badges and tags ONLY. Never use in other components. */
+  --ns-badge-1:            var(--primitive-ns-pro-accent-1);  /* Sapphire */
+  --ns-badge-2:            var(--primitive-ns-pro-accent-2);  /* Arctic */
+  --ns-badge-3:            var(--primitive-ns-pro-accent-3);  /* Lace */
+  --ns-badge-4:            var(--primitive-ns-pro-accent-4);  /* Bubblegum */
+  --ns-badge-5:            var(--primitive-ns-pro-accent-5);  /* Ballet Slipper */
+  --ns-badge-6:            var(--primitive-ns-pro-accent-6);  /* Sage */
+  --ns-badge-7:            var(--primitive-ns-pro-accent-7);  /* Pistachio */
+  /* Gradient token, badges and charts ONLY */
+  --ns-accent-gradient:    linear-gradient(to right, #FE9179, #CFB97E, #72B0AB);
+  --radius:                 4px;
+  --sidebar:                var(--primitive-ns-pro-14);
+  --sidebar-foreground:     var(--primitive-ns-pro-90);
+  --sidebar-primary:        var(--primitive-ns-pro-90);
+  --sidebar-primary-foreground: var(--primitive-ns-pro-14);
+  --sidebar-accent:         var(--primitive-ns-pro-20);
+  --sidebar-accent-foreground:  var(--primitive-ns-pro-90);
+  --sidebar-border:         rgba(255, 255, 255, 0.10);
+  --sidebar-ring:           var(--primitive-ns-pro-blue-65);
+}
+
+/* --- Light mode semantic tokens (SECONDARY) -------------------------------- */
+
+[data-theme="ns-pro"].light {
+  --background:             var(--primitive-ns-pro-98);
+  --foreground:             var(--primitive-ns-pro-8);
+  --card:                   var(--primitive-ns-pro-100);
+  --card-foreground:        var(--primitive-ns-pro-8);
+  --popover:                var(--primitive-ns-pro-100);
+  --popover-foreground:     var(--primitive-ns-pro-8);
+  --brand:                  var(--primitive-ns-pro-blue-55);   /* Spruce on light bg */
+  --primary:                var(--primitive-ns-pro-blue-55);
+  --primary-foreground:     var(--primitive-ns-pro-100);
+  --secondary:              var(--primitive-ns-pro-95);
+  --secondary-foreground:   var(--primitive-ns-pro-8);
+  --muted:                  var(--primitive-ns-pro-95);
+  --muted-foreground:       var(--primitive-ns-pro-55);
+  --accent:                 var(--primitive-ns-pro-95);
+  --accent-foreground:      var(--primitive-ns-pro-8);
+  --destructive:            var(--primitive-ns-pro-error-light);
+  --border:                 var(--primitive-ns-pro-92);
+  --input:                  var(--primitive-ns-pro-92);
+  --ring:                   var(--primitive-ns-pro-blue-55);
+  /* Chart series, accent palette unchanged between light/dark */
+  --chart-1:                var(--primitive-ns-pro-accent-1);
+  --chart-2:                var(--primitive-ns-pro-accent-5);
+  --chart-3:                var(--primitive-ns-pro-accent-6);
+  --chart-4:                var(--primitive-ns-pro-accent-7);
+  --chart-5:                var(--primitive-ns-pro-accent-4);
+  --chart-6:                var(--primitive-ns-pro-accent-8);
+  --chart-7:                var(--primitive-ns-pro-accent-2);
+  /* Badge series */
+  --ns-badge-1:            var(--primitive-ns-pro-accent-1);
+  --ns-badge-2:            var(--primitive-ns-pro-accent-2);
+  --ns-badge-3:            var(--primitive-ns-pro-accent-3);
+  --ns-badge-4:            var(--primitive-ns-pro-accent-4);
+  --ns-badge-5:            var(--primitive-ns-pro-accent-5);
+  --ns-badge-6:            var(--primitive-ns-pro-accent-6);
+  --ns-badge-7:            var(--primitive-ns-pro-accent-7);
+  --ns-accent-gradient:    linear-gradient(to right, #FE9179, #CFB97E, #72B0AB);
+  --sidebar:                var(--primitive-ns-pro-100);
+  --sidebar-foreground:     var(--primitive-ns-pro-8);
+  --sidebar-primary:        var(--primitive-ns-pro-blue-55);
+  --sidebar-primary-foreground: var(--primitive-ns-pro-100);
+  --sidebar-accent:         var(--primitive-ns-pro-95);
+  --sidebar-accent-foreground:  var(--primitive-ns-pro-8);
+  --sidebar-border:         var(--primitive-ns-pro-92);
+  --sidebar-ring:           var(--primitive-ns-pro-blue-55);
+}

@@ -1,4 +1,5 @@
-import { Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { CardAction, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { BlockCard } from "@/components/blocks/block-card"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 
@@ -20,7 +21,7 @@ export function RecentActivity({ props: blockProps = {} }: Props) {
   const showViewAll = blockProps.showViewAll !== false
 
   return (
-    <Card className="w-full max-w-md">
+    <BlockCard className="w-full max-w-md">
       <CardHeader>
         <CardTitle>{title}</CardTitle>
         <CardDescription>{description}</CardDescription>
@@ -46,6 +47,6 @@ export function RecentActivity({ props: blockProps = {} }: Props) {
           </div>
         ))}
       </CardContent>
-    </Card>
+    </BlockCard>
   )
 }

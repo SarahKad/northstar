@@ -40,7 +40,7 @@ export const blocks: BlockMeta[] = [
     { label: "New Signups", value: "+573", trend: "+8.2%", up: true },
     { label: "Churn Rate", value: "3.2%", trend: "-1.4%", up: false },
   ].map((stat) => (
-    <Card key={stat.label}>
+    <Card key={stat.label} className="shadow-sm">
       <CardHeader>
         <CardDescription>{stat.label}</CardDescription>
         <CardTitle className="text-2xl tabular-nums">{stat.value}</CardTitle>
@@ -69,7 +69,7 @@ export const blocks: BlockMeta[] = [
       },
       { name: "showViewAll", label: "Show view all", type: "boolean", defaultValue: true },
     ],
-    code: `<Card className="w-full max-w-md">
+    code: `<Card className="w-full max-w-md shadow-sm">
   <CardHeader>
     <CardTitle>Recent Activity</CardTitle>
     <CardDescription>Your latest transactions</CardDescription>
@@ -116,7 +116,7 @@ export const blocks: BlockMeta[] = [
       },
       { name: "showFooter", label: "Show footer", type: "boolean", defaultValue: true },
     ],
-    code: `<Card className="w-full max-w-md">
+    code: `<Card className="w-full max-w-md shadow-sm">
       <CardHeader>
         <CardTitle>Profile</CardTitle>
     <CardDescription>Manage your account information.</CardDescription>
@@ -156,7 +156,7 @@ export const blocks: BlockMeta[] = [
       },
       { name: "buttonLabel", label: "Button label", type: "text", defaultValue: "Invite Members" },
     ],
-    code: `<Card className="flex w-full max-w-sm flex-col items-center justify-center py-14 text-center">
+    code: `<Card className="flex w-full max-w-sm flex-col items-center justify-center py-14 text-center shadow-sm">
   <CardContent className="flex flex-col items-center gap-4 pt-0">
     <div className="flex size-12 items-center justify-center border">
       <Users className="size-5 text-muted-foreground" />
@@ -185,7 +185,7 @@ export const blocks: BlockMeta[] = [
         defaultValue: "Add members to your workspace",
       },
     ],
-    code: `<Card className="w-full max-w-md">
+    code: `<Card className="w-full max-w-md shadow-sm">
       <CardHeader>
         <CardTitle>Invite Team</CardTitle>
     <CardDescription>Add members to your workspace</CardDescription>
@@ -234,7 +234,7 @@ export const blocks: BlockMeta[] = [
         defaultValue: "PNG, JPG, PDF up to 10MB",
       },
     ],
-    code: `<Card className="w-full max-w-sm">
+    code: `<Card className="w-full max-w-sm shadow-sm">
       <CardHeader>
         <CardTitle>File Upload</CardTitle>
     <CardDescription>Drag and drop or browse</CardDescription>
@@ -286,7 +286,7 @@ export const blocks: BlockMeta[] = [
       { name: "showDescription", label: "Show description", type: "boolean", defaultValue: true },
       { name: "showDismiss", label: "Show dismiss", type: "boolean", defaultValue: true },
     ],
-    code: `<Card className="w-full max-w-md">
+    code: `<Card className="w-full max-w-md shadow-sm">
   <CardContent className="flex items-start gap-3">
     <div className="flex size-8 shrink-0 items-center justify-center border border-border bg-muted">
       <Bell className="size-4 text-muted-foreground" />

@@ -1,4 +1,5 @@
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { BlockCard } from "@/components/blocks/block-card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -13,7 +14,7 @@ export function FormCard({ props: blockProps = {} }: Props) {
   const showFooter = blockProps.showFooter !== false
 
   return (
-    <Card className="w-full max-w-md">
+    <BlockCard className="w-full max-w-md">
       <CardHeader>
         <CardTitle>{title}</CardTitle>
         <CardDescription>{description}</CardDescription>
@@ -38,6 +39,6 @@ export function FormCard({ props: blockProps = {} }: Props) {
           <Button>Save changes</Button>
         </CardFooter>
       )}
-    </Card>
+    </BlockCard>
   )
 }

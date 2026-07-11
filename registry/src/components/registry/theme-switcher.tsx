@@ -65,8 +65,9 @@ export function ThemeSwitcher() {
 /** Small circular swatch showing the brand colour for a theme */
 function ThemeSwatch({ themeId }: { themeId: string }) {
   const swatchColour: Record<string, string> = {
-    ag:   "#DA2919",  /* AG red */
-    navy: "#002B65",  /* Navy blue */
+    ag:       "#72B0AB",  /* Sapphire */
+    navy:     "#053229",  /* Peacock */
+    "ns-pro": "#72B0AB",  /* Sapphire */
   }
   const colour = swatchColour[themeId] ?? "var(--muted-foreground)"
   return (

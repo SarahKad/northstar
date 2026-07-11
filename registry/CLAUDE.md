@@ -1,12 +1,12 @@
-# AG Design System, Claude Code Instructions
+# Project North Star, Claude Code Instructions
 
-This is the Assemblies of God design system registry. Read this file completely before writing any code. Every rule here is a hard requirement, not a suggestion.
+This is the Project North Star design system registry. Read this file completely before writing any code. Every rule here is a hard requirement, not a suggestion.
 
 ---
 
 ## What this repo is
 
-A Stage 1 component registry built with Next.js 15, React 19, TypeScript, and Tailwind v4. It is the single source of truth for UI components, design tokens, and usage guidelines across AG product development. It is **not** a published npm package yet, teams reference components directly from this registry.
+A Stage 1 component registry built with Next.js 15, React 19, TypeScript, and Tailwind v4. It is the single source of truth for UI components, design tokens, and usage guidelines across North Star product development. It is **not** a published npm package yet, teams reference components directly from this registry.
 
 ---
 
@@ -19,22 +19,20 @@ A Stage 1 component registry built with Next.js 15, React 19, TypeScript, and Ta
 - If a semantic token doesn't exist for what you need, ask before inventing one
 
 ### Typography, exact fonts, exact usage
-- **Instrument Serif** (`font-heading`), h1 and h2. **Must never render below 30px (`text-3xl`)**, at smaller sizes it loses legibility and visual quality. If a section label needs to render smaller than 30px, use h3, not h2
-- **Atkinson Hyperlegible** (`font-sans`), all body text, UI labels, h3 through h6
-- **Geist Mono** (`font-mono`), code blocks and monospace only
+- **Bitter** (`font-heading`), all headings h1 through h6, weight **400 only**
+- **Atkinson Hyperlegible** (`font-sans`), all body text and UI labels
+- **Atkinson Hyperlegible Mono** (`font-mono`), code blocks and monospace only
 - Never use any other font family
-- Never apply `font-bold` or `font-semibold` to Instrument Serif elements
-- Never apply `font-heading` to any element that could render smaller than 30px
-- Never override an h2 with a size class smaller than `text-3xl`, if you think you need to, you want an h3
+- Never apply `font-bold`, `font-semibold`, or `font-medium` to heading elements
 
 ### Heading sizes, use the scale
 The base layer defines default sizes. Use them or explicitly override with a Tailwind size utility, never rely on browser defaults:
-- h1 → `text-4xl` + `font-heading` (Instrument Serif)
-- h2 → `text-3xl` + `font-heading` (Instrument Serif), never below 30px
-- h3 → `text-2xl` + `font-semibold` (Atkinson Hyperlegible)
-- h4 → `text-xl` + `font-semibold` (Atkinson Hyperlegible)
-- h5 → `text-lg` + `font-medium` (Atkinson Hyperlegible)
-- h6 → `text-base` + `font-medium` (Atkinson Hyperlegible)
+- h1 → `text-4xl` + `font-heading` (Bitter)
+- h2 → `text-3xl` + `font-heading` (Bitter)
+- h3 → `text-2xl` + `font-heading` (Bitter)
+- h4 → `text-xl` + `font-heading` (Bitter)
+- h5 → `text-lg` + `font-heading` (Bitter)
+- h6 → `text-base` + `font-heading` (Bitter)
 
 ### Border radius
 - The global base radius is `--radius: 4px`, set in every theme file
@@ -70,7 +68,7 @@ Primitive  →  Semantic  →  Component
 
 **Primitives** live in `src/app/globals.css` (`:root` block). Raw oklch values. Never use in components.
 
-**Semantic tokens** live in `src/themes/ag-core.css`, `src/themes/navy.css`, and `src/themes/bep-pro.css`. These are what components consume. Light/dark theming is handled here, primitives never change between themes, only semantic mappings do.
+**Semantic tokens** live in `src/themes/ag-core.css`, `src/themes/navy.css`, and `src/themes/ns-pro.css`. These are what components consume. Light/dark theming is handled here, primitives never change between themes, only semantic mappings do.
 
 **Component tokens** are scoped tokens like `--sidebar-*` and `--chart-*`. Used only within their component.
 
@@ -78,7 +76,7 @@ Primitive  →  Semantic  →  Component
 
 ## Theming
 
-- Three themes: `ag` (default), `navy`, and `bep-pro`
+- Three themes: `ag` (default), `navy` (Peacock), and `ns-pro`
 - Dark mode is handled via the `.dark` class on `<html>`, semantic tokens automatically respond
 - Never hardcode light-only or dark-only values, always use semantic tokens that work in both
 - To add a new theme: create a new file in `src/themes/`, follow the existing pattern, import it in `globals.css`, register it in `src/themes/index.ts`
@@ -87,26 +85,26 @@ Primitive  →  Semantic  →  Component
 
 In light mode, chart scales run dark → light. In dark mode, the order **must be reversed** (light → dark) so chart series remain visible against the dark background. This is already implemented in `ag-core.css` and `navy.css`. When adding new themes, always verify chart colors contrast with the theme's `--background` in both modes.
 
-### BEP Pro theme, accent color rules (hard requirement)
+### NS Pro theme, accent color rules (hard requirement)
 
-BEP Pro is **dark-first**, the base `[data-theme="bep-pro"]` selector applies dark tokens. Light mode is the secondary state via `.light`.
+NS Pro is **dark-first**, the base `[data-theme="ns-pro"]` selector applies dark tokens. Light mode is the secondary state via `.light`.
 
-BEP Pro brand: `#3D82F0` (dark mode) / `#1A56DB` BEP Blue (light mode).
+NS Pro brand: `#72B0AB` Sapphire (dark mode) / `#355E58` Spruce (light mode).
 
-BEP Pro chart scale order (chart-1 → chart-5): **blue → orange → purple → peach → red**. Extended tokens chart-6 (dark red `#7F1D1D`) and chart-7 (lavender `#DDD6FE`) exist for future use.
+NS Pro chart scale order (chart-1 → chart-7): **Sapphire → Ballet Slipper → Sage → Pistachio → Bubblegum → Spruce → Arctic**.
 
-BEP Pro defines a restricted accent palette (`#60A5FA`, `#AC94FA`, `#DDD6FE`, `#FB923C`, `#FDBA8C`, `#7F1D1D`, `#EF4444`, and gradient `#FB923C → #EF4444 → #788FFA`) that exists **only for charts/graphs and badges/tags**.
+NS Pro defines a restricted accent palette (`#72B0AB`, `#BCDDDC`, `#FFEDD1`, `#FDC1B4`, `#FE9179`, `#CFB97E`, `#B89D47`, `#355E58`, `#053229`, and gradient `#FE9179 → #CFB97E → #72B0AB`) that exists **only for charts/graphs and badges/tags**.
 
 These colors are exposed as:
 - `--chart-1` through `--chart-7` (charts/graphs only)
-- `--bep-badge-1` through `--bep-badge-7` (badges/tags only)
-- `--bep-accent-gradient` (badges/charts only)
+- `--ns-badge-1` through `--ns-badge-7` (badges/tags only)
+- `--ns-accent-gradient` (badges/charts only)
 
-**Non-negotiable rules for BEP Pro accent colors:**
+**Non-negotiable rules for NS Pro accent colors:**
 - Never use these tokens in layout, navigation, buttons, forms, typography, or any component outside charts and badges
 - Never use their hex values as hardcoded colors anywhere in the codebase
-- These tokens are undefined (transparent) in all other themes, misuse outside BEP Pro produces invisible elements
-- Only apply BEP Pro accent colors when the user explicitly instructs you to build a BEP Pro-themed component
+- These tokens are undefined (transparent) in all other themes, misuse outside NS Pro produces invisible elements
+- Only apply NS Pro accent colors when the user explicitly instructs you to build a NS Pro-themed component
 
 ---
 
@@ -126,7 +124,7 @@ src/
     ├── registry.ts    # Component metadata, source of truth
     ├── nav-config.ts  # Navigation structure
     └── code-generator.ts
-src/themes/            # Theme CSS files (ag-core.css, navy.css, bep-pro.css)
+src/themes/            # Theme CSS files (ag-core.css, navy.css, ns-pro.css)
 public/registry.json   # Machine-readable component manifest for AI tools and MCP
 templates/app-shell/   # Scaffold for new consumer apps (npm run scaffold:shell)
 ```
@@ -168,15 +166,15 @@ Follow this order exactly:
 
 - No `style={{ color: '#DA291C' }}` or any inline style with a raw value
 - No `className="bg-blue-500"` or any Tailwind color outside the semantic token system
-- No `font-bold` on Instrument Serif
+- No `font-bold`, `font-semibold`, or `font-medium` on headings
 - No `rounded-full` on non-circular elements
 - No hardcoded pixel values for spacing, use Tailwind spacing utilities
 - No skipping JSDoc on new components
 - No committing with TypeScript errors
 - No duplicating a component that already exists in `src/components/ui/`
 - No browser globals (`window`, `document`) outside `useEffect`
-- **No BEP Pro accent colors (`#60A5FA`, `#AC94FA`, `#DDD6FE`, `#FB923C`, `#FDBA8C`, `#7F1D1D`, `#EF4444`) outside charts/graphs and badges/tags**, not in buttons, nav, layout, typography, forms, or any other component
-- **No BEP badge tokens (`bg-bep-badge-*`) or BEP gradient (`var(--bep-accent-gradient)`) outside the BEP Pro theme context**, these are undefined in all other themes
+- **No NS Pro accent colors (`#72B0AB`, `#BCDDDC`, `#FFEDD1`, `#FDC1B4`, `#FE9179`, `#CFB97E`, `#B89D47`, `#355E58`, `#053229`) outside charts/graphs and badges/tags**, not in buttons, nav, layout, typography, forms, or any other component
+- **No NS badge tokens (`bg-ns-badge-*`) or NS gradient (`var(--ns-accent-gradient)`) outside the NS Pro theme context**, these are undefined in all other themes
 
 ---
 
@@ -193,7 +191,7 @@ npx tsc --noEmit            # Type check, must pass before any commit
 
 ## Governance
 
-- All changes require Gloo approval before merging
+- All changes require team approval before merging
 - Every release must update `CHANGELOG.md`
-- Component requests and bugs are tracked via GitHub Issues
+- Component requests and bugs are tracked via engineering
 - AI-generated code scaffolds only, always review before merging

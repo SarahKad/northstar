@@ -98,7 +98,7 @@ export function AppSidebar() {
           className="flex min-w-0 items-center gap-2.5 rounded-md px-1 py-1 outline-none focus-visible:ring-2 focus-visible:ring-sidebar-ring group-data-[collapsible=icon]:justify-center"
         >
           <span className="flex size-7 shrink-0 items-center justify-center rounded-md bg-primary text-xs font-medium text-primary-foreground">
-            AG
+            NS
           </span>
           <span className="truncate text-sm font-medium tracking-tight group-data-[collapsible=icon]:hidden">
             My App

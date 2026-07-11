@@ -1,42 +1,42 @@
 /* =============================================================================
-   NAVY THEME, src/themes/navy.css
-   Cool-toned theme anchored to a deep navy blue brand color.
+   PEACOCK THEME, src/themes/navy.css
+   Deep green theme anchored to Peacock (#053229).
    Selector: [data-theme="navy"]
    ============================================================================= */
 
-/* --- Brand & cool neutral primitives specific to this theme ----------------- */
+/* --- Brand & peacock-toned primitives ------------------------------------- */
 
 [data-theme="navy"] {
-  /* Brand, deep navy blue */
-  --primitive-navy-30:  #002B65;  /* base navy */
-  --primitive-navy-55:  #4073B3;  /* lightened for dark mode */
+  /* Brand, Peacock green */
+  --primitive-peacock-30:  #053229;  /* Peacock, base brand */
+  --primitive-peacock-55:  #355E58;  /* Spruce, lightened for dark mode */
 
-  /* Cool neutrals, blue-gray tones */
-  --primitive-cool-15:  #070B0F;  /* deep cool near-black */
-  --primitive-cool-21:  #151A1E;  /* dark cool */
-  --primitive-cool-27:  #22272A;  /* dark cool muted */
-  --primitive-cool-55:  #6C7274;  /* mid cool gray */
-  --primitive-cool-71:  #9EA4A6;  /* medium cool gray */
-  --primitive-cool-92:  #E0E4E6;  /* cool border */
-  --primitive-cool-92w: #E1E6E8;  /* near-white cool (dark mode CTA) */
-  --primitive-cool-96:  #F0F3F4;  /* cool muted background */
-  --primitive-cool-98:  #F6F8F9;  /* cool page background */
-  --primitive-cool-99:  #F9FBFB;  /* near-white cool */
-  --primitive-cool-100: #FDFEFF;  /* white */
+  /* Green-toned neutrals derived from the Peacock palette */
+  --primitive-cool-15:  #031F19;  /* deep peacock near-black */
+  --primitive-cool-21:  #0A2E26;  /* dark peacock surface */
+  --primitive-cool-27:  #153D35;  /* dark peacock muted */
+  --primitive-cool-55:  #4A6B64;  /* mid spruce gray */
+  --primitive-cool-71:  #7A9A94;  /* medium sage gray */
+  --primitive-cool-92:  #D4E8E6;  /* arctic-tinted border */
+  --primitive-cool-92w: #E4F0EE;  /* near-white green (dark mode CTA) */
+  --primitive-cool-96:  #EFF7F6;  /* light peacock muted background */
+  --primitive-cool-98:  #F4FAF9;  /* light peacock page background */
+  --primitive-cool-99:  #F8FCFB;  /* near-white peacock */
+  --primitive-cool-100: #FDFFFE;  /* white */
 
   /* Chart scale, light mode (dark → light) */
-  --primitive-chart-cool-40: #1A487F;  /* darkest */
-  --primitive-chart-cool-50: #2E65A0;  /* step 2 */
-  --primitive-chart-cool-60: #4886B8;  /* step 3 */
-  --primitive-chart-cool-70: #6BA7C9;  /* step 4 */
-  --primitive-chart-cool-78: #8EC0D5;  /* lightest */
+  --primitive-chart-cool-40: #053229;  /* Peacock */
+  --primitive-chart-cool-50: #1A4A42;  /* step 2 */
+  --primitive-chart-cool-60: #355E58;  /* Spruce */
+  --primitive-chart-cool-70: #72B0AB;  /* Sapphire */
+  --primitive-chart-cool-78: #BCDDDC;  /* Arctic */
 
   /* Chart scale, dark mode (dark → light) */
-  --primitive-chart-cool-28: #002A4E;  /* darkest */
-  --primitive-chart-cool-38: #034574;  /* step 2 */
-  --primitive-chart-cool-48: #176297;  /* step 3 */
-  --primitive-chart-cool-58: #3B82AF;  /* step 4 */
-  --primitive-chart-cool-68: #65A1C3;  /* lightest */
+  --primitive-chart-cool-28: #031F19;  /* darkest */
+  --primitive-chart-cool-38: #053229;  /* Peacock */
+  --primitive-chart-cool-48: #1A4A42;  /* step 3 */
+  --primitive-chart-cool-58: #355E58;  /* Spruce */
+  --primitive-chart-cool-68: #72B0AB;  /* Sapphire */
 }
 
 /* --- Light mode semantic tokens --------------------------------------------- */
@@ -49,8 +49,8 @@
   --card-foreground:        var(--primitive-cool-15);
   --popover:                var(--primitive-cool-100);
   --popover-foreground:     var(--primitive-cool-15);
-  --brand:                  var(--primitive-navy-30);
-  --primary:                var(--primitive-navy-30);
+  --brand:                  var(--primitive-peacock-30);
+  --primary:                var(--primitive-peacock-30);
   --primary-foreground:     var(--primitive-cool-99);
   --secondary:              var(--primitive-cool-96);
   --secondary-foreground:   var(--primitive-cool-21);
@@ -58,10 +58,10 @@
   --muted-foreground:       var(--primitive-cool-55);
   --accent:                 var(--primitive-cool-96);
   --accent-foreground:      var(--primitive-cool-21);
-  --destructive:            #DA2919;  /* standard red for errors */
+  --destructive:            #DC2626;  /* standard red for errors */
   --border:                 var(--primitive-cool-92);
   --input:                  var(--primitive-cool-92);
-  --ring:                   var(--primitive-navy-30);
+  --ring:                   var(--primitive-peacock-30);
   --chart-1:                var(--primitive-chart-cool-40);
   --chart-2:                var(--primitive-chart-cool-50);
   --chart-3:                var(--primitive-chart-cool-60);
@@ -70,12 +70,12 @@
   --radius:                 4px;
   --sidebar:                var(--primitive-cool-100);
   --sidebar-foreground:     var(--primitive-cool-15);
-  --sidebar-primary:        var(--primitive-navy-30);
+  --sidebar-primary:        var(--primitive-peacock-30);
   --sidebar-primary-foreground: var(--primitive-cool-99);
   --sidebar-accent:         var(--primitive-cool-96);
   --sidebar-accent-foreground:  var(--primitive-cool-21);
   --sidebar-border:         var(--primitive-cool-92);
-  --sidebar-ring:           var(--primitive-navy-30);
+  --sidebar-ring:           var(--primitive-peacock-30);
 }
 
 /* --- Dark mode semantic tokens ---------------------------------------------- */
@@ -87,7 +87,7 @@
   --card-foreground:        var(--primitive-cool-99);
   --popover:                var(--primitive-cool-21);
   --popover-foreground:     var(--primitive-cool-99);
-  --brand:                  var(--primitive-navy-55);
+  --brand:                  var(--primitive-peacock-55);
   --primary:                var(--primitive-cool-92w);
   --primary-foreground:     var(--primitive-cool-21);
   --secondary:              var(--primitive-cool-27);
@@ -96,16 +96,16 @@
   --muted-foreground:       var(--primitive-cool-71);
   --accent:                 var(--primitive-cool-27);
   --accent-foreground:      var(--primitive-cool-99);
-  --destructive:            #E54E3C;  /* red lightened for dark mode */
+  --destructive:            #F87171;  /* red lightened for dark mode */
   --border:                 rgba(255, 255, 255, 0.10);
   --input:                  rgba(255, 255, 255, 0.15);
-  --ring:                   var(--primitive-navy-55);
-  /* Reversed light-mode scale, lighter blues contrast on the dark surface */
-  --chart-1:                var(--primitive-chart-cool-78);   /* #8EC0D5 lightest */
-  --chart-2:                var(--primitive-chart-cool-70);   /* #6BA7C9 */
-  --chart-3:                var(--primitive-chart-cool-60);   /* #4886B8 */
-  --chart-4:                var(--primitive-chart-cool-50);   /* #2E65A0 */
-  --chart-5:                var(--primitive-chart-cool-40);   /* #1A487F darkest */
+  --ring:                   var(--primitive-peacock-55);
+  /* Reversed light-mode scale, lighter greens contrast on the dark surface */
+  --chart-1:                var(--primitive-chart-cool-78);   /* #BCDDDC Arctic */
+  --chart-2:                var(--primitive-chart-cool-68);   /* #72B0AB Sapphire */
+  --chart-3:                var(--primitive-chart-cool-58);   /* #355E58 Spruce */
+  --chart-4:                var(--primitive-chart-cool-48);   /* #1A4A42 */
+  --chart-5:                var(--primitive-chart-cool-38);   /* #053229 Peacock */
   --sidebar:                var(--primitive-cool-21);
   --sidebar-foreground:     var(--primitive-cool-99);
   --sidebar-primary:        var(--primitive-cool-92w);
@@ -113,5 +113,5 @@
   --sidebar-accent:         var(--primitive-cool-27);
   --sidebar-accent-foreground:  var(--primitive-cool-99);
   --sidebar-border:         rgba(255, 255, 255, 0.10);
-  --sidebar-ring:           var(--primitive-navy-55);
+  --sidebar-ring:           var(--primitive-peacock-55);
 }

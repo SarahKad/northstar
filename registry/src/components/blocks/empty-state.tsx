@@ -1,6 +1,7 @@
 "use client"
 
-import { Card, CardContent } from "@/components/ui/card"
+import { CardContent } from "@/components/ui/card"
+import { BlockCard } from "@/components/blocks/block-card"
 import { Button } from "@/components/ui/button"
 import { Users } from "@phosphor-icons/react"
 
@@ -16,7 +17,7 @@ export function EmptyState({ props: blockProps = {} }: Props) {
   const buttonLabel = String(blockProps.buttonLabel ?? "Invite Members")
 
   return (
-    <Card className="flex w-full max-w-sm flex-col items-center justify-center py-14 text-center">
+    <BlockCard className="flex w-full max-w-sm flex-col items-center justify-center py-14 text-center">
       <CardContent className="flex flex-col items-center gap-4 pt-0">
         <div className="flex size-12 items-center justify-center border">
           <Users className="size-5 text-muted-foreground" />
@@ -27,6 +28,6 @@ export function EmptyState({ props: blockProps = {} }: Props) {
         </div>
         <Button>{buttonLabel}</Button>
       </CardContent>
-    </Card>
+    </BlockCard>
   )
 }

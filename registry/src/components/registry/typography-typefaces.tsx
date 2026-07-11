@@ -1,34 +1,24 @@
 "use client"
 
-import { useDocumentThemeId } from "@/hooks/use-document-theme"
-
 const fonts = [
   {
-    name: "Instrument Serif",
-    role: "Display, H1 & H2, Regular (min 36px)",
+    name: "Bitter",
+    role: "Display & H1–H6, Regular (400)",
     variable: "--font-display",
     utility: "font-heading",
     sample: "The quick brown fox jumps over the lazy dog",
     className: "font-heading",
   },
   {
-    name: "Montserrat",
-    role: "BEP Pro only, H1–H6 & display (weights 400–700)",
-    variable: "--font-montserrat",
-    utility: "font-heading (when data-theme=\"bep-pro\")",
-    sample: "The quick brown fox jumps over the lazy dog",
-    className: "[font-family:var(--font-montserrat)]",
-  },
-  {
     name: "Atkinson Hyperlegible",
-    role: "Body, UI & H3–H6, Regular",
+    role: "Body & UI, Regular",
     variable: "--font-sans",
     utility: "font-sans",
     sample: "The quick brown fox jumps over the lazy dog",
     className: "font-sans",
   },
   {
-    name: "Geist Mono",
+    name: "Atkinson Hyperlegible Mono",
     role: "Code & Monospace",
     variable: "--font-mono",
     utility: "font-mono",
@@ -38,18 +28,9 @@ const fonts = [
 ] as const
 
 export function TypographyTypefaces() {
-  const themeId = useDocumentThemeId()
-  const isBepPro = themeId === "bep-pro"
-
-  const visibleFonts = fonts.filter((font) => {
-    if (isBepPro && font.name === "Instrument Serif") return false
-    if (!isBepPro && font.name === "Montserrat") return false
-    return true
-  })
-
   return (
     <div className="flex flex-col gap-4">
-      {visibleFonts.map(({ name, role, variable, utility, sample, className }) => (
+      {fonts.map(({ name, role, variable, utility, sample, className }) => (
         <div key={name} className="rounded-lg border bg-card p-5">
           <div className="mb-3 flex items-start justify-between gap-4">
             <div>

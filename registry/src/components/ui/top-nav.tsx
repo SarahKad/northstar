@@ -43,7 +43,7 @@ function useTopNav() {
  * @example
  * <TopNav>
  *   <SidebarTrigger className="-ml-1" />
- *   <TopNavBrand>AG Design</TopNavBrand>
+ *   <TopNavBrand>North Star</TopNavBrand>
  *   <TopNavBreadcrumb items={[
  *     { label: "Components", href: "/components" },
  *     { label: "Button" },

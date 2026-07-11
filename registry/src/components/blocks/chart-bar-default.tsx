@@ -3,13 +3,13 @@
 import { TrendUp } from "@phosphor-icons/react"
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts"
 import {
-  Card,
   CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import { BlockCard } from "@/components/blocks/block-card"
 import {
   ChartContainer,
   ChartTooltip,
@@ -45,7 +45,7 @@ export function ChartBarDefault({
   } satisfies ChartConfig
 
   return (
-    <Card>
+    <BlockCard>
       <CardHeader>
         <CardTitle>{title}</CardTitle>
         <CardDescription>{dateRange}</CardDescription>
@@ -77,6 +77,6 @@ export function ChartBarDefault({
           Showing total visitors for the last 6 months
         </div>
       </CardFooter>
-    </Card>
+    </BlockCard>
   )
 }
