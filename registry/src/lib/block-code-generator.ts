@@ -24,7 +24,7 @@ export function generateStatsOverviewCode(props: PropsMap): string {
   ]`
   return `<div className="grid ${cols} gap-4">
   {${items}.map((stat) => (
-    <Card key={stat.label} className="shadow-sm">
+    <Card key={stat.label} className="shadow-xl">
       <CardHeader>
         <CardDescription>{stat.label}</CardDescription>
         <CardTitle className="text-2xl tabular-nums">{stat.value}</CardTitle>
@@ -45,7 +45,7 @@ export function generateRecentActivityCode(props: PropsMap): string {
   const viewAll = props.showViewAll !== false
     ? `\n    <CardAction>\n      <Button variant="ghost" size="sm">View all</Button>\n    </CardAction>`
     : ""
-  return `<Card className="w-full max-w-md shadow-sm">
+  return `<Card className="w-full max-w-md shadow-xl">
   <CardHeader>
     <CardTitle>${title}</CardTitle>
     <CardDescription>${description}</CardDescription>${viewAll}
@@ -63,7 +63,7 @@ export function generateFormCardCode(props: PropsMap): string {
     props.showFooter !== false
       ? `\n  <CardFooter className="justify-between">\n    <Button variant="outline">Cancel</Button>\n    <Button>Save changes</Button>\n  </CardFooter>`
       : ""
-  return `<Card className="w-full max-w-md shadow-sm">
+  return `<Card className="w-full max-w-md shadow-xl">
   <CardHeader>
     <CardTitle>${title}</CardTitle>
     <CardDescription>${description}</CardDescription>
@@ -82,7 +82,7 @@ export function generateEmptyStateCode(props: PropsMap): string {
   const description =
     props.description || "Invite your team to collaborate on this project."
   const buttonLabel = props.buttonLabel || "Invite Members"
-  return `<Card className="flex w-full max-w-sm flex-col items-center justify-center py-14 text-center shadow-sm">
+  return `<Card className="flex w-full max-w-sm flex-col items-center justify-center py-14 text-center shadow-xl">
   <CardContent className="flex flex-col items-center gap-4 pt-0">
     <div className="flex size-12 items-center justify-center border">
       <Users className="size-5 text-muted-foreground" />
@@ -99,7 +99,7 @@ export function generateEmptyStateCode(props: PropsMap): string {
 export function generateInviteTeamCode(props: PropsMap): string {
   const title = props.title || "Invite Team"
   const description = props.description || "Add members to your workspace"
-  return `<Card className="w-full max-w-md shadow-sm">
+  return `<Card className="w-full max-w-md shadow-xl">
   <CardHeader>
     <CardTitle>${title}</CardTitle>
     <CardDescription>${description}</CardDescription>
@@ -117,7 +117,7 @@ export function generateFileUploadCode(props: PropsMap): string {
   const title = props.title || "File Upload"
   const description = props.description || "Drag and drop or browse"
   const hint = props.hint || "PNG, JPG, PDF up to 10MB"
-  return `<Card className="w-full max-w-sm shadow-sm">
+  return `<Card className="w-full max-w-sm shadow-xl">
   <CardHeader>
     <CardTitle>${title}</CardTitle>
     <CardDescription>${description}</CardDescription>
@@ -145,12 +145,12 @@ export function generateNotificationCardCode(props: PropsMap): string {
 
   const cardClass =
     variant === "warning"
-      ? "w-full max-w-md shadow-sm bg-yellow-50 ring-yellow-200/80 dark:bg-yellow-950/40 dark:ring-yellow-800/50"
+      ? "w-full max-w-md shadow-xl bg-yellow-50 ring-yellow-200/80 dark:bg-yellow-950/40 dark:ring-yellow-800/50"
       : variant === "alert"
-        ? "w-full max-w-md shadow-sm bg-destructive/5 ring-destructive/20"
+        ? "w-full max-w-md shadow-xl bg-destructive/5 ring-destructive/20"
         : variant === "success"
-          ? "w-full max-w-md shadow-sm bg-green-50 ring-green-200/80 dark:bg-green-950/40 dark:ring-green-800/50"
-          : "w-full max-w-md shadow-sm"
+          ? "w-full max-w-md shadow-xl bg-green-50 ring-green-200/80 dark:bg-green-950/40 dark:ring-green-800/50"
+          : "w-full max-w-md shadow-xl"
 
   const icon =
     variant === "warning"
@@ -241,8 +241,7 @@ export function generateDataTableDemoCode(props: PropsMap): string {
   const selectable = props.selectable !== false
   const columnVisibility = props.columnVisibility !== false
 
-  return `import { Card } from "@/components/ui/card"
-import { DataTable, createColumnHelper, type ColumnDef } from "@/components/ui/data-table"
+  return `import { DataTable, createColumnHelper, type ColumnDef } from "@/components/ui/data-table"
 import { Badge } from "@/components/ui/badge"
 
 type Employee = { id: string; name: string; role: string; department: string; status: string; joined: string }
@@ -256,13 +255,11 @@ const columns: ColumnDef<Employee>[] = [
   }),
 ]
 
-<Card className="w-full shadow-sm">
-  <DataTable
-    columns={columns}
-    data={employees}${searchable ? '\n    searchable="name"' : ""}${searchable ? '\n    searchPlaceholder="Search by name…"' : ""}${flag("pagination", { pagination: pagination as boolean })}${pagination ? "\n    pageSize={8}" : ""}${flag("selectable", { selectable: selectable as boolean })}${flag("columnVisibility", { columnVisibility: columnVisibility as boolean })}
-    title="Employee directory"
-  />
-</Card>`
+<DataTable
+  columns={columns}
+  data={employees}${searchable ? '\n  searchable="name"' : ""}${searchable ? '\n  searchPlaceholder="Search by name…"' : ""}${flag("pagination", { pagination: pagination as boolean })}${pagination ? "\n  pageSize={8}" : ""}${flag("selectable", { selectable: selectable as boolean })}${flag("columnVisibility", { columnVisibility: columnVisibility as boolean })}
+  title="Employee directory"
+/>`
 }
 
 export const blockCodeGenerators: BlockCodeGeneratorMap = {

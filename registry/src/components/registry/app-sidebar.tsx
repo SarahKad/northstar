@@ -13,6 +13,7 @@ import {
   Bell,
   Compass,
   ChartBar,
+  Desktop,
 } from "@phosphor-icons/react"
 import {
   Sidebar,
@@ -40,6 +41,7 @@ import { SidebarBrandLogo } from "@/components/registry/sidebar-brand-logo"
 
 const SECTION_ICONS: Record<string, ElementType> = {
   guides: BookOpen,
+  "system-preview": Desktop,
   foundations: Palette,
   blocks: SquaresFour,
   inputs: CursorClick,

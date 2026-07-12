@@ -12,8 +12,17 @@ const sizeClasses = {
 
 type AvatarSize = keyof typeof sizeClasses
 
-type AvatarContextValue = { size: AvatarSize }
-const AvatarContext = React.createContext<AvatarContextValue>({ size: "default" })
+type AvatarContextValue = {
+  size: AvatarSize
+  imageStatus: "loading" | "loaded" | "error"
+  setImageStatus: (status: "loading" | "loaded" | "error") => void
+}
+
+const AvatarContext = React.createContext<AvatarContextValue>({
+  size: "default",
+  imageStatus: "loading",
+  setImageStatus: () => {},
+})
 
 /**
  * @description Circular avatar container. Compose with `AvatarImage` and
@@ -41,16 +50,22 @@ function Avatar({
   /** Size of the avatar circle. @default "default" */
   size?: AvatarSize
 }) {
+  const [imageStatus, setImageStatus] = React.useState<"loading" | "loaded" | "error">(
+    "loading"
+  )
+
   return (
-    <AvatarContext.Provider value={{ size }}>
+    <AvatarContext.Provider value={{ size, imageStatus, setImageStatus }}>
       <span
         data-slot="avatar"
         className={cn(
           "relative inline-flex shrink-0 items-center justify-center overflow-hidden rounded-full",
-          "transition-shadow hover:shadow-md outline-none",
+          "border-0 border-transparent shadow-none outline-none ring-0",
+          "transition-shadow hover:shadow-md",
           sizeClasses[size],
           className
         )}
+        style={{ border: "none", boxShadow: "none", outline: "none" }}
         {...props}
       >
         {children}
@@ -71,20 +86,33 @@ function AvatarImage({
   src,
   alt = "",
   onError,
+  onLoad,
   ...props
 }: React.ImgHTMLAttributes<HTMLImageElement>) {
-  const [failed, setFailed] = React.useState(false)
+  const { imageStatus, setImageStatus } = React.useContext(AvatarContext)
 
-  if (failed) return null
+  React.useEffect(() => {
+    setImageStatus("loading")
+  }, [src, setImageStatus])
+
+  if (imageStatus === "error" || !src) return null
 
   return (
     <img
       data-slot="avatar-image"
       src={src}
       alt={alt}
-      className={cn("h-full w-full object-cover", className)}
+      className={cn(
+        "h-full w-full border-0 object-cover outline-none ring-0",
+        className
+      )}
+      style={{ border: "none", outline: "none" }}
+      onLoad={(e) => {
+        setImageStatus("loaded")
+        onLoad?.(e)
+      }}
       onError={(e) => {
-        setFailed(true)
+        setImageStatus("error")
         onError?.(e)
       }}
       {...props}
@@ -100,13 +128,20 @@ function AvatarImage({
  * <AvatarFallback>JD</AvatarFallback>
  */
 function AvatarFallback({ className, ...props }: React.HTMLAttributes<HTMLSpanElement>) {
+  const { imageStatus } = React.useContext(AvatarContext)
+
+  if (imageStatus === "loaded") return null
+
   return (
     <span
       data-slot="avatar-fallback"
       className={cn(
-        "absolute inset-0 flex items-center justify-center rounded-full border-0 bg-muted text-muted-foreground font-medium select-none ring-0 outline-none",
+        "absolute inset-0 flex items-center justify-center rounded-full",
+        "border-0 border-transparent bg-muted text-muted-foreground font-medium",
+        "select-none shadow-none outline-none ring-0",
         className
       )}
+      style={{ border: "none", boxShadow: "none", outline: "none" }}
       {...props}
     />
   )

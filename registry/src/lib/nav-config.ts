@@ -28,6 +28,18 @@ export const navSections: NavSection[] = [
     ],
   },
   {
+    id: "system-preview",
+    label: "System Preview",
+    items: [
+      {
+        href: "/previews/dashboard",
+        label: "Dashboard Preview",
+        section: "system-preview",
+        breadcrumb: ["System Preview", "Dashboard Preview"],
+      },
+    ],
+  },
+  {
     id: "foundations",
     label: "Foundations",
     items: [

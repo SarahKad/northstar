@@ -1,8 +1,8 @@
 import { Card } from "@/components/ui/card"
 import { cn } from "@/lib/utils"
 
-/** Level 1 elevation for block surfaces — see /docs/elevation. */
-export const blockElevationClass = "shadow-sm"
+/** Level 4 (top) elevation for block surfaces — see /docs/elevation. */
+export const blockElevationClass = "shadow-xl"
 
 export function BlockCard({
   className,

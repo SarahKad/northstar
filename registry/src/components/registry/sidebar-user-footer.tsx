@@ -2,14 +2,13 @@
 
 import { Menu } from "@base-ui/react/menu"
 import { CaretUpDown, Check, Desktop, Moon, Sun } from "@phosphor-icons/react"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { useTheme } from "@/components/registry/theme-provider"
 import { cn } from "@/lib/utils"
 
 const USER = {
   name: "Jane Doe",
   email: "user@northstar.example.com",
-  avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Jane",
   initials: "JD",
 }
 
@@ -45,16 +44,19 @@ export function SidebarUserFooter() {
     <Menu.Root>
       <Menu.Trigger
         className={cn(
-          "flex w-full items-center gap-2 rounded-lg border border-border",
+          "flex w-full items-center gap-2 overflow-hidden rounded-lg",
           "bg-background px-2.5 py-2 text-left outline-none",
+          "ring-1 ring-border ring-inset",
           "hover:bg-muted transition-colors",
           "focus-visible:ring-2 focus-visible:ring-ring/50",
-          "group-data-[collapsible=icon]:size-8 group-data-[collapsible=icon]:w-8 group-data-[collapsible=icon]:min-w-8 group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:rounded-full group-data-[collapsible=icon]:border-0 group-data-[collapsible=icon]:bg-transparent group-data-[collapsible=icon]:p-0 group-data-[collapsible=icon]:hover:bg-transparent group-data-[collapsible=icon]:focus-visible:ring-0"
+          "group-data-[collapsible=icon]:size-8 group-data-[collapsible=icon]:w-8 group-data-[collapsible=icon]:min-w-8 group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:rounded-full group-data-[collapsible=icon]:bg-transparent group-data-[collapsible=icon]:p-0 group-data-[collapsible=icon]:ring-0 group-data-[collapsible=icon]:hover:bg-transparent group-data-[collapsible=icon]:focus-visible:ring-0"
         )}
         aria-label={`${USER.name}, ${USER.email}`}
       >
-        <Avatar size="sm" className="size-8 shrink-0 shadow-none hover:shadow-none">
-          <AvatarImage src={USER.avatar} alt={USER.name} />
+        <Avatar
+          size="sm"
+          className="size-8 shrink-0 border-0 shadow-none ring-0 hover:shadow-none"
+        >
           <AvatarFallback>{USER.initials}</AvatarFallback>
         </Avatar>
         <div className="grid min-w-0 flex-1 text-left leading-tight group-data-[collapsible=icon]:hidden">

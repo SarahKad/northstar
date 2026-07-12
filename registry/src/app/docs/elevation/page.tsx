@@ -25,7 +25,7 @@ const ELEVATION_LEVELS = [
     utility: "shadow-sm",
     shadow: "Subtle",
     use: "Gentle lift for grouped content that should read as a distinct surface without floating.",
-    examples: "Calendar, carousel controls, floating sidebar variant, block surfaces",
+    examples: "Calendar, carousel controls, floating sidebar variant",
   },
   {
     level: 2,
@@ -49,7 +49,7 @@ const ELEVATION_LEVELS = [
     utility: "shadow-xl",
     shadow: "Maximum",
     use: "Highest-priority transient surfaces that must read above all other UI.",
-    examples: "Drawer, chart tooltip",
+    examples: "Drawer, chart tooltip, block surfaces",
   },
 ] as const
 
