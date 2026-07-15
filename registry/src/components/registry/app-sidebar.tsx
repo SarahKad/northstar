@@ -114,14 +114,15 @@ function NavSectionGroup({
  */
 export function AppSidebar() {
   const pathname = usePathname()
-  const guidesSections = navSections.filter((section) => section.id === "guides")
-  const scrollSections = navSections.filter((section) => section.id !== "guides")
+  const pinnedIds = new Set(["system-preview", "guides"])
+  const pinnedSections = navSections.filter((section) => pinnedIds.has(section.id))
+  const scrollSections = navSections.filter((section) => !pinnedIds.has(section.id))
 
   return (
     <Sidebar>
       <SidebarHeader className="gap-2 border-b border-sidebar-border p-2">
         <Link
-          href="/docs/getting-started"
+          href="/"
           className="flex min-w-0 items-center rounded-md px-1 py-1 outline-none focus-visible:ring-2 focus-visible:ring-sidebar-ring group-data-[collapsible=icon]:justify-center"
         >
           <SidebarBrandLogo />
@@ -132,7 +133,7 @@ export function AppSidebar() {
       <SidebarNavLayout
         pinned={
           <>
-            {guidesSections.map((section) => (
+            {pinnedSections.map((section) => (
               <NavSectionGroup
                 key={section.id}
                 section={section}

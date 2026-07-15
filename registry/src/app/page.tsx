@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation"
 
 export default function RootPage() {
-  redirect("/docs/getting-started")
+  redirect("/previews/dashboard")
 }

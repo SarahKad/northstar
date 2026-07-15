@@ -121,7 +121,7 @@ export const themes: ThemeDefinition[] = [
   {
     id: "ns-pro",
     name: "NS Pro",
-    description: "Default Project North Star theme (light mode). Brand: Spruce/Sapphire. Accent palette restricted to charts/graphs and badges/tags only.",
+    description: "Default Project North Star theme in light mode. Brand: Spruce/Sapphire. Accent palette restricted to charts/graphs and badges/tags only.",
   },
 ]
 

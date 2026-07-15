@@ -16,18 +16,6 @@ export type NavSection = {
 
 export const navSections: NavSection[] = [
   {
-    id: "guides",
-    label: "Guides",
-    items: [
-      {
-        href: "/docs/getting-started",
-        label: "Getting Started",
-        section: "guides",
-        breadcrumb: ["Guides", "Getting Started"],
-      },
-    ],
-  },
-  {
     id: "system-preview",
     label: "System Preview",
     items: [
@@ -36,6 +24,18 @@ export const navSections: NavSection[] = [
         label: "Dashboard Preview",
         section: "system-preview",
         breadcrumb: ["System Preview", "Dashboard Preview"],
+      },
+    ],
+  },
+  {
+    id: "guides",
+    label: "Guides",
+    items: [
+      {
+        href: "/docs/getting-started",
+        label: "Getting Started",
+        section: "guides",
+        breadcrumb: ["Guides", "Getting Started"],
       },
     ],
   },

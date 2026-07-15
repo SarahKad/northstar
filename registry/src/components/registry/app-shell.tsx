@@ -26,7 +26,7 @@ function MobileTopBar() {
   return (
     <header className="flex shrink-0 items-center justify-between border-b px-4 py-3 md:hidden">
       <SidebarTrigger />
-      <Link href="/docs/getting-started">
+      <Link href="/">
         <SidebarBrandLogo />
       </Link>
       <DarkModeToggle />

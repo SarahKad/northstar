@@ -19,7 +19,7 @@ export const themes: Theme[] = [
   {
     id: "ns-pro",
     name: "NS Pro",
-    description: "Bold dark-first theme for NS Pro products. Anchored to Spruce/Sapphire.",
+    description: "Default Project North Star theme (light mode). Anchored to Spruce/Sapphire.",
     // All tokens are driven by [data-theme="ns-pro"] CSS selectors in ns-pro.css.
     // No inline overrides needed here.
     cssVars: {},
