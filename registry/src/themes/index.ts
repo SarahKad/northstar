@@ -111,7 +111,7 @@ export const themes: ThemeDefinition[] = [
   {
     id: "ag",
     name: "NS Core",
-    description: "Project North Star core brand theme. The default theme for all North Star digital products.",
+    description: "Project North Star core brand theme for North Star digital products.",
   },
   {
     id: "navy",
@@ -121,14 +121,14 @@ export const themes: ThemeDefinition[] = [
   {
     id: "ns-pro",
     name: "NS Pro",
-    description: "Dark-first theme for NS Pro products. Brand: Spruce/Sapphire. North Star accent palette restricted to charts/graphs and badges/tags only.",
+    description: "Default Project North Star theme (light mode). Brand: Spruce/Sapphire. Accent palette restricted to charts/graphs and badges/tags only.",
   },
 ]
 
 /** The theme applied when no preference is stored. */
-export const DEFAULT_THEME_ID = "ag"
+export const DEFAULT_THEME_ID = "ns-pro"
 
 /** Returns the ThemeDefinition for a given id, or the default theme if not found. */
 export function getTheme(id: string): ThemeDefinition {
-  return themes.find((t) => t.id === id) ?? themes[0]
+  return themes.find((t) => t.id === id) ?? themes.find((t) => t.id === DEFAULT_THEME_ID) ?? themes[0]
 }

@@ -79,11 +79,11 @@ export const ROOT_LAYOUT = `import { ThemeProvider } from "@/components/ag-shell
 import Script from "next/script"
 import "./globals.css"
 
-const themeInitScript = \`(function(){try{var t=localStorage.getItem('colorMode');var d=t==='dark'||(t==='system'&&window.matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.classList.toggle('dark',d);document.documentElement.classList.toggle('light',!d);var ct=localStorage.getItem('colorTheme')||'ag';document.documentElement.dataset.theme=ct;}catch(e){}})();\`
+const themeInitScript = \`(function(){try{var t=localStorage.getItem('colorMode');var d=t==='dark'||(t==='system'&&window.matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.classList.toggle('dark',d);document.documentElement.classList.toggle('light',!d);var ct=localStorage.getItem('colorTheme')||'ns-pro';document.documentElement.dataset.theme=ct;}catch(e){}})();\`
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning data-theme="ag">
+    <html lang="en" suppressHydrationWarning data-theme="ns-pro">
       <body>
         <Script id="theme-init" strategy="beforeInteractive" dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <ThemeProvider>{children}</ThemeProvider>

@@ -75,7 +75,7 @@ const fontMono = Atkinson_Hyperlegible_Mono({
 <html
   lang="en"
   suppressHydrationWarning
-  data-theme="ag"
+  data-theme="ns-pro"
   className={`h-full antialiased font-sans light ${fontSans.variable} ${fontDisplay.variable} ${fontMono.variable}`}
 >
 ```

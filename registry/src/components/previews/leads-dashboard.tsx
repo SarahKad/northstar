@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useMemo, useState } from "react"
 import { Area, AreaChart, CartesianGrid, Label, Pie, PieChart, XAxis } from "recharts"
 import { CalendarBlank, Info } from "@phosphor-icons/react"
 import {
@@ -43,29 +43,120 @@ const FUNNEL_STAGES = [
   { id: "closed", label: "Closed won", count: 100, value: "$50", duration: "10 days", color: "var(--chart-3)", flex: 100 },
 ] as const
 
-const SOURCE_DATA = [
-  { source: "clutch", visitors: 50, amount: "$3000", percent: "50%", fill: "var(--color-clutch)" },
-  { source: "behance", visitors: 25, amount: "$1000", percent: "50%", fill: "var(--color-behance)" },
-  { source: "instagram", visitors: 25, amount: "$1000", percent: "50%", fill: "var(--color-instagram)" },
-  { source: "dribbble", visitors: 25, amount: "$1000", percent: "50%", fill: "var(--color-dribbble)" },
-]
+type SourceKey = "clutch" | "behance" | "instagram" | "dribbble"
+type SourceView = "received" | "converted" | "deals"
+
+type SourceMetric = {
+  source: SourceKey
+  value: number
+  display: string
+  fill: string
+}
+
+const SOURCE_VIEWS: Record<
+  SourceView,
+  { centerPrimary: string; centerSecondary: string; data: SourceMetric[] }
+> = {
+  received: {
+    centerPrimary: "900",
+    centerSecondary: "received",
+    data: [
+      { source: "clutch", value: 420, display: "420", fill: "var(--color-clutch)" },
+      { source: "behance", value: 210, display: "210", fill: "var(--color-behance)" },
+      { source: "instagram", value: 180, display: "180", fill: "var(--color-instagram)" },
+      { source: "dribbble", value: 90, display: "90", fill: "var(--color-dribbble)" },
+    ],
+  },
+  converted: {
+    centerPrimary: "300",
+    centerSecondary: "converted",
+    data: [
+      { source: "clutch", value: 150, display: "150", fill: "var(--color-clutch)" },
+      { source: "behance", value: 75, display: "75", fill: "var(--color-behance)" },
+      { source: "instagram", value: 45, display: "45", fill: "var(--color-instagram)" },
+      { source: "dribbble", value: 30, display: "30", fill: "var(--color-dribbble)" },
+    ],
+  },
+  deals: {
+    centerPrimary: "$6,000",
+    centerSecondary: "total",
+    data: [
+      { source: "clutch", value: 3000, display: "$3,000", fill: "var(--color-clutch)" },
+      { source: "behance", value: 1000, display: "$1,000", fill: "var(--color-behance)" },
+      { source: "instagram", value: 1000, display: "$1,000", fill: "var(--color-instagram)" },
+      { source: "dribbble", value: 1000, display: "$1,000", fill: "var(--color-dribbble)" },
+    ],
+  },
+}
 
 const sourceChartConfig = {
-  visitors: { label: "Leads" },
+  value: { label: "Value" },
   clutch: { label: "Clutch", color: "var(--chart-1)" },
   behance: { label: "Behance", color: "var(--chart-2)" },
   instagram: { label: "Instagram", color: "var(--chart-5)" },
   dribbble: { label: "Dribbble", color: "var(--chart-4)" },
 } satisfies ChartConfig
 
-const trackingData = [
-  { month: "March", won: 8, lost: 2 },
-  { month: "April", won: 4, lost: 3 },
-  { month: "May", won: 8, lost: 2 },
-  { month: "June", won: 32, lost: 12 },
-  { month: "July", won: 38, lost: 8 },
-  { month: "August", won: 48, lost: 10 },
-]
+type TrackingRange = "30d" | "3m" | "6m" | "12m"
+
+const TRACKING_BY_RANGE: Record<
+  TrackingRange,
+  {
+    closed: number
+    lost: number
+    data: { month: string; won: number; lost: number }[]
+  }
+> = {
+  "30d": {
+    closed: 86,
+    lost: 18,
+    data: [
+      { month: "Week 1", won: 18, lost: 4 },
+      { month: "Week 2", won: 22, lost: 5 },
+      { month: "Week 3", won: 24, lost: 3 },
+      { month: "Week 4", won: 22, lost: 6 },
+    ],
+  },
+  "3m": {
+    closed: 118,
+    lost: 30,
+    data: [
+      { month: "June", won: 32, lost: 12 },
+      { month: "July", won: 38, lost: 8 },
+      { month: "August", won: 48, lost: 10 },
+    ],
+  },
+  "6m": {
+    closed: 138,
+    lost: 37,
+    data: [
+      { month: "March", won: 8, lost: 2 },
+      { month: "April", won: 4, lost: 3 },
+      { month: "May", won: 8, lost: 2 },
+      { month: "June", won: 32, lost: 12 },
+      { month: "July", won: 38, lost: 8 },
+      { month: "August", won: 48, lost: 10 },
+    ],
+  },
+  "12m": {
+    closed: 214,
+    lost: 58,
+    data: [
+      { month: "Sep", won: 10, lost: 3 },
+      { month: "Oct", won: 14, lost: 4 },
+      { month: "Nov", won: 12, lost: 5 },
+      { month: "Dec", won: 18, lost: 4 },
+      { month: "Jan", won: 11, lost: 3 },
+      { month: "Feb", won: 11, lost: 2 },
+      { month: "Mar", won: 8, lost: 2 },
+      { month: "Apr", won: 4, lost: 3 },
+      { month: "May", won: 8, lost: 2 },
+      { month: "Jun", won: 32, lost: 12 },
+      { month: "Jul", won: 38, lost: 8 },
+      { month: "Aug", won: 48, lost: 10 },
+    ],
+  },
+}
 
 const trackingChartConfig = {
   won: { label: "Closed won", color: "var(--chart-1)" },
@@ -79,21 +170,9 @@ const LOST_REASONS = [
   { percent: "30%", reason: "The proposal is unclear" },
 ] as const
 
-function DateRangeSelect({ id }: { id: string }) {
-  return (
-    <Select defaultValue="6m">
-      <SelectTrigger id={id} size="sm" className="w-[10.5rem]">
-        <CalendarBlank className="size-3.5 text-muted-foreground" aria-hidden />
-        <SelectValue />
-      </SelectTrigger>
-      <SelectContent>
-        <SelectItem value="30d">Last 30 days</SelectItem>
-        <SelectItem value="3m">Last 3 months</SelectItem>
-        <SelectItem value="6m">Last 6 months</SelectItem>
-        <SelectItem value="12m">Last 12 months</SelectItem>
-      </SelectContent>
-    </Select>
-  )
+function formatPercent(value: number, total: number) {
+  if (total <= 0) return "0%"
+  return `${Math.round((value / total) * 100)}%`
 }
 
 function FunnelCard() {
@@ -107,12 +186,24 @@ function FunnelCard() {
 
         <div className="flex h-3 w-full overflow-hidden rounded-full">
           {FUNNEL_STAGES.map((stage) => (
-            <div
-              key={stage.id}
-              className="h-full first:rounded-l-full last:rounded-r-full"
-              style={{ flex: stage.flex, backgroundColor: stage.color }}
-              title={stage.label}
-            />
+            <Tooltip key={stage.id}>
+              <TooltipTrigger
+                render={
+                  <button
+                    type="button"
+                    className="h-full first:rounded-l-full last:rounded-r-full"
+                    style={{ flex: stage.flex, backgroundColor: stage.color }}
+                    aria-label={`${stage.label}: ${stage.count} leads, ${stage.value}`}
+                  />
+                }
+              />
+              <TooltipContent>
+                <span className="font-medium">{stage.label}</span>
+                <span className="opacity-80">
+                  · {stage.count} leads · {stage.value}
+                </span>
+              </TooltipContent>
+            </Tooltip>
           ))}
         </div>
 
@@ -156,7 +247,12 @@ function FunnelCard() {
 }
 
 function SourcesCard() {
-  const [sourceView, setSourceView] = useState<"came" | "converted" | "deals">("converted")
+  const [sourceView, setSourceView] = useState<SourceView>("converted")
+  const view = SOURCE_VIEWS[sourceView]
+  const total = useMemo(
+    () => view.data.reduce((sum, item) => sum + item.value, 0),
+    [view.data]
+  )
 
   return (
     <BlockCard className="h-full">
@@ -172,8 +268,8 @@ function SourcesCard() {
             <PieChart>
               <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
               <Pie
-                data={SOURCE_DATA}
-                dataKey="visitors"
+                data={view.data}
+                dataKey="value"
                 nameKey="source"
                 innerRadius={48}
                 strokeWidth={4}
@@ -191,10 +287,17 @@ function SourcesCard() {
                         >
                           <tspan
                             x={viewBox.cx}
-                            y={viewBox.cy}
+                            y={(viewBox.cy ?? 0) - 6}
                             className="fill-foreground text-xl font-medium"
                           >
-                            Sources
+                            {view.centerPrimary}
+                          </tspan>
+                          <tspan
+                            x={viewBox.cx}
+                            y={(viewBox.cy ?? 0) + 14}
+                            className="fill-muted-foreground text-xs"
+                          >
+                            {view.centerSecondary}
                           </tspan>
                         </text>
                       )
@@ -206,10 +309,8 @@ function SourcesCard() {
           </ChartContainer>
 
           <div className="flex w-full flex-col gap-3">
-            {SOURCE_DATA.map((item) => {
-              const label = sourceChartConfig[item.source as keyof typeof sourceChartConfig]
-              const color =
-                "color" in label ? label.color : "var(--muted-foreground)"
+            {view.data.map((item) => {
+              const config = sourceChartConfig[item.source]
               return (
                 <div
                   key={item.source}
@@ -218,16 +319,14 @@ function SourcesCard() {
                   <div className="flex min-w-0 items-center gap-2">
                     <span
                       className="size-2.5 shrink-0 rounded-sm"
-                      style={{ backgroundColor: color }}
+                      style={{ backgroundColor: config.color }}
                       aria-hidden
                     />
-                    <span className="truncate">
-                      {"label" in label ? String(label.label) : item.source}
-                    </span>
+                    <span className="truncate">{config.label}</span>
                   </div>
-                  <span className="tabular-nums text-muted-foreground">{item.amount}</span>
+                  <span className="tabular-nums text-muted-foreground">{item.display}</span>
                   <span className="w-10 text-right tabular-nums text-muted-foreground">
-                    {item.percent}
+                    {formatPercent(item.value, total)}
                   </span>
                 </div>
               )
@@ -237,22 +336,22 @@ function SourcesCard() {
 
         <ButtonGroup size="sm" className="self-end">
           <ButtonGroupItem
-            active={sourceView === "came"}
-            onClick={() => setSourceView("came")}
+            active={sourceView === "received"}
+            onClick={() => setSourceView("received")}
           >
-            Leads came
+            Leads received
           </ButtonGroupItem>
           <ButtonGroupItem
             active={sourceView === "converted"}
             onClick={() => setSourceView("converted")}
           >
-            Leads Converted
+            Leads converted
           </ButtonGroupItem>
           <ButtonGroupItem
             active={sourceView === "deals"}
             onClick={() => setSourceView("deals")}
           >
-            Total deals size
+            Total deals
           </ButtonGroupItem>
         </ButtonGroup>
       </CardContent>
@@ -261,6 +360,9 @@ function SourcesCard() {
 }
 
 function TrackingCard() {
+  const [timeRange, setTimeRange] = useState<TrackingRange>("6m")
+  const tracking = TRACKING_BY_RANGE[timeRange]
+
   return (
     <BlockCard>
       <CardHeader className="flex flex-row flex-wrap items-start justify-between gap-4">
@@ -268,20 +370,38 @@ function TrackingCard() {
           <CardTitle>Leads tracking</CardTitle>
           <div className="mt-2 flex flex-wrap gap-6">
             <p className="text-2xl tracking-tight">
-              <span className="text-foreground">680</span>{" "}
+              <span className="text-foreground">{tracking.closed}</span>{" "}
               <span className="text-base text-muted-foreground">total closed</span>
             </p>
             <p className="text-2xl tracking-tight">
-              <span className="text-foreground">70</span>{" "}
+              <span className="text-foreground">{tracking.lost}</span>{" "}
               <span className="text-base text-muted-foreground">total lost</span>
             </p>
           </div>
         </div>
-        <DateRangeSelect id="tracking-range" />
+        <Select
+          value={timeRange}
+          onValueChange={(value) => {
+            if (value === "30d" || value === "3m" || value === "6m" || value === "12m") {
+              setTimeRange(value)
+            }
+          }}
+        >
+          <SelectTrigger id="tracking-range" size="sm" className="w-[10.5rem]">
+            <CalendarBlank className="size-3.5 text-muted-foreground" aria-hidden />
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="30d">Last 30 days</SelectItem>
+            <SelectItem value="3m">Last 3 months</SelectItem>
+            <SelectItem value="6m">Last 6 months</SelectItem>
+            <SelectItem value="12m">Last 12 months</SelectItem>
+          </SelectContent>
+        </Select>
       </CardHeader>
       <CardContent>
         <ChartContainer config={trackingChartConfig} className="aspect-auto h-[260px] w-full">
-          <AreaChart data={trackingData} margin={{ left: 8, right: 8, top: 8 }}>
+          <AreaChart data={tracking.data} margin={{ left: 8, right: 8, top: 8 }}>
             <defs>
               <linearGradient id="fillWon" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="5%" stopColor="var(--color-won)" stopOpacity={0.35} />

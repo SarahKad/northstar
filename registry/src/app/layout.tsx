@@ -8,7 +8,7 @@ import { AppShell } from "@/components/registry/app-shell"
 import { cn } from "@/lib/utils"
 
 // Runs before React hydrates, applies dark/light class to <html> without flash
-const themeInitScript = `(function(){try{var t=localStorage.getItem('colorMode');var d=t==='dark'||(t==='system'&&window.matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.classList.toggle('dark',d);document.documentElement.classList.toggle('light',!d);var ct=localStorage.getItem('colorTheme')||'ag';document.documentElement.dataset.theme=ct;}catch(e){}})();`
+const themeInitScript = `(function(){try{var t=localStorage.getItem('colorMode');var d=t==='dark'||(t==='system'&&window.matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.classList.toggle('dark',d);document.documentElement.classList.toggle('light',!d);var ct=localStorage.getItem('colorTheme')||'ns-pro';document.documentElement.dataset.theme=ct;}catch(e){}})();`
 
 const atkinson = Atkinson_Hyperlegible_Next({
   subsets: ["latin"],
@@ -42,7 +42,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      data-theme="ag"
+      data-theme="ns-pro"
       className={cn("h-full antialiased font-sans light", atkinson.variable, bitter.variable, atkinsonMono.variable)}
     >
       <body className="h-full">

@@ -117,7 +117,7 @@ Update `src/app/layout.tsx` in the app:
 - **Bitter** → `--font-display` (h1–h6), weight **400 only**
 - **Atkinson Hyperlegible Mono** → `--font-mono` (code)
 
-Apply font variables on `<html>`. Set `data-theme="ag"` and default light/dark classes on `<html>` if not already present.
+Apply font variables on `<html>`. Set `data-theme="ns-pro"` and default light/dark classes on `<html>` if not already present.
 
 Do **not** add `ThemeProvider` yet, that ships with the app shell (`@ns-vibe-start`).
 
